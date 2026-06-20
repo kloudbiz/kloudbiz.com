@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
   :root,[data-theme="light"]{
     --bg:#f4f6fb;
@@ -209,8 +210,8 @@
   }
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--sky);}
   .field textarea{resize:vertical;min-height:90px;}
-  .captcha-row label{font-weight:600;}
-  .captcha-row #captcha-question{font-family:'JetBrains Mono',monospace;color:var(--sky);}
+  .recaptcha-row{display:flex;justify-content:center;margin-bottom:8px;}
+  .recaptcha-row .g-recaptcha{transform-origin:center;}
   .form-status{margin-top:13px;font-size:0.9rem;display:none;}
   .form-status.is-success{display:block;color:#1f8a55;}
   .form-status.is-error{display:block;color:var(--coral);}
@@ -417,9 +418,8 @@
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required autocomplete="name">
         </div>
-        <div class="field captcha-row">
-          <label for="captcha-answer">Quick check — what is <span id="captcha-question">4 + 7</span>?</label>
-          <input type="number" inputmode="numeric" id="captcha-answer" name="captcha-answer" required>
+        <div class="recaptcha-row">
+          <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
         </div>
         <button type="submit" class="btn btn--primary btn--block btn--lg btn--pulse">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
@@ -572,18 +572,6 @@
   checkboxes.forEach(function(cb){ cb.addEventListener('change', updateSummary); });
   updateSummary();
 
-  // simple no-signup captcha: basic spam deterrent, not bulletproof security
-  var captchaAnswer = 0;
-  var captchaQuestionEl = document.getElementById('captcha-question');
-  var captchaInputEl = document.getElementById('captcha-answer');
-  function newCaptcha(){
-    var a = Math.floor(Math.random() * 9) + 1;
-    var b = Math.floor(Math.random() * 9) + 1;
-    captchaAnswer = a + b;
-    captchaQuestionEl.textContent = a + ' + ' + b;
-    captchaInputEl.value = '';
-  }
-  newCaptcha();
 
   // contact form: validate, then build a pre-filled WhatsApp message
   var WHATSAPP_NUMBER = '61414491510'; // 0414 491 510 in international format
@@ -608,17 +596,16 @@
       formStatus.classList.add('is-error');
       return;
     }
-    var givenAnswer = parseInt(captchaInputEl.value, 10);
-    if (isNaN(givenAnswer) || givenAnswer !== captchaAnswer) {
-      formStatus.textContent = "That answer doesn't look right — try the new question.";
+    var recaptchaToken = typeof grecaptcha !== 'undefined' && grecaptcha.getResponse();
+    if (!recaptchaToken) {
+      formStatus.textContent = "Please complete the reCAPTCHA verification.";
       formStatus.classList.add('is-error');
-      newCaptcha();
       return;
     }
 
     var lines = [
-      "Hi Kloudbiz, I'm " + name + ".",
-      'Interested in: ' + picked.join(', ')
+      "Hey Kloudbiz! 👋 I'm " + name + " and I'd love to get " + picked.join(' & ') + " sorted with your team.",
+      "Let’s catch up soon — excited to see what we can build together! 🚀"
     ];
     var text = encodeURIComponent(lines.join('\n'));
     var waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text;
