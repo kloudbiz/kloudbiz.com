@@ -162,8 +162,19 @@ SUMMARY: <one or two sentences describing what changed>
 <original task content below>
 ```
 
+## Versioning
+
+The site carries a visible version number in the footer (`<span class="site-version">` in `index.html`).
+
+- Format: `vMAJOR.MINOR.PATCH` (e.g. `v1.0.4`)
+- The **patch** number increments automatically on every `/commit` run
+- **Minor** version: bump manually when a meaningful new feature ships
+- **Major** version: bump manually for significant redesigns or rebrands
+- The version appears in monospace, muted, after the copyright line
+- The `/commit` command includes the new version in the commit subject line
+
 ## Custom skills
 
 | Command   | Description                                         |
 |-----------|-----------------------------------------------------|
-| `/commit` | Create a new branch, commit staged changes, and push to origin |
+| `/commit` | Create a new branch, bump patch version, commit, and push to origin |

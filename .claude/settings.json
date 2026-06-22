@@ -11,7 +11,7 @@
       "Bash(git -C * commit*)",
       "Bash(git -C * push*)",
       "Bash(git -C * stash*)",
-      "Bash(python3 *)",
+      "Bash(python3 -c *)",
       "Bash(node *)",
       "Bash(mkdir -p *)",
       "Bash(cp *)",
