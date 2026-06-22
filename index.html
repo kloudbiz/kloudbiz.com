@@ -8,8 +8,7 @@
 <meta name="theme-color" content="#0b0f1f">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Noto+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root,[data-theme="light"]{
     --bg:#f4f6fb;
@@ -57,6 +56,7 @@
     --wa-green-dark:#149048;
   }
 
+  html{font-size:17px;}
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -66,7 +66,7 @@
     background-attachment:fixed;
     background-repeat:no-repeat;
     color:var(--ink);
-    font-family:'Inter',system-ui,sans-serif;
+    font-family:'Inter','Noto Sans',system-ui,sans-serif;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     transition:background-color 0.25s ease,color 0.25s ease;
@@ -83,7 +83,7 @@
   .container{max-width:1180px;margin:0 auto;padding:0 20px;}
   .eyebrow{
     font-family:'JetBrains Mono',monospace;
-    font-size:0.76rem;
+    font-size:0.8rem;
     letter-spacing:0.11em;
     text-transform:uppercase;
     color:var(--sky);
@@ -121,6 +121,7 @@
   .btn--ghost:hover{border-color:var(--sky);color:var(--sky);transform:translateY(-2px);}
   .btn--block{width:100%;}
   .btn--lg{padding:16px 28px;font-size:1rem;}
+  .btn[aria-busy="true"]{opacity:0.72;cursor:wait;pointer-events:none;}
 
   /* theme toggle */
   .theme-toggle{
@@ -155,7 +156,7 @@
   .logo{display:flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.12rem;}
   .logo-img{height:64px;width:auto;display:block;flex-shrink:0;color:var(--ink);}
   .nav-links{display:flex;gap:30px;list-style:none;margin:0;padding:0;}
-  .nav-links a{font-weight:500;font-size:0.94rem;position:relative;padding:4px 0;color:var(--ink-soft);}
+  .nav-links a{font-weight:500;font-size:1rem;position:relative;padding:4px 0;color:var(--ink-soft);}
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--coral);transition:width 0.2s ease;}
   .nav-links a:hover{color:var(--ink);}
   .nav-links a:hover::after{width:100%;}
@@ -169,14 +170,14 @@
   /* action / top section */
   .action{padding-top:48px;}
   .action__head{max-width:620px;margin:0 auto 40px;text-align:center;}
-  .action__head h1{font-size:clamp(1.9rem,4.6vw,2.7rem);margin:14px 0 14px;}
-  .action__head p{color:var(--ink-soft);font-size:1.05rem;}
+  .action__head h1{font-size:clamp(2.1rem,5vw,3rem);margin:14px 0 14px;}
+  .action__head p{color:var(--ink-soft);font-size:1.1rem;}
 
   .action-card{padding:36px;max-width:820px;margin:0 auto 28px;}
   fieldset.service-picker{border:none;margin:0;padding:0;}
   .action-divider{border:none;border-top:1px solid var(--border);margin:28px 0;}
   .picker-label{font-weight:700;font-size:1rem;margin-bottom:16px;display:block;}
-  .picker-label .hint{font-weight:400;color:var(--ink-faint);font-size:0.85rem;}
+  .picker-label .hint{font-weight:400;color:var(--ink-faint);font-size:0.9rem;}
 
   .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;}
   .service-checkbox{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
@@ -205,7 +206,7 @@
   .service-tile__icon-wrap--coral{background:rgba(255,107,87,0.16);color:var(--coral);}
   .service-tile__icon-wrap--sun{background:rgba(232,169,61,0.2);color:var(--sun);}
   .service-tile__icon{width:23px;height:23px;color:inherit;}
-  .service-tile__label{font-size:0.86rem;font-weight:600;}
+  .service-tile__label{font-size:0.92rem;font-weight:600;}
   .service-tile__check{
     position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;
     background:var(--sky);display:flex;align-items:center;justify-content:center;
@@ -222,11 +223,11 @@
   .service-tile__hint svg{width:10px;height:10px;}
   .service-tile:hover .service-tile__hint{opacity:1;border-color:var(--sky);color:var(--sky);}
   .service-checkbox:checked + .service-tile .service-tile__hint{opacity:0;}
-  .selected-summary{font-size:0.86rem;color:var(--ink-faint);margin-top:16px;text-align:center;}
+  .selected-summary{font-size:0.92rem;color:var(--ink-faint);margin-top:16px;text-align:center;}
 
   .contact-form{padding:0;}
   .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
-  .field label{font-size:0.85rem;font-weight:600;color:var(--ink);}
+  .field label{font-size:0.9rem;font-weight:600;color:var(--ink);}
   .field label .opt{font-weight:400;color:var(--ink-faint);}
   .field input,.field textarea{
     border:1.5px solid var(--border-strong);border-radius:10px;padding:11px 13px;
@@ -235,15 +236,7 @@
   }
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--sky);}
   .field textarea{resize:vertical;min-height:90px;}
-  .recaptcha-row{display:flex;justify-content:center;margin-top:24px;margin-bottom:24px;}
-  .recaptcha-row .g-recaptcha{transform-origin:center;}
-  /* reCAPTCHA challenge popup — scale down on small screens */
-  body > div[style*="z-index: 2000000000"] > div,
-  body > div[style*="z-index:2000000000"] > div{
-    transform:scale(0.82);
-    transform-origin:center top;
-    max-width:90vw;
-  }
+
   .form-status{margin-top:13px;font-size:0.9rem;display:none;}
   .form-status.is-success{display:block;color:#1f8a55;}
   .form-status.is-error{display:block;color:var(--coral);}
@@ -251,13 +244,13 @@
   .trust-strip{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:36px;}
   .trust-chip{
     display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
-    background:var(--surface);border:1px solid var(--border);font-size:0.84rem;color:var(--ink-soft);
+    background:var(--surface);border:1px solid var(--border);font-size:0.92rem;color:var(--ink-soft);
   }
   .trust-chip svg{width:15px;height:15px;color:var(--sky);flex-shrink:0;}
 
   .section-head{max-width:560px;margin-bottom:40px;}
   .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
-  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem);margin:12px 0 12px;}
+  .section-head h2{font-size:clamp(1.8rem,3.2vw,2.3rem);margin:12px 0 12px;}
   .section-head p{color:var(--ink-soft);}
 
   /* services */
@@ -270,9 +263,9 @@
   .svc-card__icon--coral{background:rgba(255,107,87,0.16);color:var(--coral);}
   .svc-card__icon--sun{background:rgba(232,169,61,0.2);color:var(--sun);}
   .svc-card h3{font-size:1.12rem;}
-  .svc-card__intro{font-size:0.92rem;color:var(--ink-soft);margin-top:-4px;}
+  .svc-card__intro{font-size:0.97rem;color:var(--ink-soft);margin-top:-4px;}
   .svc-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
-  .svc-list li{display:flex;align-items:flex-start;gap:10px;font-size:0.89rem;color:var(--ink-soft);line-height:1.5;}
+  .svc-list li{display:flex;align-items:flex-start;gap:10px;font-size:0.95rem;color:var(--ink-soft);line-height:1.55;}
   .svc-list li svg{width:16px;height:16px;color:var(--sky);flex-shrink:0;margin-top:3px;}
   .services-foot{text-align:center;margin-top:36px;}
   .services-foot p{color:var(--ink-soft);font-size:0.95rem;margin-bottom:18px;}
@@ -281,7 +274,7 @@
   .why-card{padding:26px;}
   .why-card svg{width:22px;height:22px;color:var(--sky);margin-bottom:14px;}
   .why-card h3{font-size:1.02rem;margin-bottom:8px;}
-  .why-card p{font-size:0.91rem;color:var(--ink-soft);}
+  .why-card p{font-size:0.97rem;color:var(--ink-soft);}
 
   .faq-list{display:flex;flex-direction:column;gap:12px;max-width:760px;margin:0 auto;}
   .faq-item{padding:6px 26px;}
@@ -292,11 +285,11 @@
   .faq-item summary::-webkit-details-marker{display:none;}
   .faq-item summary .chev{width:18px;height:18px;color:var(--sky);flex-shrink:0;transition:transform 0.2s ease;}
   .faq-item[open] summary .chev{transform:rotate(180deg);}
-  .faq-item p{padding-bottom:18px;color:var(--ink-soft);font-size:0.93rem;max-width:640px;}
+  .faq-item p{padding-bottom:18px;color:var(--ink-soft);font-size:0.98rem;max-width:640px;}
 
   .site-footer{padding:36px 0 90px;border-top:1px solid var(--border);}
   .site-footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
-  .site-footer p{font-size:0.86rem;color:var(--ink-faint);}
+  .site-footer p{font-size:0.92rem;color:var(--ink-faint);}
   .footer-wa{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--wa-green-dark);}
   [data-theme="dark"] .footer-wa{color:var(--wa-green);}
   .footer-wa svg{width:17px;height:17px;}
@@ -340,6 +333,11 @@
     .lang-picker__globe{display:none;}
     .lang-select{padding:0 26px 0 12px;font-size:0.92rem;height:38px;}
   }
+
+  /* Noto Sans for Indic script languages */
+  :lang(hi),:lang(mr),:lang(gu),:lang(pa),:lang(ta),:lang(te),:lang(ml){
+    font-family:'Noto Sans',system-ui,sans-serif;
+  }
 </style>
 </head>
 <body data-theme="dark">
@@ -362,8 +360,8 @@
         <svg class="lang-picker__globe" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" stroke="currentColor" stroke-width="1.6"/></svg>
         <select class="lang-select" id="lang-select">
           <option value="en">English</option>
-          <option value="hi">हिंदी</option>
           <option value="mr">मराठी</option>
+          <option value="hi">हिंदी</option>
           <option value="gu">ગુજરાતી</option>
           <option value="pa">ਪੰਜਾਬੀ</option>
           <option value="ta">தமிழ்</option>
@@ -375,7 +373,7 @@
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 14.5A8.5 8.5 0 119.5 4a7 7 0 1010.5 10.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
       </button>
-      <a href="#top" class="btn btn--ghost" data-i18n="nav_quote">Get a quote</a>
+      <a href="#top" class="btn btn--ghost" data-i18n="nav_quote">Free Consultation</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -474,21 +472,20 @@
 
       <hr class="action-divider">
 
-      <form class="contact-form" id="contact-form">
-        <div class="field">
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="field" id="field-name">
           <label for="name" data-i18n="form_name">Name</label>
-          <input type="text" id="name" name="name" required autocomplete="name">
+          <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error">
+          <span class="field__error" id="name-error" aria-live="polite" data-i18n="form_err_name">Please enter your name.</span>
         </div>
-        <div class="recaptcha-row">
-          <div class="g-recaptcha" data-sitekey="6LfM5yktAAAAAPT4Lv9oDFSbVdzBCbhNbhSXkEa5" data-theme="dark" id="g-recaptcha"></div>
-        </div>
+
         <div style="display:flex;justify-content:center;">
-          <button type="submit" class="btn btn--primary btn--lg btn--pulse">
+          <button type="submit" class="btn btn--primary btn--lg btn--pulse" id="submit-btn" aria-busy="false">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
-            <span data-i18n="form_submit">Submit on WhatsApp</span>
+            <span data-i18n="form_submit">Book a Free Consultation</span>
           </button>
         </div>
-        <p class="form-status" id="form-status" role="status"></p>
+        <p class="form-status" id="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
       </form>
 
     </form>
@@ -689,7 +686,7 @@
 <div class="sticky-cta" id="sticky-cta">
   <a href="#top" class="btn btn--primary">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
-    <span data-i18n="nav_quote">Get a quote</span>
+    <span data-i18n="nav_quote">Free Consultation</span>
   </a>
 </div>
 
@@ -726,11 +723,7 @@
   var themeBtn = document.getElementById('theme-toggle');
   function applyTheme(isDark){
     root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    var rc = document.getElementById('g-recaptcha');
-    if (rc) {
-      rc.setAttribute('data-theme', isDark ? 'dark' : 'light');
-      if (typeof grecaptcha !== 'undefined' && typeof grecaptcha.reset === 'function') { grecaptcha.reset(); }
-    }
+
   }
   applyTheme(true);
   themeBtn.addEventListener('click', function(){
@@ -814,45 +807,69 @@
 
 
   // contact form: validate, then build a pre-filled WhatsApp message
+  var RECAPTCHA_V3_KEY = '6LeIXS0tAAAAAIBUQBRzmKuEOVPSYr61Mgm-OTuW'; // ← paste your reCAPTCHA v3 site key here
   var WHATSAPP_NUMBER = '61414491510'; // 0414 491 510 in international format
+
+  // load reCAPTCHA v3 invisibly
+  (function(){
+    var s = document.createElement('script');
+    s.src = 'https://www.google.com/recaptcha/api.js?render=' + RECAPTCHA_V3_KEY;
+    s.async = true;
+    document.head.appendChild(s);
+  })();
   var form = document.getElementById('contact-form');
   var formStatus = document.getElementById('form-status');
+
+  var nameInput = document.getElementById('name');
+  var fieldName = document.getElementById('field-name');
+  nameInput.addEventListener('input', function(){
+    if (this.value.trim()) fieldName.classList.remove('is-invalid');
+  });
+  nameInput.addEventListener('blur', function(){
+    fieldName.classList.toggle('is-invalid', !this.value.trim());
+  });
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
     formStatus.className = 'form-status';
     formStatus.textContent = '';
 
-    var name = document.getElementById('name').value.trim();
+    var nameInput = document.getElementById('name');
+    var name = nameInput.value.trim();
     var picked = selectedServices();
+    var fieldName = document.getElementById('field-name');
 
-    if (!name) {
-      formStatus.textContent = t('form_err_name');
-      formStatus.classList.add('is-error');
-      return;
-    }
+    fieldName.classList.toggle('is-invalid', !name);
+
+    if (!name) { nameInput.focus(); return; }
     if (picked.length === 0) {
       formStatus.textContent = t('form_err_service');
       formStatus.classList.add('is-error');
       return;
     }
-    var recaptchaToken = typeof grecaptcha !== 'undefined' && grecaptcha.getResponse();
-    if (!recaptchaToken) {
-      formStatus.textContent = t('form_err_captcha');
-      formStatus.classList.add('is-error');
-      return;
-    }
 
-    var lines = [
-      "Hey Kloudbiz! 👋 I'm " + name + " and I'd love to get " + picked.join(' & ') + " sorted with your team.",
-      "Let’s catch up soon — excited to see what we can build together! 🚀"
-    ];
-    var text = encodeURIComponent(lines.join('\n'));
-    var waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text;
-
+    var submitBtn = document.getElementById('submit-btn');
+    submitBtn.setAttribute('aria-busy', 'true');
     formStatus.textContent = t('form_opening');
     formStatus.classList.add('is-success');
-    window.open(waUrl, '_blank', 'noopener');
+
+    function openWhatsApp(){
+      var lines = [
+        "Hey Kloudbiz! 👋 I'm " + name + " and I'd like to book a free consultation about " + picked.join(', ') + ".",
+        "Looking forward to hearing from you!"
+      ];
+      var text = encodeURIComponent(lines.join('\n'));
+      window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text, '_blank', 'noopener');
+      setTimeout(function(){ submitBtn.setAttribute('aria-busy', 'false'); }, 3000);
+    }
+
+    if (typeof grecaptcha !== 'undefined' && RECAPTCHA_V3_KEY !== 'YOUR_SITE_KEY_HERE') {
+      grecaptcha.ready(function(){
+        grecaptcha.execute(RECAPTCHA_V3_KEY, {action: 'book_consultation'}).then(openWhatsApp);
+      });
+    } else {
+      openWhatsApp();
+    }
   });
 </script>
 

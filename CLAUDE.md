@@ -113,6 +113,38 @@ Rules for translations:
 - The outgoing WhatsApp message stays in English so the business reads every enquiry
   consistently, regardless of the visitor's chosen UI language.
 
+## UX standards
+
+### Typography
+- Body: `'Inter', 'Noto Sans', system-ui, sans-serif`
+- Headings: `'Space Grotesk'`
+- Eyebrows/code: `'JetBrains Mono'`
+- Indic languages: `:lang(hi/mr/gu/pa/ta/te/ml)` override to `'Noto Sans', system-ui`
+- Noto Sans is loaded from Google Fonts alongside Inter for multilingual support
+
+### Icons
+- Lucide is the preferred icon library for all new icons
+- Custom inline SVGs are acceptable for brand/social icons (WhatsApp, logo) not in Lucide
+- Icons must always accompany a visible label or have a descriptive `aria-label`
+
+### Forms
+- No intrusive CAPTCHAs (no reCAPTCHA v2 image challenges)
+- Prefer invisible bot protection; if needed use reCAPTCHA v3 or Cloudflare Turnstile
+- Inline validation: show `.field.is-invalid` + `.field__error` on blur and submit
+- `aria-live="polite"` on all status/error message regions
+- `novalidate` on `<form>` to control validation UI ourselves
+
+### Accessibility
+- WCAG AA contrast minimum
+- `focus-visible` outlines on all interactive elements (use `--sun` token)
+- `aria-live="polite"` + `aria-atomic="true"` on dynamic status regions
+- Every interactive icon-only element must have an `aria-label`
+
+### Mobile-first
+- Tap targets ≥ 44px
+- Single-column form layouts on mobile
+- Sticky CTA on mobile: icon-only circular pill when viewport < 600px
+
 ## Deployment
 
 Pushes to `main` are automatically deployed via the GitHub Actions workflow (`.github/workflows/`). Allow ~30 seconds after push for the live site to update.
