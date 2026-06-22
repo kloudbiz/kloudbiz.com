@@ -9,6 +9,9 @@ Static website for Kloudbiz, a Melbourne-based digital studio offering websites,
 ```
 kloudbiz.com/
 ├── index.html          # Single-page site (all HTML, CSS, JS inline)
+├── poster.html         # Shareable 4:5 WhatsApp poster (self-contained, fluid)
+├── public/             # Static assets
+│   └── kloudbiz-logo.svg   # Themeable vector wordmark (currentColor)
 ├── tasks/              # Task files — one per task, markdown format
 │   └── 1.md            # Completed tasks logged here
 └── .claude/
@@ -22,6 +25,61 @@ kloudbiz.com/
 - WhatsApp number: `61414491510` (international format for `wa.me` links)
 - Dark theme is the default (`data-theme="dark"` on `<body>`)
 - No build step, no dependencies, no package.json — edit `index.html` directly
+
+## Design system
+
+All content created for Kloudbiz — pages, sections, posters, emails, assets — MUST be
+**mobile-first** and follow this spec. Build for the smallest screen first, then layer
+up enhancements with `min-width` media queries. Never let anything overflow the viewport
+horizontally on a phone.
+
+### Mobile-first rules
+
+- Design and write CSS for narrow screens first; use `@media (min-width: …)` to scale up,
+  not `max-width` to patch desktop down.
+- Fluid by default: prefer `clamp()`, `%`, `min()/max()`, and `vw` over fixed `px` widths.
+  Grids use `repeat(auto-fit, minmax(…, 1fr))` so they reflow on their own.
+- Fixed-ratio graphics (posters, social cards) keep their composition and **scale as one
+  unit** to fit the screen. Use a `container-type: inline-size` wrapper sized
+  `width: min(<design-width>px, 100vw - margin)` and express every inner size in container
+  units (`cqw`) so the whole layout scales proportionally. No JS, no overflow.
+- Tap targets ≥ 44px; respect `prefers-reduced-motion`.
+
+### Tokens (defined as CSS variables in `index.html`)
+
+Theme via the `data-theme` attribute on `<body>`; **dark is the default**. Always read
+colours from the variables, never hard-code hex in components.
+
+| Token              | Light       | Dark        | Use |
+|--------------------|-------------|-------------|-----|
+| `--bg`             | `#f4f6fb`   | `#080b16`   | page background |
+| `--bg-soft`        | `#eceffa`   | `#0e1326`   | alt background |
+| `--surface`        | white .7    | white .052  | glass panel fill |
+| `--surface-solid`  | `#ffffff`   | `#171f3a`   | solid cards, inputs, tiles |
+| `--border`         | ink .1      | white .13   | hairline borders |
+| `--ink`            | `#151a2e`   | `#f2f4fb`   | primary text |
+| `--ink-soft`       | `#525a78`   | `#aeb6d6`   | secondary text |
+| `--ink-faint`      | `#7b82a0`   | `#828dba`   | muted text |
+| `--sky`            | `#3a5ad9`   | `#8aa4ff`   | **primary accent**, links |
+| `--coral`          | `#ff6b57`   | `#ff9684`   | warm highlight (sparing) |
+| `--sun`            | `#e8a93d`   | `#ffce6e`   | warm highlight (sparing) |
+| `--wa-green`       | `#25D366` → `--wa-green-dark` `#149048` | WhatsApp CTAs |
+
+In dark mode the page carries a soft multi-radial `--hero-glow` background, and `.glass`
+panels get an `inset 0 1px 0 rgba(255,255,255,.06)` top-highlight for depth.
+
+### Typography & aesthetic
+
+- Fonts: **Space Grotesk** (headings), **Inter** (body/UI), **JetBrains Mono** (eyebrows).
+- Frosted `.glass` surfaces, ~22px radius, pill buttons, subtle scroll-reveal.
+- Accent strategy: anchor on `--sky`; use `--coral`/`--sun` only as occasional highlights.
+  WhatsApp green is reserved for the primary "message us" CTA.
+- Keep contrast at WCAG AA or better (verify against `--bg`).
+
+### Voice
+
+Short, professional, confident — written for business owners. **No em-dashes** in copy;
+use commas, periods, or a middle dot (`·`).
 
 ## Deployment
 
