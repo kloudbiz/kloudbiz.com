@@ -81,6 +81,38 @@ panels get an `inset 0 1px 0 rgba(255,255,255,.06)` top-highlight for depth.
 Short, professional, confident — written for business owners. **No em-dashes** in copy;
 use commas, periods, or a middle dot (`·`).
 
+## Internationalization (i18n)
+
+The site is multilingual. **English is the default**, plus seven Indian languages:
+**Marathi, Hindi, Punjabi, Gujarati, Tamil, Telugu, Malayalam**. A language picker sits
+next to the theme toggle in the header; the choice is persisted in `localStorage`
+(`kb-lang`) and applied on load.
+
+**All primary, user-facing content MUST be provided in every one of these languages by
+default.** When you add or change any visible copy, you are not done until its translation
+exists in all eight languages.
+
+How it works (all inline in `index.html`):
+
+- Translatable text carries a `data-i18n="key"` attribute; the `I18N` object in the script
+  holds one entry per `key` for every language. `applyLang(lang)` swaps `textContent` and
+  sets `<html lang>`.
+- If an element also contains an icon/SVG, wrap just the text in a `<span data-i18n>` so the
+  icon is preserved (the script overwrites `textContent`).
+- Strings shown only via JS (the service-picker summary, form status messages) are fetched
+  with `t('key')`; add those keys too.
+
+Rules for translations:
+
+- **Accuracy first.** Translate meaning, not word-for-word, and keep it consistent across
+  all languages. Every language must have the exact same set of keys (no missing/extra).
+- Keep brand and common tech terms in English, as is natural in these languages: Kloudbiz,
+  WhatsApp, Google, AI, iOS, iPhone, iPad, Android, Play Store, App Store, DNS, reCAPTCHA.
+- Indic scripts render via the system font stack (`system-ui`); no extra web fonts are
+  loaded, to keep the page fast.
+- The outgoing WhatsApp message stays in English so the business reads every enquiry
+  consistently, regardless of the visitor's chosen UI language.
+
 ## Deployment
 
 Pushes to `main` are automatically deployed via the GitHub Actions workflow (`.github/workflows/`). Allow ~30 seconds after push for the live site to update.
