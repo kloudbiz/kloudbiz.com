@@ -864,8 +864,12 @@
     }
 
     if (typeof grecaptcha !== 'undefined' && RECAPTCHA_V3_KEY !== 'YOUR_SITE_KEY_HERE') {
+      var rcDone = false;
+      var rcTimer = setTimeout(function(){ if (!rcDone){ rcDone = true; openWhatsApp(); } }, 3000);
       grecaptcha.ready(function(){
-        grecaptcha.execute(RECAPTCHA_V3_KEY, {action: 'book_consultation'}).then(openWhatsApp);
+        grecaptcha.execute(RECAPTCHA_V3_KEY, {action: 'book_consultation'})
+          .then(function(){ if (!rcDone){ rcDone = true; clearTimeout(rcTimer); openWhatsApp(); } })
+          .catch(function(){ if (!rcDone){ rcDone = true; clearTimeout(rcTimer); openWhatsApp(); } });
       });
     } else {
       openWhatsApp();
