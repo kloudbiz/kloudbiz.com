@@ -349,6 +349,32 @@
     transform-origin:center top;
     max-width:90vw;
   }
+
+  /* about section */
+  .about-inner{display:flex;gap:40px;align-items:center;padding:40px;}
+  .about-photo-col{flex-shrink:0;}
+  .about-photo-frame{
+    width:180px;height:180px;border-radius:50%;overflow:hidden;
+    border:3px solid var(--sky);
+    box-shadow:0 0 0 6px rgba(58,90,217,0.12);
+  }
+  [data-theme="dark"] .about-photo-frame{box-shadow:0 0 0 6px rgba(138,164,255,0.15);}
+  .about-photo{width:100%;height:100%;object-fit:cover;display:block;}
+  .about-name{font-size:clamp(1.5rem,3vw,2rem);margin:10px 0 4px;}
+  .about-role{color:var(--sky);font-weight:600;font-size:0.97rem;margin-bottom:14px;}
+  .about-bio{color:var(--ink-soft);font-size:0.97rem;line-height:1.7;}
+  @media(max-width:640px){
+    .about-inner{flex-direction:column;align-items:center;text-align:center;padding:24px 20px;gap:24px;}
+  }
+
+  /* secondary (sky-blue) button */
+  .btn--secondary{background:var(--sky);color:#ffffff;box-shadow:0 10px 24px rgba(58,90,217,0.28);}
+  .btn--secondary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(58,90,217,0.45);}
+  [data-theme="dark"] .btn--secondary{color:#080b16;box-shadow:0 10px 24px rgba(138,164,255,0.22);}
+  [data-theme="dark"] .btn--secondary:hover{box-shadow:0 14px 30px rgba(138,164,255,0.38);}
+
+  /* form dual-CTA row */
+  .form-cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
 </style>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
@@ -363,6 +389,7 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#services" data-i18n="nav_services">Services</a></li>
         <li><a href="#why" data-i18n="nav_why">Why us</a></li>
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
         <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
       </ul>
     </nav>
@@ -484,7 +511,7 @@
 
       <hr class="action-divider">
 
-      <form class="contact-form" id="contact-form" novalidate>
+      <form class="contact-form" id="contact-form" novalidate onsubmit="return false">
         <div class="field" id="field-name">
           <label for="name" data-i18n="form_name">Name</label>
           <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error">
@@ -494,16 +521,19 @@
         <div class="recaptcha-row">
           <div class="g-recaptcha" data-sitekey="6LfM5yktAAAAAPT4Lv9oDFSbVdzBCbhNbhSXkEa5" data-theme="dark" id="g-recaptcha" data-callback="onRecaptchaSolved" data-expired-callback="onRecaptchaExpired"></div>
         </div>
-        <div style="display:flex;justify-content:center;">
-          <button type="submit" class="btn btn--primary btn--lg btn--pulse" id="submit-btn" aria-busy="false" disabled>
+        <div class="form-cta-row">
+          <button type="button" class="btn btn--primary btn--lg btn--pulse" id="btn-wa" aria-busy="false" disabled>
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
-            <span data-i18n="form_submit">Book a Free Consultation</span>
+            <span data-i18n="form_submit_wa">Message on WhatsApp</span>
+          </button>
+          <button type="button" class="btn btn--secondary btn--lg" id="btn-email" aria-busy="false" disabled>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span data-i18n="form_submit_email">Send an Email</span>
           </button>
         </div>
         <p class="form-status" id="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
       </form>
 
-    </form>
     </div>
 
     <div class="trust-strip" data-reveal>
@@ -664,6 +694,24 @@
     </div>
   </section>
 
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner glass" data-reveal>
+        <div class="about-photo-col">
+          <div class="about-photo-frame">
+            <img src="public/Anurag.png" alt="Anurag Kulkarni, Owner and Founder of Kloudbiz" class="about-photo" width="180" height="180" loading="lazy">
+          </div>
+        </div>
+        <div class="about-text-col">
+          <p class="eyebrow" data-i18n="about_eyebrow">About Us</p>
+          <h2 class="about-name">Anurag Kulkarni</h2>
+          <p class="about-role" data-i18n="about_role">Owner &amp; Founder, Kloudbiz</p>
+          <p class="about-bio" data-i18n="about_bio">Polyglot software engineer with 10+ years of experience building applications across multiple platforms and languages. AI expert across ChatGPT, Claude, and CoPilot, with a passion for helping businesses leverage technology to grow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="faq" id="faq">
     <div class="container">
       <div class="section-head center" data-reveal>
@@ -694,7 +742,7 @@
 
 <footer class="site-footer">
   <div class="container">
-    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.1</span></p>
+    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.2</span></p>
   </div>
 </footer>
 
@@ -825,17 +873,19 @@
   });
 
 
-  // reCAPTCHA v2 callbacks — enable/disable submit button
+  // reCAPTCHA v2 callbacks — enable/disable CTA buttons
   window.onRecaptchaSolved = function(){
-    document.getElementById('submit-btn').disabled = false;
+    document.getElementById('btn-wa').disabled = false;
+    document.getElementById('btn-email').disabled = false;
   };
   window.onRecaptchaExpired = function(){
-    document.getElementById('submit-btn').disabled = true;
+    document.getElementById('btn-wa').disabled = true;
+    document.getElementById('btn-email').disabled = true;
   };
 
-  // contact form: validate, then build a pre-filled WhatsApp message
+  // contact form: validate and build consultation messages
   var WHATSAPP_NUMBER = '61414491510'; // 0414 491 510 in international format
-  var form = document.getElementById('contact-form');
+  var EMAIL_ADDRESS = 'info@kloudbiz.com';
   var formStatus = document.getElementById('form-status');
 
   var nameInput = document.getElementById('name');
@@ -847,53 +897,57 @@
     fieldName.classList.toggle('is-invalid', !this.value.trim());
   });
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
+  function validateForm(){
     formStatus.className = 'form-status';
     formStatus.textContent = '';
-
-    var nameInput = document.getElementById('name');
     var name = nameInput.value.trim();
     var picked = selectedServices();
-    var fieldName = document.getElementById('field-name');
-
     fieldName.classList.toggle('is-invalid', !name);
-
-    if (!name) { nameInput.focus(); return; }
-    if (picked.length === 0) {
+    if (!name){ nameInput.focus(); return null; }
+    if (picked.length === 0){
       formStatus.textContent = t('form_err_service');
       formStatus.classList.add('is-error');
-      return;
+      return null;
     }
+    return { name: name, picked: picked };
+  }
 
-    var recaptchaToken = typeof grecaptcha !== 'undefined' && grecaptcha.getResponse();
-    if (!recaptchaToken) {
-      formStatus.textContent = t('form_err_captcha');
-      formStatus.classList.add('is-error');
-      return;
-    }
-
-    var submitBtn = document.getElementById('submit-btn');
-    submitBtn.setAttribute('aria-busy', 'true');
-    formStatus.textContent = t('form_opening');
+  document.getElementById('btn-wa').addEventListener('click', function(){
+    var data = validateForm();
+    if (!data) return;
+    var btn = this;
+    btn.setAttribute('aria-busy', 'true');
+    formStatus.textContent = t('form_opening_wa');
     formStatus.classList.add('is-success');
+    var bullets = data.picked.map(function(s){ return '  • ' + s; }).join('\n');
+    var lines = [
+      "Hey Kloudbiz! 👋 I'm *" + data.name + "* and I'd like to book a free consultation.",
+      "",
+      "*Services I'm interested in:*",
+      bullets,
+      "",
+      "Looking forward to hearing from you!"
+    ];
+    var text = encodeURIComponent(lines.join('\n'));
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text, '_blank', 'noopener');
+    setTimeout(function(){ btn.setAttribute('aria-busy', 'false'); }, 3000);
+  });
 
-    function openWhatsApp(){
-      var bullets = picked.map(function(s){ return '  • ' + s; }).join('\n');
-      var lines = [
-        "Hey Kloudbiz! 👋 I'm *" + name + "* and I'd like to book a free consultation.",
-        "",
-        "*Services I'm interested in:*",
-        bullets,
-        "",
-        "Looking forward to hearing from you!"
-      ];
-      var text = encodeURIComponent(lines.join('\n'));
-      window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text, '_blank', 'noopener');
-      setTimeout(function(){ submitBtn.setAttribute('aria-busy', 'false'); }, 3000);
-    }
-
-    openWhatsApp();
+  document.getElementById('btn-email').addEventListener('click', function(){
+    var data = validateForm();
+    if (!data) return;
+    var btn = this;
+    btn.setAttribute('aria-busy', 'true');
+    formStatus.textContent = t('form_opening_email');
+    formStatus.classList.add('is-success');
+    var bullets = data.picked.map(function(s){ return '  • ' + s; }).join('\n');
+    var subject = encodeURIComponent('Free Consultation Request — ' + data.picked.join(', '));
+    var body = encodeURIComponent(
+      "Hi Kloudbiz,\n\nI'm " + data.name + " and I'd like to book a free consultation.\n\n" +
+      "Services I'm interested in:\n" + bullets + "\n\nLooking forward to hearing from you!"
+    );
+    window.location.href = 'mailto:' + EMAIL_ADDRESS + '?subject=' + subject + '&body=' + body;
+    setTimeout(function(){ btn.setAttribute('aria-busy', 'false'); }, 3000);
   });
 
   // register service worker for caching
