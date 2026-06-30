@@ -6,6 +6,19 @@
 <title>Kloudbiz — Power your business with AI & Cloud!</title>
 <meta name="description" content="Kloudbiz builds websites, Google Business listings, Android and iOS apps, AI learning tools, and digital content — based in Melbourne, Australia. Message us on WhatsApp.">
 <meta name="theme-color" content="#0b0f1f">
+<link rel="canonical" href="https://kloudbiz.com/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='sans-serif' font-weight='700' fill='%233a5ad9'>K</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kloudbiz.com/">
+<meta property="og:site_name" content="Kloudbiz">
+<meta property="og:title" content="Kloudbiz — Power your business with AI &amp; Cloud">
+<meta property="og:description" content="Websites, Google Business listings, Android and iOS apps, AI learning tools, and digital content. Melbourne-based digital studio.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kloudbiz — Power your business with AI &amp; Cloud">
+<meta name="twitter:description" content="Websites, apps, AI tools, and digital content. Melbourne-based digital studio. Message us on WhatsApp.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Kloudbiz","description":"Kloudbiz builds websites, Google Business listings, Android and iOS apps, AI learning tools, and digital content.","url":"https://kloudbiz.com","telephone":"+61414491510","email":"info@kloudbiz.com","founder":{"@type":"Person","name":"Anurag Kulkarni"},"address":{"@type":"PostalAddress","addressLocality":"Melbourne","addressRegion":"VIC","addressCountry":"AU"},"areaServed":"Australia"}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Noto+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -271,6 +284,8 @@
   .services-foot{text-align:center;margin-top:36px;}
   .services-foot p{color:var(--ink-soft);font-size:0.95rem;margin-bottom:18px;}
 
+  .ai-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+
   .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
   .why-card{padding:26px;}
   .why-card svg{width:22px;height:22px;color:var(--sky);margin-bottom:14px;}
@@ -349,10 +364,52 @@
     transform-origin:center top;
     max-width:90vw;
   }
+
+  /* field error states */
+  .field__error{display:none;font-size:0.85rem;color:var(--coral);}
+  .field.is-invalid .field__error{display:block;}
+  .field.is-invalid input,.field.is-invalid textarea{border-color:var(--coral);}
+
+  /* about section */
+  .about-inner{display:flex;gap:40px;align-items:center;padding:40px;}
+  .about-photo-col{flex-shrink:0;}
+  .about-photo-frame{
+    width:clamp(160px,22vw,200px);height:clamp(160px,22vw,200px);
+    border-radius:50%;overflow:hidden;
+    border:3px solid var(--sky);
+    box-shadow:0 0 0 6px rgba(58,90,217,0.14);
+  }
+  [data-theme="dark"] .about-photo-frame{
+    box-shadow:0 0 0 6px rgba(138,164,255,0.2),0 0 28px rgba(138,164,255,0.2);
+  }
+  .about-photo{width:100%;height:100%;object-fit:cover;display:block;}
+  .about-name{font-size:clamp(1.5rem,3vw,2rem);margin:10px 0 4px;}
+  .about-role{color:var(--sky);font-weight:600;font-size:0.97rem;margin-bottom:14px;}
+  .about-bio{color:var(--ink-soft);font-size:0.97rem;line-height:1.7;}
+  @media(max-width:640px){
+    .about-inner{flex-direction:column;align-items:center;text-align:center;padding:24px 20px;gap:24px;}
+  }
+
+  /* secondary (sky-blue) button */
+  .btn--secondary{background:var(--sky);color:#ffffff;box-shadow:0 10px 24px rgba(58,90,217,0.28);}
+  .btn--secondary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(58,90,217,0.45);}
+  [data-theme="dark"] .btn--secondary{color:#080b16;box-shadow:0 10px 24px rgba(138,164,255,0.22);}
+  [data-theme="dark"] .btn--secondary:hover{box-shadow:0 14px 30px rgba(138,164,255,0.38);}
+
+  /* form dual-CTA row */
+  .form-cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
 </style>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body data-theme="dark">
+
+<noscript>
+  <style>body > main,.sticky-cta{display:none!important}</style>
+  <div style="text-align:center;padding:64px 20px;font-family:sans-serif;color:#151a2e">
+    <p style="margin-bottom:20px;font-size:1.1rem">Please enable JavaScript to use this site, or contact us directly.</p>
+    <a href="https://wa.me/61414491510" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:14px 24px;border-radius:999px;font-weight:600;text-decoration:none;font-family:sans-serif">Contact on WhatsApp</a>
+  </div>
+</noscript>
 
 <header class="site-header">
   <div class="nav-wrap">
@@ -362,7 +419,9 @@
     <nav>
       <ul class="nav-links" id="nav-links">
         <li><a href="#services" data-i18n="nav_services">Services</a></li>
+        <li><a href="#ai-training" data-i18n="nav_ai_training">AI Training</a></li>
         <li><a href="#why" data-i18n="nav_why">Why us</a></li>
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
         <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
       </ul>
     </nav>
@@ -484,7 +543,7 @@
 
       <hr class="action-divider">
 
-      <form class="contact-form" id="contact-form" novalidate>
+      <form class="contact-form" id="contact-form" novalidate onsubmit="return false">
         <div class="field" id="field-name">
           <label for="name" data-i18n="form_name">Name</label>
           <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error">
@@ -494,16 +553,19 @@
         <div class="recaptcha-row">
           <div class="g-recaptcha" data-sitekey="6LfM5yktAAAAAPT4Lv9oDFSbVdzBCbhNbhSXkEa5" data-theme="dark" id="g-recaptcha" data-callback="onRecaptchaSolved" data-expired-callback="onRecaptchaExpired"></div>
         </div>
-        <div style="display:flex;justify-content:center;">
-          <button type="submit" class="btn btn--primary btn--lg btn--pulse" id="submit-btn" aria-busy="false" disabled>
+        <div class="form-cta-row">
+          <button type="button" class="btn btn--primary btn--lg btn--pulse" id="btn-wa" aria-busy="false" disabled>
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
-            <span data-i18n="form_submit">Book a Free Consultation</span>
+            <span data-i18n="form_submit_wa">Message on WhatsApp</span>
+          </button>
+          <button type="button" class="btn btn--secondary btn--lg" id="btn-email" aria-busy="false" disabled>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span data-i18n="form_submit_email">Send an Email</span>
           </button>
         </div>
         <p class="form-status" id="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
       </form>
 
-    </form>
     </div>
 
     <div class="trust-strip" data-reveal>
@@ -638,6 +700,51 @@
     </div>
   </section>
 
+  <section class="ai-training" id="ai-training">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <p class="eyebrow" data-i18n="ai_eyebrow">AI Training</p>
+        <h2 data-i18n="ai_title">Learn AI, applied to the real world</h2>
+        <p data-i18n="ai_intro">Practical training sessions for teams and individuals, covering the tools and techniques that make a real difference at work.</p>
+      </div>
+      <div class="ai-training-grid" data-reveal>
+        <div class="svc-card glass">
+          <div class="svc-card__head">
+            <div class="svc-card__icon svc-card__icon--sky">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M8 10v1M12 10v1M16 10v1M8 14v1M12 14v1M16 14v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 data-i18n="ai_biz_title">For Businesses</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="ai_biz_intro">Get your team confident with AI, faster. We tailor each session to your tools, industry, and workflow.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ai_biz_b1">Half-day or full-day team workshops</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ai_biz_b2">Prompting, automation, and content generation</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ai_biz_b3">Hands-on practice with tools your team will actually use</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ai_biz_b4">Ongoing support and guidance after the session</span></li>
+          </ul>
+        </div>
+        <div class="svc-card glass">
+          <div class="svc-card__head">
+            <div class="svc-card__icon svc-card__icon--coral">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3 data-i18n="ai_ind_title">For Individuals</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="ai_ind_intro">One-on-one coaching built around your goals, your pace, and your current level.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ai_ind_b1">Personal sessions, online or in person</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ai_ind_b2">Learn ChatGPT, Claude, Gemini, and more</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ai_ind_b3">Real skills you can use straight away</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ai_ind_b4">No technical background needed</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="services-foot" data-reveal>
+        <a href="#top" class="btn btn--primary" data-i18n="ai_cta">Book a free session</a>
+      </div>
+    </div>
+  </section>
+
   <section class="why" id="why">
     <div class="container">
       <div class="section-head center" data-reveal>
@@ -664,10 +771,28 @@
     </div>
   </section>
 
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner glass" data-reveal>
+        <div class="about-photo-col">
+          <div class="about-photo-frame">
+            <img src="public/Anurag.png" alt="Anurag Kulkarni, Owner and Founder of Kloudbiz" class="about-photo" width="180" height="180" loading="lazy">
+          </div>
+        </div>
+        <div class="about-text-col">
+          <p class="eyebrow" data-i18n="about_eyebrow">About Us</p>
+          <h2 class="about-name">Anurag Kulkarni</h2>
+          <p class="about-role" data-i18n="about_role">Owner &amp; Founder, Kloudbiz</p>
+          <p class="about-bio" data-i18n="about_bio">Polyglot software engineer with 10+ years of experience building applications across multiple platforms and languages. AI expert across ChatGPT, Claude, and CoPilot, with a passion for helping businesses leverage technology to grow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="faq" id="faq">
     <div class="container">
       <div class="section-head center" data-reveal>
-        <h2 data-i18n="faq_title">FAQ's</h2>
+        <h2 data-i18n="faq_title">FAQs</h2>
       </div>
       <div class="faq-list" data-reveal>
         <details class="faq-item glass">
@@ -694,14 +819,18 @@
 
 <footer class="site-footer">
   <div class="container">
-    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.1</span></p>
+    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.3</span></p>
+    <a href="https://wa.me/61414491510" class="footer-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
+      <span>WhatsApp</span>
+    </a>
   </div>
 </footer>
 
 <div class="sticky-cta" id="sticky-cta">
-  <a href="#top" class="btn btn--primary">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
-    <span data-i18n="nav_quote">Free Consultation</span>
+  <a href="#top" class="btn btn--primary" aria-label="Free Consultation">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
+    <span data-i18n="nav_quote" aria-hidden="true">Free Consultation</span>
   </a>
 </div>
 
@@ -744,7 +873,7 @@
       if (typeof grecaptcha !== 'undefined' && typeof grecaptcha.reset === 'function') { grecaptcha.reset(); }
     }
   }
-  applyTheme(true);
+  applyTheme(!window.matchMedia('(prefers-color-scheme: light)').matches);
   themeBtn.addEventListener('click', function(){
     applyTheme(root.getAttribute('data-theme') !== 'dark');
   });
@@ -825,17 +954,19 @@
   });
 
 
-  // reCAPTCHA v2 callbacks — enable/disable submit button
+  // reCAPTCHA v2 callbacks — enable/disable CTA buttons
   window.onRecaptchaSolved = function(){
-    document.getElementById('submit-btn').disabled = false;
+    document.getElementById('btn-wa').disabled = false;
+    document.getElementById('btn-email').disabled = false;
   };
   window.onRecaptchaExpired = function(){
-    document.getElementById('submit-btn').disabled = true;
+    document.getElementById('btn-wa').disabled = true;
+    document.getElementById('btn-email').disabled = true;
   };
 
-  // contact form: validate, then build a pre-filled WhatsApp message
+  // contact form: validate and build consultation messages
   var WHATSAPP_NUMBER = '61414491510'; // 0414 491 510 in international format
-  var form = document.getElementById('contact-form');
+  var EMAIL_ADDRESS = 'info@kloudbiz.com';
   var formStatus = document.getElementById('form-status');
 
   var nameInput = document.getElementById('name');
@@ -847,53 +978,57 @@
     fieldName.classList.toggle('is-invalid', !this.value.trim());
   });
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
+  function validateForm(){
     formStatus.className = 'form-status';
     formStatus.textContent = '';
-
-    var nameInput = document.getElementById('name');
     var name = nameInput.value.trim();
     var picked = selectedServices();
-    var fieldName = document.getElementById('field-name');
-
     fieldName.classList.toggle('is-invalid', !name);
-
-    if (!name) { nameInput.focus(); return; }
-    if (picked.length === 0) {
+    if (!name){ nameInput.focus(); return null; }
+    if (picked.length === 0){
       formStatus.textContent = t('form_err_service');
       formStatus.classList.add('is-error');
-      return;
+      return null;
     }
+    return { name: name, picked: picked };
+  }
 
-    var recaptchaToken = typeof grecaptcha !== 'undefined' && grecaptcha.getResponse();
-    if (!recaptchaToken) {
-      formStatus.textContent = t('form_err_captcha');
-      formStatus.classList.add('is-error');
-      return;
-    }
-
-    var submitBtn = document.getElementById('submit-btn');
-    submitBtn.setAttribute('aria-busy', 'true');
-    formStatus.textContent = t('form_opening');
+  document.getElementById('btn-wa').addEventListener('click', function(){
+    var data = validateForm();
+    if (!data) return;
+    var btn = this;
+    btn.setAttribute('aria-busy', 'true');
+    formStatus.textContent = t('form_opening_wa');
     formStatus.classList.add('is-success');
+    var bullets = data.picked.map(function(s){ return '  • ' + s; }).join('\n');
+    var lines = [
+      "Hey Kloudbiz! 👋 I'm *" + data.name + "* and I'd like to book a free consultation.",
+      "",
+      "*Services I'm interested in:*",
+      bullets,
+      "",
+      "Looking forward to hearing from you!"
+    ];
+    var text = encodeURIComponent(lines.join('\n'));
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text, '_blank', 'noopener');
+    setTimeout(function(){ btn.setAttribute('aria-busy', 'false'); }, 3000);
+  });
 
-    function openWhatsApp(){
-      var bullets = picked.map(function(s){ return '  • ' + s; }).join('\n');
-      var lines = [
-        "Hey Kloudbiz! 👋 I'm *" + name + "* and I'd like to book a free consultation.",
-        "",
-        "*Services I'm interested in:*",
-        bullets,
-        "",
-        "Looking forward to hearing from you!"
-      ];
-      var text = encodeURIComponent(lines.join('\n'));
-      window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text, '_blank', 'noopener');
-      setTimeout(function(){ submitBtn.setAttribute('aria-busy', 'false'); }, 3000);
-    }
-
-    openWhatsApp();
+  document.getElementById('btn-email').addEventListener('click', function(){
+    var data = validateForm();
+    if (!data) return;
+    var btn = this;
+    btn.setAttribute('aria-busy', 'true');
+    formStatus.textContent = t('form_opening_email');
+    formStatus.classList.add('is-success');
+    var bullets = data.picked.map(function(s){ return '  • ' + s; }).join('\n');
+    var subject = encodeURIComponent('Free Consultation Request — ' + data.picked.join(', '));
+    var body = encodeURIComponent(
+      "Hi Kloudbiz,\n\nI'm " + data.name + " and I'd like to book a free consultation.\n\n" +
+      "Services I'm interested in:\n" + bullets + "\n\nLooking forward to hearing from you!"
+    );
+    window.location.href = 'mailto:' + EMAIL_ADDRESS + '?subject=' + subject + '&body=' + body;
+    setTimeout(function(){ btn.setAttribute('aria-busy', 'false'); }, 3000);
   });
 
   // register service worker for caching
