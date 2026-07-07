@@ -170,8 +170,8 @@
   .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;max-width:1180px;margin:0 auto;}
   .logo{display:flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.12rem;}
   .logo-img{height:64px;width:auto;display:block;flex-shrink:0;color:var(--ink);}
-  .nav-links{display:flex;gap:30px;list-style:none;margin:0;padding:0;}
-  .nav-links a{font-weight:600;font-size:1rem;position:relative;padding:4px 0;color:var(--ink-soft);}
+  .nav-links{display:flex;gap:18px;list-style:none;margin:0;padding:0;}
+  .nav-links a{font-weight:600;font-size:0.82rem;white-space:nowrap;position:relative;padding:4px 0;color:var(--ink-soft);}
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--coral);transition:width 0.2s ease;}
   .nav-links a:hover{color:var(--ink);}
   .nav-links a:hover::after{width:100%;}
@@ -327,7 +327,7 @@
     .btn--pulse{animation:none !important;}
   }
 
-  @media (max-width:980px){
+  @media (max-width:1100px){
     .why-grid{grid-template-columns:1fr 1fr;}
     .nav-links{
       position:absolute;top:100%;left:0;right:0;background:var(--surface-solid);
@@ -420,6 +420,11 @@
 
   /* alt-bg section tint */
   .section--alt{background:var(--bg-soft);}
+  /* Section share links */
+  .section-share{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;color:var(--ink-faint);background:var(--surface-solid);border:1px solid var(--border);border-radius:999px;padding:4px 12px;cursor:pointer;transition:color 0.18s,border-color 0.18s;text-decoration:none;vertical-align:middle;margin-top:12px;}
+  .section-share svg{width:13px;height:13px;flex-shrink:0;}
+  .section-share:hover{color:var(--sky);border-color:var(--sky);}
+  .section-share.copied{color:#1f8a55;border-color:#1f8a55;}
 </style>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
@@ -505,6 +510,7 @@
       <div class="section-head center" data-reveal>
         <p class="eyebrow" data-i18n="services_eyebrow">What we do</p>
         <h2 data-i18n="services_title">Services, scoped to your needs</h2>
+        <a href="#services" class="section-share" data-share-id="services" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="services">kloudbiz.com/#services</span></a>
         <p data-i18n="services_intro">Pick what fits your business. Pricing follows the scope below, so you get a quote built around your project, not a fixed package.</p>
       </div>
 
@@ -671,6 +677,7 @@
       <div class="section-head center" data-reveal>
         <p class="eyebrow" data-i18n="social_eyebrow">Social Media &amp; Online Sales</p>
         <h2 data-i18n="social_title">Reach customers everywhere they shop</h2>
+        <a href="#social-media" class="section-share" data-share-id="social-media" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="social-media">kloudbiz.com/#social-media</span></a>
         <p data-i18n="social_intro">We set up and connect your social profiles and online sales channels — so your business shows up where your customers already are.</p>
       </div>
       <div class="social-grid" data-reveal>
@@ -716,6 +723,7 @@
       <div class="section-head center" data-reveal>
         <p class="eyebrow" data-i18n="ai_eyebrow">AI Training for Business</p>
         <h2 data-i18n="ai_title">Learn AI, applied to the real world</h2>
+        <a href="#ai-training" class="section-share" data-share-id="ai-training" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="ai-training">kloudbiz.com/#ai-training</span></a>
         <p data-i18n="ai_intro">Practical training sessions for teams and individuals, covering the tools and techniques that make a real difference at work.</p>
       </div>
       <div class="ai-training-grid" data-reveal>
@@ -761,6 +769,7 @@
       <div class="section-head center" data-reveal>
         <p class="eyebrow" data-i18n="aijoeys_eyebrow">AIJoeys</p>
         <h2 data-i18n="aijoeys_title">Joyful learning for every young joey</h2>
+        <a href="#aijoeys" class="section-share" data-share-id="aijoeys" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="aijoeys">kloudbiz.com/#aijoeys</span></a>
         <p data-i18n="aijoeys_intro">AI-powered activities built for kinder, daycare, montessori, and schools — from first steps to teen years.</p>
       </div>
       <div class="aijoeys-grid" data-reveal>
@@ -821,6 +830,7 @@
       <div class="section-head center" data-reveal>
         <p class="eyebrow" data-i18n="why_eyebrow">Why Kloudbiz</p>
         <h2 data-i18n="why_title">A small studio, on purpose</h2>
+        <a href="#why" class="section-share" data-share-id="why" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="why">kloudbiz.com/#why</span></a>
       </div>
       <div class="why-grid" data-reveal>
         <div class="why-card glass">
@@ -842,55 +852,12 @@
     </div>
   </section>
 
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about-inner glass" data-reveal>
-        <div class="about-photo-col">
-          <div class="about-photo-frame">
-            <img src="public/Anurag.png" alt="Anurag Kulkarni, Owner and Founder of Kloudbiz" class="about-photo" width="180" height="180" loading="lazy">
-          </div>
-        </div>
-        <div class="about-text-col">
-          <p class="eyebrow" data-i18n="about_eyebrow">About Us</p>
-          <h2 class="about-name">Anurag Kulkarni</h2>
-          <p class="about-role" data-i18n="about_role">Owner &amp; Founder, Kloudbiz</p>
-          <p class="about-bio" data-i18n="about_bio">Polyglot software engineer with 10+ years of experience building applications across multiple platforms and languages. AI expert across ChatGPT, Claude, and CoPilot, with a passion for helping businesses leverage technology to grow.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="faq" id="faq">
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <h2 data-i18n="faq_title">FAQs</h2>
-      </div>
-      <div class="faq-list" data-reveal>
-        <details class="faq-item glass">
-          <summary><span data-i18n="faq_q1">How long does a typical project take?</span><svg class="chev" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <p data-i18n="faq_a1">It depends on scope — a simple listing or one-page site might be ready within a week; a full app usually takes a few weeks. You'll get a timeframe before any work starts.</p>
-        </details>
-        <details class="faq-item glass">
-          <summary><span data-i18n="faq_q2">Do you handle hosting, or do I need my own hosting account?</span><svg class="chev" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <p data-i18n="faq_a2">Either works. I can host things for you start to finish, or set it up under your own account if you'd rather keep ownership of it.</p>
-        </details>
-        <details class="faq-item glass">
-          <summary><span data-i18n="faq_q3">Can I select more than one service?</span><svg class="chev" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <p data-i18n="faq_a3">Yes — pick as many as apply. One message covers everything you're interested in, and you'll get a single reply addressing all of it.</p>
-        </details>
-        <details class="faq-item glass">
-          <summary><span data-i18n="faq_q4">What does a project cost?</span><svg class="chev" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <p data-i18n="faq_a4">It depends on what you need, so quotes aren't generic. Send a message with a rough idea and you'll get a straight answer back.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
 
   <section class="action" id="quote">
     <div class="container">
       <div class="action__head" data-reveal>
         <h2 data-i18n="quote_title">Book your free consultation</h2>
+        <a href="#quote" class="section-share" data-share-id="quote" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="quote">kloudbiz.com/#quote</span></a>
         <p data-i18n="hero_title">Tell us what you need — we'll get back to you on WhatsApp.</p>
         <p data-i18n="hero_subtitle">Pick one or more services below.</p>
       </div>
@@ -1009,11 +976,11 @@
         <div class="form-cta-row">
           <button type="button" class="btn btn--primary btn--lg btn--pulse" id="btn-wa" aria-busy="false" disabled>
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
-            <span data-i18n="form_submit_wa">Message on WhatsApp</span>
+            <span data-i18n="form_submit_wa">WhatsApp for Free Consultation</span>
           </button>
           <button type="button" class="btn btn--secondary btn--lg" id="btn-email" aria-busy="false" disabled>
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-            <span data-i18n="form_submit_email">Send an Email</span>
+            <span data-i18n="form_submit_email">Email for Free Consultation</span>
           </button>
         </div>
         <p class="form-status" id="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -1024,11 +991,58 @@
     </div>
   </section>
 
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner glass" data-reveal>
+        <div class="about-photo-col">
+          <div class="about-photo-frame">
+            <img src="public/Anurag.png" alt="Anurag Kulkarni, Owner and Founder of Kloudbiz" class="about-photo" width="180" height="180" loading="lazy">
+          </div>
+        </div>
+        <div class="about-text-col">
+          <p class="eyebrow" data-i18n="about_eyebrow">About Us</p>
+          <h2 class="about-name">Anurag Kulkarni</h2>
+        <a href="#about" class="section-share" data-share-id="about" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="about">kloudbiz.com/#about</span></a>
+          <p class="about-role" data-i18n="about_role">Owner &amp; Founder, Kloudbiz</p>
+          <p class="about-bio" data-i18n="about_bio">Polyglot software engineer with 10+ years of experience building applications across multiple platforms and languages. AI expert across ChatGPT, Claude, and CoPilot, with a passion for helping businesses leverage technology to grow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <h2 data-i18n="faq_title">FAQs</h2>
+        <a href="#faq" class="section-share" data-share-id="faq" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="faq">kloudbiz.com/#faq</span></a>
+      </div>
+      <div class="faq-list" data-reveal>
+        <details class="faq-item glass">
+          <summary><span data-i18n="faq_q1">How long does a typical project take?</span><svg class="chev" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p data-i18n="faq_a1">It depends on scope — a simple listing or one-page site might be ready within a week; a full app usually takes a few weeks. You'll get a timeframe before any work starts.</p>
+        </details>
+        <details class="faq-item glass">
+          <summary><span data-i18n="faq_q2">Do you handle hosting, or do I need my own hosting account?</span><svg class="chev" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p data-i18n="faq_a2">Either works. I can host things for you start to finish, or set it up under your own account if you'd rather keep ownership of it.</p>
+        </details>
+        <details class="faq-item glass">
+          <summary><span data-i18n="faq_q3">Can I select more than one service?</span><svg class="chev" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p data-i18n="faq_a3">Yes — pick as many as apply. One message covers everything you're interested in, and you'll get a single reply addressing all of it.</p>
+        </details>
+        <details class="faq-item glass">
+          <summary><span data-i18n="faq_q4">What does a project cost?</span><svg class="chev" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p data-i18n="faq_a4">It depends on what you need, so quotes aren't generic. Send a message with a rough idea and you'll get a straight answer back.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.7</span></p>
+    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.8</span></p>
     <a href="https://wa.me/61414491510" class="footer-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
       <span>WhatsApp</span>
@@ -1244,6 +1258,38 @@
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(function(){});
   }
+
+  // Section scroll-spy (updates URL hash) + share-link clipboard copy
+  (function(){
+    var spySections = document.querySelectorAll('main > section[id]');
+    if (!('IntersectionObserver' in window)) return;
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          try { history.replaceState(null,'','#'+e.target.id); } catch(er){}
+        }
+      });
+    },{threshold:0.35});
+    spySections.forEach(function(s){ spy.observe(s); });
+    document.querySelectorAll('.section-share').forEach(function(btn){
+      btn.addEventListener('click',function(ev){
+        ev.preventDefault();
+        var id = btn.getAttribute('data-share-id');
+        var url = window.location.origin + window.location.pathname + '#' + id;
+        if (navigator.clipboard){
+          navigator.clipboard.writeText(url).then(function(){
+            btn.classList.add('copied');
+            var sp = btn.querySelector('[data-share-label]');
+            var orig = sp.textContent;
+            sp.textContent = 'Link copied!';
+            setTimeout(function(){ btn.classList.remove('copied'); sp.textContent = orig; },2200);
+          });
+        } else {
+          window.location.hash = '#' + id;
+        }
+      });
+    });
+  })();
 </script>
 
 </body>
