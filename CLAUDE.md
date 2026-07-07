@@ -173,6 +173,11 @@ The site carries a visible version number in the footer (`<span class="site-vers
 - The version appears in monospace, muted, after the copyright line
 - The `/commit` command includes the new version in the commit subject line
 
+## Workflow rules
+
+- **Never commit or push automatically.** After making code or content changes, stop — do not run `/commit` on the user's behalf. The user will explicitly run `/commit` themselves when they are ready.
+- Only commit when the user explicitly invokes the `/commit` skill in their message.
+
 ## Custom skills
 
 | Command   | Description                                         |
