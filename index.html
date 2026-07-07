@@ -182,10 +182,10 @@
   [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
   [data-reveal].is-visible{opacity:1;transform:translateY(0);}
 
-  /* action / top section */
-  .action{padding-top:48px;}
+  /* quote / contact section (at bottom) */
+  .action{background:var(--bg-soft);}
   .action__head{max-width:620px;margin:0 auto 40px;text-align:center;}
-  .action__head h1{font-size:clamp(2.1rem,5vw,3rem);margin:14px 0 14px;}
+  .action__head h2{font-size:clamp(1.9rem,4vw,2.6rem);margin:14px 0 14px;}
   .action__head p{color:var(--ink-soft);font-size:1.1rem;}
 
   .action-card{padding:36px;max-width:820px;margin:0 auto 28px;}
@@ -399,6 +399,27 @@
 
   /* form dual-CTA row */
   .form-cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+
+  /* hero section */
+  .hero{padding:80px 0 56px;text-align:center;}
+  .hero-inner{max-width:720px;margin:0 auto;}
+  .hero-inner h1{font-size:clamp(2.3rem,5.5vw,3.4rem);margin:12px 0 18px;}
+  .hero-tagline{color:var(--ink-soft);font-size:1.1rem;max-width:560px;margin:0 auto 34px;}
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  @media(max-width:600px){.hero{padding:52px 0 36px;}.hero-ctas{flex-direction:column;align-items:center;}}
+
+  /* service card: "learn more" / "enquire" links */
+  .svc-card__footer{margin-top:auto;padding-top:12px;display:flex;gap:12px;align-items:center;}
+  .svc-card__link{display:inline-flex;align-items:center;gap:5px;font-size:0.88rem;font-weight:600;color:var(--sky);transition:gap 0.18s ease;}
+  .svc-card__link:hover{gap:8px;}
+  .svc-card__link svg{width:14px;height:14px;}
+
+  /* social / aijoeys sections — reuse ai-training-grid */
+  .social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+  .aijoeys-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+
+  /* alt-bg section tint */
+  .section--alt{background:var(--bg-soft);}
 </style>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
@@ -420,7 +441,9 @@
     <nav>
       <ul class="nav-links" id="nav-links">
         <li><a href="#services" data-i18n="nav_services">Services</a></li>
+        <li><a href="#social-media" data-i18n="nav_social">Social &amp; Sales</a></li>
         <li><a href="#ai-training" data-i18n="nav_ai_training">AI Training for Business</a></li>
+        <li><a href="#aijoeys" data-i18n="nav_aijoeys">AIJoeys</a></li>
         <li><a href="#why" data-i18n="nav_why">Why us</a></li>
         <li><a href="#about" data-i18n="nav_about">About</a></li>
         <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
@@ -445,7 +468,7 @@
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 14.5A8.5 8.5 0 119.5 4a7 7 0 1010.5 10.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
       </button>
-      <a href="#top" class="btn btn--ghost" data-i18n="nav_quote">Free Consultation</a>
+      <a href="#quote" class="btn btn--ghost" data-i18n="nav_quote">Free Consultation</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -453,133 +476,23 @@
   </div>
 </header>
 
-<main id="top">
+<main>
 
-  <section class="action">
+  <section class="hero" id="top">
     <div class="container">
-      <div class="action__head" data-reveal>
-        <h1 data-i18n="hero_eyebrow">Power your business with AI & Cloud!</h1>
-        <p data-i18n="hero_title">Tell us what you need — we'll get back to you on WhatsApp.</p>
-        <p data-i18n="hero_subtitle">Pick one or more services below.</p>
-      </div>
-
-      <div class="action-card glass" data-reveal>
-        <fieldset class="service-picker">
-        <legend class="picker-label"><span data-i18n="picker_label">What do you need?</span> <span class="hint" data-i18n="picker_hint">(select any that apply)</span></legend>
-        <div class="service-grid">
-
-          <input type="checkbox" id="svc-web" class="service-checkbox" value="Website">
-          <label for="svc-web" class="service-tile">
-            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
-            <span class="service-tile__icon-wrap service-tile__icon-wrap--sky">
-              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4.5" width="18" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 8.5h18" stroke="currentColor" stroke-width="1.6"/></svg>
-            </span>
-            <span class="service-tile__label" data-i18n="svc_web">Build Your Website</span>
-          </label>
-
-          <input type="checkbox" id="svc-gbl" class="service-checkbox" value="Google Listing">
-          <label for="svc-gbl" class="service-tile">
-            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
-            <span class="service-tile__icon-wrap service-tile__icon-wrap--coral">
-              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-6.1-7-11a7 7 0 1114 0c0 4.9-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
-            </span>
-            <span class="service-tile__label" data-i18n="svc_gbl">Create Google Listing</span>
-          </label>
-
-          <input type="checkbox" id="svc-android" class="service-checkbox" value="Android App">
-          <label for="svc-android" class="service-tile">
-            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
-            <span class="service-tile__icon-wrap service-tile__icon-wrap--sun">
-              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2.5" width="10" height="19" rx="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="5.5" r="0.9" fill="currentColor"/></svg>
-            </span>
-            <span class="service-tile__label" data-i18n="svc_android">Build Your Android App</span>
-          </label>
-
-          <input type="checkbox" id="svc-ios" class="service-checkbox" value="iOS App">
-          <label for="svc-ios" class="service-tile">
-            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
-            <span class="service-tile__icon-wrap service-tile__icon-wrap--sky">
-              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2.5" width="10" height="19" rx="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M10 18.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            </span>
-            <span class="service-tile__label" data-i18n="svc_ios">Build Your iOS App</span>
-          </label>
-
-          <input type="checkbox" id="svc-ai" class="service-checkbox" value="AI Training for Business">
-          <label for="svc-ai" class="service-tile">
-            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
-            <span class="service-tile__icon-wrap service-tile__icon-wrap--coral">
-              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l8 4-8 4-8-4 8-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 9.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3V9.5" stroke="currentColor" stroke-width="1.6"/></svg>
-            </span>
-            <span class="service-tile__label" data-i18n="svc_ai">AI Training for Business</span>
-          </label>
-
-          <input type="checkbox" id="svc-aishers" class="service-checkbox" value="AIJoeys">
-          <label for="svc-aishers" class="service-tile">
-            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
-            <span class="service-tile__icon-wrap service-tile__icon-wrap--sun">
-              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" stroke="currentColor" stroke-width="1.6"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            </span>
-            <span class="service-tile__label" data-i18n="svc_aishers">AIJoeys</span>
-          </label>
-
-          <input type="checkbox" id="svc-content" class="service-checkbox" value="Digital Content">
-          <label for="svc-content" class="service-tile">
-            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
-            <span class="service-tile__icon-wrap service-tile__icon-wrap--sun">
-              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8.5" cy="9.5" r="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="service-tile__label" data-i18n="svc_content">Create Digital Content</span>
-          </label>
-
-          <input type="checkbox" id="svc-other" class="service-checkbox" value="Other">
-          <label for="svc-other" class="service-tile">
-            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
-            <span class="service-tile__icon-wrap service-tile__icon-wrap--sky">
-              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="12" r="1.1" fill="currentColor"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/><circle cx="16" cy="12" r="1.1" fill="currentColor"/></svg>
-            </span>
-            <span class="service-tile__label" data-i18n="svc_other">Other</span>
-          </label>
-
-        </div>
-        <p class="selected-summary" id="selected-summary">No services selected yet</p>
-      </fieldset>
-
-      <hr class="action-divider">
-
-      <form class="contact-form" id="contact-form" novalidate onsubmit="return false">
-        <div class="field" id="field-name">
-          <label for="name" data-i18n="form_name">Name</label>
-          <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error">
-          <span class="field__error" id="name-error" aria-live="polite" data-i18n="form_err_name">Please enter your name.</span>
-        </div>
-
-        <div class="recaptcha-row">
-          <div class="g-recaptcha" data-sitekey="6LfM5yktAAAAAPT4Lv9oDFSbVdzBCbhNbhSXkEa5" data-theme="dark" id="g-recaptcha" data-callback="onRecaptchaSolved" data-expired-callback="onRecaptchaExpired"></div>
-        </div>
-        <div class="form-cta-row">
-          <button type="button" class="btn btn--primary btn--lg btn--pulse" id="btn-wa" aria-busy="false" disabled>
+      <div class="hero-inner" data-reveal>
+        <p class="eyebrow" data-i18n="hero_eyebrow">Power your business with AI &amp; Cloud!</p>
+        <h1 data-i18n="hero_tagline">Everything your business needs to grow online.</h1>
+        <p class="hero-tagline" data-i18n="hero_sub">From websites and apps to AI training, social media, and digital content — we build it, launch it, and support it.</p>
+        <div class="hero-ctas">
+          <a href="#quote" class="btn btn--primary btn--lg">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
-            <span data-i18n="form_submit_wa">Message on WhatsApp</span>
-          </button>
-          <button type="button" class="btn btn--secondary btn--lg" id="btn-email" aria-busy="false" disabled>
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-            <span data-i18n="form_submit_email">Send an Email</span>
-          </button>
+            <span data-i18n="nav_quote">Free Consultation</span>
+          </a>
+          <a href="#services" class="btn btn--ghost btn--lg" data-i18n="hero_explore">Explore Services</a>
         </div>
-        <p class="form-status" id="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
-      </form>
-
-    </div>
-
-    <div class="trust-strip" data-reveal>
+      </div>
+      <div class="trust-strip" data-reveal>
         <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="trust_1">Direct contact, no account managers</span></span>
         <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="trust_2">Design, build &amp; hosting in one place</span></span>
         <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="trust_3">Melbourne based, clients Australia-wide</span></span>
@@ -597,7 +510,7 @@
 
       <div class="services-grid" data-reveal>
 
-        <article class="svc-card glass">
+        <article class="svc-card glass" id="service-web">
           <div class="svc-card__head">
             <span class="svc-card__icon svc-card__icon--sky">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4.5" width="18" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 8.5h18" stroke="currentColor" stroke-width="1.6"/></svg>
@@ -613,9 +526,10 @@
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_web_b5">Secure payment gateway integration</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_web_b6">Fast and mobile-friendly on every device</span></li>
           </ul>
+          <div class="svc-card__footer"><a href="#quote" class="svc-card__link" data-i18n="svc_enquire">Get started <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </article>
 
-        <article class="svc-card glass">
+        <article class="svc-card glass" id="service-gbl">
           <div class="svc-card__head">
             <span class="svc-card__icon svc-card__icon--coral">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-6.1-7-11a7 7 0 1114 0c0 4.9-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
@@ -630,9 +544,10 @@
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_gbl_b4">Website and booking links connected</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_gbl_b5">Guidance to earn reviews and rank higher</span></li>
           </ul>
+          <div class="svc-card__footer"><a href="#quote" class="svc-card__link" data-i18n="svc_enquire">Get started <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </article>
 
-        <article class="svc-card glass">
+        <article class="svc-card glass" id="service-android">
           <div class="svc-card__head">
             <span class="svc-card__icon svc-card__icon--sun">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2.5" width="10" height="19" rx="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="5.5" r="0.9" fill="currentColor"/></svg>
@@ -648,9 +563,10 @@
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="app_b_pay">In-app payments and subscriptions</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_android_b6">Play Store account setup and publishing</span></li>
           </ul>
+          <div class="svc-card__footer"><a href="#quote" class="svc-card__link" data-i18n="svc_enquire">Get started <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </article>
 
-        <article class="svc-card glass">
+        <article class="svc-card glass" id="service-ios">
           <div class="svc-card__head">
             <span class="svc-card__icon svc-card__icon--sky">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2.5" width="10" height="19" rx="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M10 18.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -666,9 +582,10 @@
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="app_b_pay">In-app payments and subscriptions</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_ios_b6">Apple Developer setup and App Store publishing</span></li>
           </ul>
+          <div class="svc-card__footer"><a href="#quote" class="svc-card__link" data-i18n="svc_enquire">Get started <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </article>
 
-        <article class="svc-card glass">
+        <article class="svc-card glass" id="service-ai">
           <div class="svc-card__head">
             <span class="svc-card__icon svc-card__icon--coral">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l8 4-8 4-8-4 8-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 9.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3V9.5" stroke="currentColor" stroke-width="1.6"/></svg>
@@ -683,9 +600,10 @@
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_ai_b4">Content drafting and summaries</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_ai_b5">Setup, training, and handover included</span></li>
           </ul>
+          <div class="svc-card__footer"><a href="#ai-training" class="svc-card__link" data-i18n="svc_learnmore">Learn more <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </article>
 
-        <article class="svc-card glass">
+        <article class="svc-card glass" id="service-aijoeys">
           <div class="svc-card__head">
             <span class="svc-card__icon svc-card__icon--sun">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" stroke="currentColor" stroke-width="1.6"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -700,9 +618,28 @@
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b4">Built for kinder, daycare, and schools — runs on any tablet</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b5">Privacy-first — no sign-up needed, all data stays on the device</span></li>
           </ul>
+          <div class="svc-card__footer"><a href="#aijoeys" class="svc-card__link" data-i18n="svc_learnmore">Learn more <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </article>
 
-        <article class="svc-card glass">
+                <article class="svc-card glass" id="service-social">
+          <div class="svc-card__head">
+            <span class="svc-card__icon svc-card__icon--sky">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="5" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="19" r="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.4 10.9l7.2-3.8M8.4 13.1l7.2 3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <h3 data-i18n="card_social_title">Social Media &amp; Online Sales</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="card_social_intro">Grow your presence and sell more across social platforms and online marketplaces.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_social_b1">Facebook and Instagram Business pages</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_social_b2">X (Twitter) and WhatsApp Business profiles</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_social_b3">Amazon, eBay, and Etsy seller accounts</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_social_b4">Google Shopping product listings</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_social_b5">Consistent branding across all platforms</span></li>
+          </ul>
+          <div class="svc-card__footer"><a href="#social-media" class="svc-card__link" data-i18n="svc_learnmore">Learn more <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+        </article>
+
+        <article class="svc-card glass" id="service-content">
           <div class="svc-card__head">
             <span class="svc-card__icon svc-card__icon--sun">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8.5" cy="9.5" r="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -717,13 +654,59 @@
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_content_b4">Posters, flyers, and menus</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_content_b5">Reusable brand kit and templates</span></li>
           </ul>
+          <div class="svc-card__footer"><a href="#quote" class="svc-card__link" data-i18n="svc_enquire">Get started <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </article>
 
       </div>
 
       <div class="services-foot" data-reveal>
         <p data-i18n="services_foot">Not sure where to start? Tell us a little about your business and we will point you the right way.</p>
-        <a href="#top" class="btn btn--primary" data-i18n="services_foot_cta">Get your free quote</a>
+        <a href="#quote" class="btn btn--primary" data-i18n="services_foot_cta">Get your free quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-training section--alt" id="social-media">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <p class="eyebrow" data-i18n="social_eyebrow">Social Media &amp; Online Sales</p>
+        <h2 data-i18n="social_title">Reach customers everywhere they shop</h2>
+        <p data-i18n="social_intro">We set up and connect your social profiles and online sales channels — so your business shows up where your customers already are.</p>
+      </div>
+      <div class="social-grid" data-reveal>
+        <div class="svc-card glass">
+          <div class="svc-card__head">
+            <div class="svc-card__icon svc-card__icon--sky">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="5" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8.4 10.9l7.2-3.8M8.4 13.1l7.2 3.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3 data-i18n="social_plat_title">Social Platforms</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="social_plat_intro">Professional setup, branding, and guidance for each channel.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="social_plat_b1">Facebook Business page and Meta integration</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="social_plat_b2">Instagram Business profile and shop setup</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="social_plat_b3">X (Twitter) brand page</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="social_plat_b4">WhatsApp Business profile with quick replies</span></li>
+          </ul>
+        </div>
+        <div class="svc-card glass">
+          <div class="svc-card__head">
+            <div class="svc-card__icon svc-card__icon--coral">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 6h18" stroke="currentColor" stroke-width="1.8"/><path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <h3 data-i18n="social_sales_title">Online Marketplaces</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="social_sales_intro">List your products where buyers already browse.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="social_sales_b1">Amazon Seller Central account setup</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="social_sales_b2">eBay store and listing strategy</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="social_sales_b3">Etsy shop for handmade or creative products</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="social_sales_b4">Google Shopping product feed</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="services-foot" data-reveal>
+        <a href="#quote" class="btn btn--primary" data-i18n="social_cta">Book a free session</a>
       </div>
     </div>
   </section>
@@ -768,7 +751,67 @@
         </div>
       </div>
       <div class="services-foot" data-reveal>
-        <a href="#top" class="btn btn--primary" data-i18n="ai_cta">Book a free session</a>
+        <a href="#quote" class="btn btn--primary" data-i18n="ai_cta">Book a free session</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-training section--alt" id="aijoeys">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <p class="eyebrow" data-i18n="aijoeys_eyebrow">AIJoeys</p>
+        <h2 data-i18n="aijoeys_title">Joyful learning for every young joey</h2>
+        <p data-i18n="aijoeys_intro">AI-powered activities built for kinder, daycare, montessori, and schools — from first steps to teen years.</p>
+      </div>
+      <div class="aijoeys-grid" data-reveal>
+        <div class="svc-card glass">
+          <div class="svc-card__head">
+            <div class="svc-card__icon svc-card__icon--sun">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" stroke="currentColor" stroke-width="1.6"/></svg>
+            </div>
+            <h3 data-i18n="aijoeys_k_title">Kinder &amp; Daycare (3–5)</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="aijoeys_k_intro">Gentle, play-based learning designed for childcare and montessori settings.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_k_b1">Playful habit tracker with animal companions</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_k_b2">Visual stories, colours, and shapes</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_k_b3">Designed with educators — no screen anxiety</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_k_b4">Works offline, no sign-up needed</span></li>
+          </ul>
+        </div>
+        <div class="svc-card glass">
+          <div class="svc-card__head">
+            <div class="svc-card__icon svc-card__icon--sky">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <h3 data-i18n="aijoeys_s_title">School (5–12)</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="aijoeys_s_intro">Interactive games that reinforce classroom learning.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_s_b1">Reading, literacy, and comprehension games</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_s_b2">Numeracy and problem-solving challenges</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_s_b3">Life skills and social-emotional learning</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_s_b4">Curriculum-aligned for Australian schools</span></li>
+          </ul>
+        </div>
+        <div class="svc-card glass">
+          <div class="svc-card__head">
+            <div class="svc-card__icon svc-card__icon--coral">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 data-i18n="aijoeys_t_title">Teens (12+)</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="aijoeys_t_intro">Real AI literacy — building skills for tomorrow's world.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_t_b1">AI tools explained and applied</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_t_b2">Creative projects using AI</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_t_b3">Critical thinking and digital citizenship</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_t_b4">Project-based and self-paced</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="services-foot" data-reveal>
+        <a href="#quote" class="btn btn--primary" data-i18n="aijoeys_cta">Enquire for your school or centre</a>
       </div>
     </div>
   </section>
@@ -843,11 +886,149 @@
     </div>
   </section>
 
+
+  <section class="action" id="quote">
+    <div class="container">
+      <div class="action__head" data-reveal>
+        <h2 data-i18n="quote_title">Book your free consultation</h2>
+        <p data-i18n="hero_title">Tell us what you need — we'll get back to you on WhatsApp.</p>
+        <p data-i18n="hero_subtitle">Pick one or more services below.</p>
+      </div>
+
+      <div class="action-card glass" data-reveal>
+        <fieldset class="service-picker">
+        <legend class="picker-label"><span data-i18n="picker_label">What do you need?</span> <span class="hint" data-i18n="picker_hint">(select any that apply)</span></legend>
+        <div class="service-grid">
+
+          <input type="checkbox" id="svc-web-q" class="service-checkbox" value="Website">
+          <label for="svc-web-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--sky">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4.5" width="18" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 8.5h18" stroke="currentColor" stroke-width="1.6"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_web">Build Your Website</span>
+          </label>
+
+          <input type="checkbox" id="svc-gbl-q" class="service-checkbox" value="Google Listing">
+          <label for="svc-gbl-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--coral">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-6.1-7-11a7 7 0 1114 0c0 4.9-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_gbl">Create Google Listing</span>
+          </label>
+
+          <input type="checkbox" id="svc-android-q" class="service-checkbox" value="Android App">
+          <label for="svc-android-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--sun">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2.5" width="10" height="19" rx="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="5.5" r="0.9" fill="currentColor"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_android">Build Your Android App</span>
+          </label>
+
+          <input type="checkbox" id="svc-ios-q" class="service-checkbox" value="iOS App">
+          <label for="svc-ios-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--sky">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2.5" width="10" height="19" rx="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M10 18.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_ios">Build Your iOS App</span>
+          </label>
+
+          <input type="checkbox" id="svc-ai-q" class="service-checkbox" value="AI Training for Business">
+          <label for="svc-ai-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--coral">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l8 4-8 4-8-4 8-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 9.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3V9.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_ai">AI Training for Business</span>
+          </label>
+
+          <input type="checkbox" id="svc-aishers-q" class="service-checkbox" value="AIJoeys">
+          <label for="svc-aishers-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--sun">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" stroke="currentColor" stroke-width="1.6"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_aishers">AIJoeys</span>
+          </label>
+
+          <input type="checkbox" id="svc-social-q" class="service-checkbox" value="Social Media &amp; Sales">
+          <label for="svc-social-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--sky">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="5" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="19" r="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.4 10.9l7.2-3.8M8.4 13.1l7.2 3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_social">Social Media &amp; Sales</span>
+          </label>
+
+          <input type="checkbox" id="svc-content-q" class="service-checkbox" value="Digital Content">
+          <label for="svc-content-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--sun">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8.5" cy="9.5" r="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_content">Create Digital Content</span>
+          </label>
+
+          <input type="checkbox" id="svc-other-q" class="service-checkbox" value="Other">
+          <label for="svc-other-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--sky">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="12" r="1.1" fill="currentColor"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/><circle cx="16" cy="12" r="1.1" fill="currentColor"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_other">Other</span>
+          </label>
+
+        </div>
+        <p class="selected-summary" id="selected-summary-q">No services selected yet</p>
+      </fieldset>
+
+      <hr class="action-divider">
+
+      <form class="contact-form" id="contact-form" novalidate onsubmit="return false">
+        <div class="field" id="field-name">
+          <label for="name" data-i18n="form_name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error">
+          <span class="field__error" id="name-error" aria-live="polite" data-i18n="form_err_name">Please enter your name.</span>
+        </div>
+
+        <div class="recaptcha-row">
+          <div class="g-recaptcha" data-sitekey="6LfM5yktAAAAAPT4Lv9oDFSbVdzBCbhNbhSXkEa5" data-theme="dark" id="g-recaptcha" data-callback="onRecaptchaSolved" data-expired-callback="onRecaptchaExpired"></div>
+        </div>
+        <div class="form-cta-row">
+          <button type="button" class="btn btn--primary btn--lg btn--pulse" id="btn-wa" aria-busy="false" disabled>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
+            <span data-i18n="form_submit_wa">Message on WhatsApp</span>
+          </button>
+          <button type="button" class="btn btn--secondary btn--lg" id="btn-email" aria-busy="false" disabled>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span data-i18n="form_submit_email">Send an Email</span>
+          </button>
+        </div>
+        <p class="form-status" id="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </form>
+
+    </div>
+
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.6</span></p>
+    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.7</span></p>
     <a href="https://wa.me/61414491510" class="footer-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
       <span>WhatsApp</span>
@@ -856,7 +1037,7 @@
 </footer>
 
 <div class="sticky-cta" id="sticky-cta">
-  <a href="#top" class="btn btn--primary" aria-label="Free Consultation">
+  <a href="#quote" class="btn btn--primary" aria-label="Free Consultation">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
     <span data-i18n="nav_quote" aria-hidden="true">Free Consultation</span>
   </a>
@@ -938,7 +1119,7 @@
   }
 
   // sticky CTA visibility (hide while the top action section is in view)
-  var actionEl = document.querySelector('.action');
+  var actionEl = document.querySelector('.action#quote');
   var stickyCta = document.getElementById('sticky-cta');
   var ctaObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
@@ -948,12 +1129,12 @@
   ctaObserver.observe(actionEl);
 
   // service picker summary
-  var checkboxes = document.querySelectorAll('.service-checkbox');
-  var summaryEl = document.getElementById('selected-summary');
+  var checkboxes = document.querySelectorAll('.action#quote .service-checkbox');
+  var summaryEl = document.getElementById('selected-summary-q');
   function selectedServices(){
     return Array.from(checkboxes).filter(function(c){ return c.checked; }).map(function(c){ return c.value; });
   }
-  var SERVICE_KEY = {'Website':'name_web','Google Listing':'name_gbl','Android App':'name_android','iOS App':'name_ios','AI Training for Business':'name_ai','AIJoeys':'name_aishers','Digital Content':'name_content','Other':'name_other'};
+  var SERVICE_KEY = {'Website':'name_web','Google Listing':'name_gbl','Android App':'name_android','iOS App':'name_ios','AI Training for Business':'name_ai','AIJoeys':'name_aishers','Social Media & Sales':'name_social','Digital Content':'name_content','Other':'name_other'};
   function updateSummary(){
     var picked = selectedServices();
     if (picked.length){
