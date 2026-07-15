@@ -23,7 +23,7 @@ kloudbiz.com/
 
 - Single-file site: all styles and scripts are inline in `index.html`
 - WhatsApp number: `61414491510` (international format for `wa.me` links)
-- Dark theme is the default (`data-theme="dark"` on `<body>`)
+- Light theme is the default (`data-theme="light"` on `<body>`); dark available via the header toggle
 - No build step, no dependencies, no package.json — edit `index.html` directly
 
 ## Design system
@@ -47,8 +47,8 @@ horizontally on a phone.
 
 ### Tokens (defined as CSS variables in `index.html`)
 
-Theme via the `data-theme` attribute on `<body>`; **dark is the default**. Always read
-colours from the variables, never hard-code hex in components.
+Theme via the `data-theme` attribute on `<body>`; **light is the default**, dark via the
+header toggle. Always read colours from the variables, never hard-code hex in components.
 
 | Token              | Light       | Dark        | Use |
 |--------------------|-------------|-------------|-----|
