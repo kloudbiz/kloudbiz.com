@@ -177,9 +177,12 @@ The site carries a visible version number in the footer (`<span class="site-vers
 
 - **Never commit or push automatically.** After making code or content changes, stop — do not run `/commit` on the user's behalf. The user will explicitly run `/commit` themselves when they are ready.
 - Only commit when the user explicitly invokes the `/commit` skill in their message.
+- **One feature branch at a time.** `/commit` reuses the currently active feature branch
+  (and its PR) for successive commits; a new branch is created only when starting from
+  `main`, i.e. after the previous PR has been merged.
 
 ## Custom skills
 
 | Command   | Description                                         |
 |-----------|-----------------------------------------------------|
-| `/commit` | Create a new branch, bump patch version, commit, and push to origin |
+| `/commit` | Bump patch version, commit, and push — reusing the active feature branch (new branch only when on `main`) |
