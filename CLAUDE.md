@@ -23,7 +23,7 @@ kloudbiz.com/
 
 - Single-file site: all styles and scripts are inline in `index.html`
 - WhatsApp number: `61414491510` (international format for `wa.me` links)
-- Dark theme is the default (`data-theme="dark"` on `<body>`)
+- Light theme is the default (`data-theme="light"` on `<body>`); dark available via the header toggle
 - No build step, no dependencies, no package.json — edit `index.html` directly
 
 ## Design system
@@ -47,8 +47,8 @@ horizontally on a phone.
 
 ### Tokens (defined as CSS variables in `index.html`)
 
-Theme via the `data-theme` attribute on `<body>`; **dark is the default**. Always read
-colours from the variables, never hard-code hex in components.
+Theme via the `data-theme` attribute on `<body>`; **light is the default**, dark via the
+header toggle. Always read colours from the variables, never hard-code hex in components.
 
 | Token              | Light       | Dark        | Use |
 |--------------------|-------------|-------------|-----|
@@ -177,9 +177,12 @@ The site carries a visible version number in the footer (`<span class="site-vers
 
 - **Never commit or push automatically.** After making code or content changes, stop — do not run `/commit` on the user's behalf. The user will explicitly run `/commit` themselves when they are ready.
 - Only commit when the user explicitly invokes the `/commit` skill in their message.
+- **One feature branch at a time.** `/commit` reuses the currently active feature branch
+  (and its PR) for successive commits; a new branch is created only when starting from
+  `main`, i.e. after the previous PR has been merged.
 
 ## Custom skills
 
 | Command   | Description                                         |
 |-----------|-----------------------------------------------------|
-| `/commit` | Create a new branch, bump patch version, commit, and push to origin |
+| `/commit` | Bump patch version, commit, and push — reusing the active feature branch (new branch only when on `main`) |
