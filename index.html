@@ -23,50 +23,71 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Noto+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+  /* ================================================================
+     THEME PALETTE CONFIG
+     Every colour on the site derives from the five role variables
+     below, defined once per mode. Re-skin the whole site by editing
+     these hex codes, or switch palettes live via the header picker
+     (see PALETTES in the script at the bottom of this file).
+       --c?-bg       page background
+       --c?-text     primary text
+       --c?-accent   primary accent + links   (Accent 1)
+       --c?-accent2  soft secondary surface   (Accent 2)
+       --c?-cta      buttons / focus / accents (Button/CTA)
+     Prefix cl- = light mode, cd- = dark mode. Defaults below are the
+     "Clean Slate" palette; the script overrides them from PALETTES +
+     localStorage on load. --wa-green stays fixed (WhatsApp brand).
+     ================================================================ */
+  :root{
+    --cl-bg:#FAFAFA; --cl-text:#1A1A2E; --cl-accent:#4361EE; --cl-accent2:#B5C0FF; --cl-cta:#3A0CA3;
+    --cd-bg:#0F0F1A; --cd-text:#E8E8F0; --cd-accent:#7B93FF; --cd-accent2:#2A2A4A; --cd-cta:#4CC9F0;
+    --wa-green:#25D366;
+    --wa-green-dark:#149048;
+  }
   :root,[data-theme="light"]{
-    --bg:#f4f6fb;
-    --bg-soft:#eceffa;
-    --surface:rgba(255,255,255,0.7);
-    --surface-solid:#ffffff;
-    --border:rgba(21,26,46,0.1);
-    --border-strong:rgba(21,26,46,0.18);
-    --ink:#151a2e;
-    --ink-soft:#525a78;
-    --ink-faint:#7b82a0;
-    --sky:#3a5ad9;
-    --sky-strong:#2c44ab;
-    --coral:#ff6b57;
-    --sun:#e8a93d;
-    --shadow:0 18px 40px rgba(21,26,46,0.09);
-    --header-bg:rgba(244,246,251,0.78);
+    --bg:var(--cl-bg);
+    --bg-soft:color-mix(in srgb, var(--cl-accent2) 55%, var(--cl-bg));
+    --surface:color-mix(in srgb, #ffffff 74%, transparent);
+    --surface-solid:color-mix(in srgb, #ffffff 92%, var(--cl-bg));
+    --border:color-mix(in srgb, var(--cl-text) 11%, transparent);
+    --border-strong:color-mix(in srgb, var(--cl-text) 18%, transparent);
+    --ink:var(--cl-text);
+    --ink-soft:color-mix(in srgb, var(--cl-text) 66%, var(--cl-bg));
+    --ink-faint:color-mix(in srgb, var(--cl-text) 48%, var(--cl-bg));
+    --sky:var(--cl-accent);
+    --sky-strong:color-mix(in srgb, var(--cl-accent) 82%, #000000);
+    --coral:var(--cl-cta);
+    --sun:var(--cl-cta);
+    --cta:var(--cl-cta);
+    --accent-2:var(--cl-accent2);
+    --shadow:0 18px 40px color-mix(in srgb, var(--cl-text) 12%, transparent);
+    --header-bg:color-mix(in srgb, var(--cl-bg) 82%, transparent);
     --hero-glow:none;
     color-scheme:light;
   }
   [data-theme="dark"]{
-    --bg:#080b16;
-    --bg-soft:#0e1326;
-    --surface:rgba(255,255,255,0.052);
-    --surface-solid:#171f3a;
-    --border:rgba(255,255,255,0.13);
-    --border-strong:rgba(255,255,255,0.22);
-    --ink:#f2f4fb;
-    --ink-soft:#aeb6d6;
-    --ink-faint:#828dba;
-    --sky:#8aa4ff;
-    --sky-strong:#aebcff;
-    --coral:#ff9684;
-    --sun:#ffce6e;
+    --bg:var(--cd-bg);
+    --bg-soft:var(--cd-accent2);
+    --surface:color-mix(in srgb, var(--cd-text) 6%, transparent);
+    --surface-solid:color-mix(in srgb, var(--cd-accent2) 86%, var(--cd-text));
+    --border:color-mix(in srgb, var(--cd-text) 13%, transparent);
+    --border-strong:color-mix(in srgb, var(--cd-text) 22%, transparent);
+    --ink:var(--cd-text);
+    --ink-soft:color-mix(in srgb, var(--cd-text) 68%, var(--cd-bg));
+    --ink-faint:color-mix(in srgb, var(--cd-text) 50%, var(--cd-bg));
+    --sky:var(--cd-accent);
+    --sky-strong:color-mix(in srgb, var(--cd-accent) 82%, #ffffff);
+    --coral:var(--cd-cta);
+    --sun:var(--cd-cta);
+    --cta:var(--cd-cta);
+    --accent-2:var(--cd-accent2);
     --shadow:0 20px 48px rgba(0,0,0,0.55);
-    --header-bg:rgba(8,11,22,0.72);
+    --header-bg:color-mix(in srgb, var(--cd-bg) 78%, transparent);
     --hero-glow:
-      radial-gradient(1000px 640px at 8% -12%, rgba(138,164,255,0.13), transparent 60%),
-      radial-gradient(820px 520px at 102% -6%, rgba(255,150,132,0.08), transparent 55%),
-      radial-gradient(760px 620px at 88% 26%, rgba(37,211,102,0.05), transparent 62%);
+      radial-gradient(1000px 640px at 8% -12%, color-mix(in srgb, var(--cd-accent) 16%, transparent), transparent 60%),
+      radial-gradient(820px 520px at 102% -6%, color-mix(in srgb, var(--cd-cta) 12%, transparent), transparent 55%),
+      radial-gradient(760px 620px at 88% 26%, color-mix(in srgb, var(--cd-accent) 7%, transparent), transparent 62%);
     color-scheme:dark;
-  }
-  :root{
-    --wa-green:#25D366;
-    --wa-green-dark:#149048;
   }
 
   html{font-size:17px;}
@@ -164,6 +185,25 @@
   }
   .lang-select:hover{border-color:var(--sky);}
   .lang-select:focus-visible{outline:3px solid var(--sun);outline-offset:2px;}
+
+  /* palette picker (mirrors the language picker) */
+  .palette-picker{position:relative;display:flex;align-items:center;flex-shrink:0;}
+  .palette-picker__swatch{
+    position:absolute;left:11px;width:15px;height:15px;pointer-events:none;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--sky) 40%,var(--cta));
+    box-shadow:0 0 0 1px var(--border-strong) inset;
+  }
+  .palette-select{
+    appearance:none;-webkit-appearance:none;
+    height:40px;padding:0 30px 0 33px;border-radius:999px;
+    border:1px solid var(--border-strong);background:var(--surface-solid);color:var(--ink);
+    font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238792b5' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 11px center;
+  }
+  .palette-select:hover{border-color:var(--sky);}
+  .palette-select:focus-visible{outline:3px solid var(--sun);outline-offset:2px;}
 
   /* header */
   .site-header{position:sticky;top:0;z-index:60;background:var(--header-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
@@ -351,6 +391,11 @@
     .nav-right{gap:10px;}
     .lang-picker__globe{display:none;}
     .lang-select{padding:0 26px 0 12px;font-size:0.92rem;height:38px;}
+    .lang-select{max-width:104px;}
+    /* palette picker collapses to an icon (swatch + arrow); the native
+       dropdown still lists full palette names on tap */
+    .palette-select{width:56px;padding:0 22px 0 30px;height:38px;font-size:0;color:transparent;}
+    .palette-select option{font-size:0.95rem;color:var(--ink);}
   }
 
   /* Noto Sans for Indic script languages */
@@ -505,6 +550,18 @@
           <option value="ta">தமிழ்</option>
           <option value="te">తెలుగు</option>
           <option value="ml">മലയാളം</option>
+        </select>
+      </label>
+      <label class="palette-picker">
+        <span class="sr-only" data-i18n="palette_label">Colour theme</span>
+        <span class="palette-picker__swatch" aria-hidden="true"></span>
+        <select class="palette-select" id="palette-select" aria-label="Colour theme">
+          <option value="clean-slate">Clean Slate</option>
+          <option value="forest-calm">Forest Calm</option>
+          <option value="warm-editorial">Warm Editorial</option>
+          <option value="berry-pop">Berry Pop</option>
+          <option value="mono-pro">Mono Pro</option>
+          <option value="ocean-teal">Ocean Teal</option>
         </select>
       </label>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
@@ -1143,7 +1200,7 @@
 
 <footer class="site-footer">
   <div class="container">
-    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.11</span></p>
+    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.12</span></p>
     <a href="https://wa.me/61414491510" class="footer-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
       <span>WhatsApp</span>
@@ -1201,6 +1258,53 @@
   themeBtn.addEventListener('click', function(){
     applyTheme(root.getAttribute('data-theme') !== 'dark');
   });
+
+  // ===== THEME PALETTE =====
+  // Config: edit the hex codes here (or add a palette) to re-skin the
+  // site. Each palette carries a light + dark set of the five role
+  // colours consumed by the CSS config block at the top of this file.
+  // The header picker switches palettes live; the choice persists in
+  // localStorage ('kb-palette'). Default is DEFAULT_PALETTE below.
+  var PALETTES = {
+    'clean-slate':    { light:{bg:'#FAFAFA',text:'#1A1A2E',accent:'#4361EE',accent2:'#B5C0FF',cta:'#3A0CA3'},
+                        dark: {bg:'#0F0F1A',text:'#E8E8F0',accent:'#7B93FF',accent2:'#2A2A4A',cta:'#4CC9F0'} },
+    'forest-calm':    { light:{bg:'#F6F7F2',text:'#22302A',accent:'#2D6A4F',accent2:'#D8E2DC',cta:'#40916C'},
+                        dark: {bg:'#121A16',text:'#E3EDE7',accent:'#74C69D',accent2:'#1F2E27',cta:'#52B788'} },
+    'warm-editorial': { light:{bg:'#FFFDF7',text:'#2B2118',accent:'#C05621',accent2:'#F3E3CB',cta:'#9C4221'},
+                        dark: {bg:'#191410',text:'#F2E9DF',accent:'#ED8936',accent2:'#2E2419',cta:'#DD6B20'} },
+    'berry-pop':      { light:{bg:'#FDF8FB',text:'#2D1B2E',accent:'#B5179E',accent2:'#F1D4EB',cta:'#7209B7'},
+                        dark: {bg:'#17101A',text:'#F0E4F2',accent:'#F072D8',accent2:'#2C1E33',cta:'#9D4EDD'} },
+    'mono-pro':       { light:{bg:'#FFFFFF',text:'#111111',accent:'#555555',accent2:'#EAEAEA',cta:'#000000'},
+                        dark: {bg:'#0A0A0A',text:'#F5F5F5',accent:'#AAAAAA',accent2:'#222222',cta:'#FFFFFF'} },
+    'ocean-teal':     { light:{bg:'#F5FBFB',text:'#12343B',accent:'#0E7C7B',accent2:'#CDEDEC',cta:'#086972'},
+                        dark: {bg:'#0B1B1E',text:'#DDF3F2',accent:'#35C2C1',accent2:'#14313A',cta:'#17A2A0'} }
+  };
+  var DEFAULT_PALETTE = 'clean-slate';
+  var paletteSelect = document.getElementById('palette-select');
+  function applyPalette(key){
+    var p = PALETTES[key] || PALETTES[DEFAULT_PALETTE];
+    var s = root.style;
+    s.setProperty('--cl-bg', p.light.bg);
+    s.setProperty('--cl-text', p.light.text);
+    s.setProperty('--cl-accent', p.light.accent);
+    s.setProperty('--cl-accent2', p.light.accent2);
+    s.setProperty('--cl-cta', p.light.cta);
+    s.setProperty('--cd-bg', p.dark.bg);
+    s.setProperty('--cd-text', p.dark.text);
+    s.setProperty('--cd-accent', p.dark.accent);
+    s.setProperty('--cd-accent2', p.dark.accent2);
+    s.setProperty('--cd-cta', p.dark.cta);
+  }
+  var savedPalette = DEFAULT_PALETTE;
+  try { var sp = localStorage.getItem('kb-palette'); if (sp && PALETTES[sp]) savedPalette = sp; } catch (e) {}
+  applyPalette(savedPalette);
+  if (paletteSelect) {
+    paletteSelect.value = savedPalette;
+    paletteSelect.addEventListener('change', function(){
+      applyPalette(this.value);
+      try { localStorage.setItem('kb-palette', this.value); } catch (e) {}
+    });
+  }
 
   // mobile nav
   var toggle = document.getElementById('nav-toggle');
