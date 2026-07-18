@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIJoeys — Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Sora:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;background:#dfe4f2;font-family:'Inter',system-ui,sans-serif;
+    padding:16px;
+  }
+  /* Mobile-first: each stage caps at the A4 design width but never exceeds the
+     viewport. All sizes inside use container-query units (cqw) so each A4
+     portrait composition scales as one unit — screen or print. */
+  .stage-group{display:flex;flex-direction:column;align-items:center;gap:24px;}
+  .stage{
+    width:min(900px, 100vw - 32px);
+    container-type:inline-size;
+  }
+  .poster{
+    width:100%;aspect-ratio:210 / 297;position:relative;overflow:hidden;
+    background:
+      radial-gradient(90cqw 60cqw at 6% -6%, rgba(58,90,217,0.10), transparent 60%),
+      radial-gradient(80cqw 55cqw at 104% 12%, rgba(255,107,87,0.10), transparent 55%),
+      radial-gradient(85cqw 60cqw at 90% 106%, rgba(232,169,61,0.14), transparent 58%),
+      linear-gradient(165deg,#fdfdff 0%,#f4f6fb 55%,#eef1fa 100%);
+    color:#151a2e;display:flex;flex-direction:column;
+    padding:5.4cqw 6.2cqw 5cqw;
+    border-radius:1.6cqw;box-shadow:0 3cqw 8cqw rgba(21,26,46,0.16);
+  }
+  /* playful confetti backdrop */
+  .poster::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(rgba(58,90,217,0.10) 0.45cqw, transparent 0.45cqw);
+    background-size:6.5cqw 6.5cqw;
+    mask:linear-gradient(180deg,rgba(0,0,0,0.65),transparent 55%);
+  }
+  .poster > *{position:relative;z-index:1;}
+
+  .brand-row{display:flex;align-items:center;justify-content:space-between;}
+  .brand-row svg.logo{height:7.6cqw;width:auto;display:block;color:#151a2e;}
+  .badge{
+    display:inline-flex;align-items:center;gap:1cqw;
+    font-family:'JetBrains Mono',monospace;font-size:1.55cqw;letter-spacing:0.14em;
+    text-transform:uppercase;font-weight:500;color:#b3401f;
+    background:rgba(255,107,87,0.12);border:1px solid rgba(255,107,87,0.4);
+    border-radius:999px;padding:1.1cqw 2.2cqw;
+  }
+  .badge svg{width:1.9cqw;height:1.9cqw;flex-shrink:0;}
+  .badge--sky{color:#2c47b8;background:rgba(58,90,217,0.10);border-color:rgba(58,90,217,0.32);}
+
+  /* Title is an inline SVG with an SVG gradient fill (not CSS
+     background-clip:text) so the gradient survives print / PDF export —
+     Chromium's PDF engine drops background-clip:text, but honours SVG
+     gradients. The SVG scales in cqw like everything else. */
+  h1{margin-top:1.6cqw;text-align:center;line-height:1;}
+  h1 .title-svg{width:56cqw;height:auto;display:block;margin:0 auto;}
+  .tagline{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:3.1cqw;
+    text-align:center;margin-top:1cqw;color:#151a2e;
+  }
+  .tagline .hl{
+    background:linear-gradient(120deg, rgba(58,90,217,0.16), rgba(255,107,87,0.20));
+    color:#2c47b8;font-weight:800;border-radius:0.3em;padding:0.03em 0.32em;
+  }
+  .ages{
+    display:flex;justify-content:center;gap:1.2cqw;margin-top:1.5cqw;flex-wrap:wrap;
+  }
+  .ages span{
+    font-size:1.85cqw;font-weight:600;color:#2c47b8;
+    background:rgba(58,90,217,0.10);border:1px solid rgba(58,90,217,0.32);
+    border-radius:999px;padding:0.85cqw 2cqw;
+  }
+  .ages span.hl{
+    background:linear-gradient(120deg,#3a5ad9,#2c47b8);color:#ffffff;
+    border-color:transparent;box-shadow:0 0.5cqw 1.4cqw rgba(58,90,217,0.3);
+  }
+
+  .wave{width:100%;height:2.8cqw;display:block;margin-top:1.6cqw;}
+
+  .middle{display:flex;align-items:center;gap:3.6cqw;margin-top:2cqw;}
+  .joey-wrap{flex:0 0 37cqw;}
+  .joey-wrap svg{width:100%;height:auto;display:block;}
+  .ribbons{flex:1;display:flex;flex-direction:column;gap:1.3cqw;}
+  .ribbon{
+    display:flex;align-items:center;gap:1.5cqw;
+    background:#ffffff;border:1px solid rgba(21,26,46,0.10);
+    border-radius:999px;padding:1cqw 2.4cqw 1cqw 1cqw;
+    box-shadow:0 0.5cqw 1.4cqw rgba(21,26,46,0.05);
+  }
+  .ribbon__num{
+    flex-shrink:0;width:5.6cqw;height:5.6cqw;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:2cqw;
+  }
+  .ribbon__num--sky{background:rgba(58,90,217,0.12);color:#3a5ad9;}
+  .ribbon__num--coral{background:rgba(255,107,87,0.14);color:#e04e38;}
+  .ribbon__num--sun{background:rgba(232,169,61,0.18);color:#b57a14;}
+  .ribbon__num--leaf{background:rgba(31,138,85,0.13);color:#1f8a55;}
+  .ribbon p{font-size:1.7cqw;font-weight:600;color:#151a2e;}
+
+  .starburst-wrap{position:absolute;top:15cqw;right:2cqw;pointer-events:none;}
+  .starburst{
+    width:13.5cqw;height:13.5cqw;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#ff6b57,#e8a93d);
+    clip-path:polygon(50% 0%, 61% 14%, 78% 8%, 82% 26%, 100% 30%, 92% 47%, 100% 64%, 82% 68%, 79% 86%, 61% 80%, 50% 100%, 39% 80%, 21% 86%, 18% 68%, 0% 64%, 8% 47%, 0% 30%, 18% 26%, 22% 8%, 39% 14%);
+    transform:rotate(-8deg);
+    box-shadow:0 0.8cqw 2cqw rgba(255,107,87,0.28);
+  }
+  .starburst span{
+    display:block;transform:rotate(8deg);
+    text-align:center;font-family:'Space Grotesk',sans-serif;font-weight:700;
+    font-size:1.32cqw;line-height:1.18;color:#151a2e;
+    padding:0 1.6cqw;text-transform:uppercase;letter-spacing:0.01em;
+  }
+
+  .lede{
+    font-size:1.85cqw;color:#525a78;line-height:1.48;text-align:center;
+    max-width:78cqw;margin:1.8cqw auto 0;
+  }
+
+  .spacer{flex:1;}
+
+  .cta{
+    margin-top:1.6cqw;display:flex;align-items:center;gap:2.6cqw;
+    background:#ffffff;border:1px solid rgba(58,90,217,0.28);
+    border-radius:2.4cqw;padding:1.6cqw 2.4cqw;
+    box-shadow:0 1cqw 3cqw rgba(58,90,217,0.10);
+  }
+  .cta__qr{display:flex;flex-direction:column;align-items:center;gap:0.8cqw;flex-shrink:0;}
+  .cta__qr svg.qr{
+    width:14cqw;height:14cqw;display:block;border-radius:1cqw;
+    border:1px solid rgba(21,26,46,0.12);
+  }
+  .cta__qr .qr-label{
+    font-size:1.25cqw;color:#525a78;font-weight:500;text-align:center;letter-spacing:0.1em;
+    text-transform:uppercase;font-family:'JetBrains Mono',monospace;
+  }
+  .cta__info h2{
+    font-family:'Space Grotesk',sans-serif;font-size:2.9cqw;font-weight:700;color:#151a2e;
+  }
+  .cta__info p{font-size:1.75cqw;color:#525a78;line-height:1.45;margin-top:0.7cqw;}
+  .cta__info .arrow-hint{
+    display:inline-flex;align-items:center;gap:0.9cqw;margin-top:1.3cqw;
+    font-weight:600;font-size:1.7cqw;color:#2c47b8;
+  }
+  .cta__info .arrow-hint svg{width:2.1cqw;height:2.1cqw;}
+
+  .foot{
+    display:flex;flex-direction:column;gap:0.9cqw;
+    margin-top:1.6cqw;
+  }
+  .foot-top{display:flex;align-items:center;justify-content:space-between;}
+  .foot-hint{display:flex;justify-content:center;}
+  .foot-brand{display:flex;align-items:center;gap:1cqw;}
+  .foot-brand svg.cameo-icon{width:5.4cqw;height:auto;display:block;flex-shrink:0;}
+  .foot .site{
+    font-family:'Space Grotesk',sans-serif;font-size:3.5cqw;font-weight:700;
+    color:#151a2e;letter-spacing:0.005em;
+  }
+  .foot .loc{display:flex;align-items:center;gap:0.9cqw;font-size:1.9cqw;color:#525a78;}
+  .foot .loc svg{width:2.1cqw;height:2.1cqw;color:#ff6b57;}
+  .foot .hint{
+    display:flex;align-items:center;gap:0.6cqw;
+    font-family:'JetBrains Mono',monospace;font-size:1.4cqw;color:#3a5ad9;font-weight:500;
+  }
+  .foot .hint svg{width:1.8cqw;height:1.8cqw;}
+
+  /* page 2 */
+  .banner{
+    margin-top:2cqw;display:flex;align-items:center;justify-content:center;gap:1.2cqw;
+    background:linear-gradient(120deg,#3a5ad9,#2c47b8);color:#ffffff;
+    border-radius:1.6cqw;padding:1.5cqw 3cqw;text-align:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:2.15cqw;
+  }
+  .banner svg{width:2cqw;height:2cqw;flex-shrink:0;color:#ffce6e;}
+
+  .page2-head{margin-top:2.8cqw;text-align:center;}
+  .page2-head h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:4.2cqw;color:#151a2e;}
+  .page2-head p{
+    margin-top:0.9cqw;font-size:1.85cqw;color:#525a78;line-height:1.45;
+    max-width:80cqw;margin-left:auto;margin-right:auto;
+  }
+
+  .contact-wrap{display:flex;align-items:stretch;gap:2.6cqw;margin-top:2.8cqw;}
+  .qr-card-wrap{position:relative;flex:0 0 32cqw;}
+  .qr-card{
+    display:flex;flex-direction:column;align-items:center;gap:1cqw;
+    background:#ffffff;border:1px solid rgba(21,26,46,0.12);border-radius:2cqw;
+    padding:2.2cqw;box-shadow:0 0.8cqw 2cqw rgba(21,26,46,0.06);height:100%;
+  }
+  .qr-card svg.qr{width:100%;max-width:24cqw;height:auto;display:block;border-radius:0.8cqw;}
+  .qr-card .qr-label{
+    font-family:'JetBrains Mono',monospace;font-size:1.2cqw;letter-spacing:0.09em;
+    text-transform:uppercase;color:#525a78;
+  }
+  .qr-card .qr-url{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.75cqw;color:#2c47b8;}
+
+  .sticker{
+    position:absolute;top:-2.2cqw;right:-2.2cqw;
+    background:#ff6b57;color:#151a2e;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5cqw;
+    padding:0.9cqw 1.8cqw;border-radius:999px;transform:rotate(9deg);
+    box-shadow:0 0.6cqw 1.5cqw rgba(255,107,87,0.35);white-space:nowrap;
+  }
+
+  .contact-card{
+    flex:1;display:flex;flex-direction:column;justify-content:center;gap:1.5cqw;
+    background:#ffffff;border:1px solid rgba(21,26,46,0.10);border-radius:2cqw;
+    padding:2.2cqw 2.4cqw;box-shadow:0 0.8cqw 2cqw rgba(21,26,46,0.05);
+  }
+  .contact-row{display:flex;align-items:center;gap:1.5cqw;}
+  .contact-row .ico{
+    flex-shrink:0;width:4.8cqw;height:4.8cqw;border-radius:1.3cqw;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .contact-row .ico svg{width:2.5cqw;height:2.5cqw;}
+  .ico--wa{background:rgba(37,211,102,0.16);color:#149048;}
+  .ico--sky{background:rgba(58,90,217,0.12);color:#3a5ad9;}
+  .ico--coral{background:rgba(255,107,87,0.14);color:#e04e38;}
+  .contact-row .label{
+    font-family:'JetBrains Mono',monospace;font-size:1.15cqw;letter-spacing:0.08em;
+    text-transform:uppercase;color:#525a78;
+  }
+  .contact-row .value{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:2cqw;color:#151a2e;
+    margin-top:0.15cqw;
+  }
+
+  .info-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:1.1cqw 1.6cqw;margin-top:2.4cqw;
+  }
+  .info-item{
+    display:flex;align-items:center;gap:1.2cqw;
+    background:#ffffff;border:1px solid rgba(21,26,46,0.08);
+    border-radius:1.4cqw;padding:1.1cqw 1.6cqw;
+    box-shadow:0 0.4cqw 1.2cqw rgba(21,26,46,0.04);
+  }
+  .info-item--wide{grid-column:1 / -1;justify-content:center;}
+  .info-item .ico{
+    flex-shrink:0;width:4.2cqw;height:4.2cqw;border-radius:1cqw;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(58,90,217,0.10);color:#2c47b8;
+  }
+  .info-item .ico svg{width:2.3cqw;height:2.3cqw;}
+  .info-item span.label-text{font-size:1.5cqw;font-weight:600;color:#151a2e;line-height:1.3;}
+
+  /* No fixed @page size: the page box follows whatever paper the print
+     dialog / PDF export targets. .poster keeps the 210:297 ratio (the same
+     1:√2 ratio shared by every ISO A- and B-series sheet — A4, A5, B5,
+     B6, A3, ...), so .stage filling 100% of the page width scales the whole
+     composition to exactly fill that page at any of those sizes. */
+  @page{margin:0;}
+  @media print{
+    body{display:block;padding:0;background:#ffffff;min-height:auto;}
+    .stage-group{display:block;gap:0;}
+    .stage{width:100%;height:100vh;container-type:inline-size;}
+    .stage:first-of-type{break-after:page;}
+    /* Explicit height (not just aspect-ratio) so print pagination can't push a
+       sub-pixel sliver of overflow onto an extra near-blank page — Chromium's
+       print layout pass can compute the aspect-ratio-derived height a hair
+       taller than the actual page box. */
+    .poster{border-radius:0;box-shadow:none;height:100%;}
+  }
+</style>
+</head>
+<body>
+  <div class="stage-group">
+
+  <!-- PAGE 1 -->
+  <div class="stage">
+  <div class="poster">
+
+    <div class="brand-row">
+      <svg class="logo" viewBox="0 0 380 190" fill="currentColor" role="img" aria-label="Kloudbiz" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" stroke="currentColor" stroke-width="3" stroke-linejoin="round" d="M38.9 41.3L68.4 41.3L68.3 42.4L65 42.4L60.8 44.6L57.9 50.8L57.9 125.8L60.8 131.9L65 134.1L68.3 134.1L68.3 135.4L38.9 135.3L39 134.1L45.5 132.6L49.1 127.3L49.1 49.3L45.5 43.9L38.9 41.5ZM89.6 41.3L118 41.1L118.1 42L111 43.1L104.5 46.9L71.6 85L125.5 141.6L141.8 151.9L151 154.9L160 155.6L160 157.1L151 158.4L139.5 157.1L130.8 154.1L120.8 148.4L104.4 133.5L62.4 88.8L94.6 48L94.4 43.5L89.6 41.5ZM310.1 69.8L346.4 77.8L321.4 75.5L329.8 83.6L301.5 78.6L309.8 87.4L264.4 79.8L298 80.6L291.8 73.9L318.9 78.3L310.3 69.9ZM308.4 97.5L312 97.6L314.6 100.5L314.6 103.8L311.5 106.9L307.8 106.6L305.1 103.5L305.6 99.8L308.3 97.6ZM255.1 98L255.9 143.3L247.5 143.4L247.3 140.9L239.5 143.9L230.3 141.9L225.1 137.5L222.1 131.5L221.6 125.5L223.6 119L228 113.9L234 110.9L241.5 110.6L247.3 112.9L247.4 99.8L255 98.1ZM131.4 99.8L140.4 99.8L140.3 143.4L131.4 143.3L131.4 100ZM263.1 99.8L287.3 99.9L293.3 102.1L296.4 105L298.4 109.3L298.4 113.8L296.6 117.8L293.4 121L298.9 126L299.9 133.3L295.3 140.4L287 143.4L263.1 143.3L263.1 100ZM272.5 107.1L272.5 117.6L284 117.6L289.1 114.5L289.1 110.3L286.3 107.6L272.8 107.1ZM162.9 110.3L168.8 110.9L174.3 113.6L178.6 118.5L180.9 124.8L180.4 132L176.9 138.3L170.3 142.9L164 144.1L157 142.9L152.3 140.1L147.4 133.5L146.1 127.8L147.4 120.8L150.1 116.3L157 111.4L162.8 110.4ZM71.6 110.8L73.8 111.1L75 113.1L77.8 112.9L79.5 115.6L81.5 115.9L82.9 118.3L82.4 120L77.3 123.4L67.8 123.4L65.8 120.9L62.5 120.9L61.6 117L64.8 115.6L66 113.1L69.3 112.9L71.5 110.9ZM185.9 111L194.4 111L194.6 131.8L197.3 135.6L199.8 136.6L204.5 136.1L207.9 133.5L207.9 111L216.6 111L216.5 143.4L208 143.4L207.8 140.9L203.5 143.4L196 143.9L188.9 139.8L185.9 132.5L185.9 111.3ZM305.6 111L314.1 111L314 143.4L305.6 143.3L305.6 111.3ZM319.4 111L346.6 111L346.6 117L330.4 136L346.8 136.1L346.8 143.4L319.1 143.3L319.1 137.5L335.4 118.3L319.5 118.1L319.4 111.3ZM162.8 117.6L156.6 121L154.9 124.5L154.6 128.8L158 134.6L164.5 136.6L170.1 133.8L172.6 126.3L169.8 120.1L163 117.6ZM238.5 117.6L234.3 119.1L231.6 121.8L230.1 128.5L231.9 132.8L235.3 135.6L242 136.4L247.4 133.3L247.4 120.8L243.8 118.4L238.8 117.6ZM272.3 124.6L272.3 135.9L285.5 135.9L288.8 134.6L290.6 132.3L290.6 128.3L288 125.4L272.5 124.6Z"/>
+      </svg>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 1114 0c0 4.9-7 11-7 11z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+        Coming to a community centre near you
+      </span>
+    </div>
+
+    <h1>
+      <svg class="title-svg" viewBox="0 0 640 128" role="img" aria-label="AIJoeys" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0.22">
+            <stop offset="0.12" stop-color="#3a5ad9"/>
+            <stop offset="0.55" stop-color="#ff6b57"/>
+            <stop offset="0.92" stop-color="#d98a1f"/>
+          </linearGradient>
+        </defs>
+        <text x="320" y="99" text-anchor="middle" font-family="'Sora',sans-serif" font-weight="800" font-size="106" letter-spacing="0.5" fill="url(#titleGrad)">AIJOEYS</text>
+      </svg>
+    </h1>
+    <p class="tagline">Where <span class="hl">AI</span> meets learning for your young ones</p>
+    <div class="ages">
+      <span>Ages 4 – 8</span>
+      <span class="hl">Play-based learning</span>
+      <span>Powered by AI</span>
+      <span>New sessions starting soon</span>
+    </div>
+
+    <svg class="wave" viewBox="0 0 900 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0 22 C 150 2, 300 40, 450 20 C 600 0, 750 38, 900 18 L900 40 L0 40 Z" fill="rgba(58,90,217,0.08)"/>
+    </svg>
+
+    <div class="middle">
+      <div class="joey-wrap">
+        <svg viewBox="0 0 420 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A friendly young joey kangaroo learning with a tablet">
+          <!-- sparkles -->
+          <path d="M62 60l3.2 8.3 8.3 3.2-8.3 3.2-3.2 8.3-3.2-8.3-8.3-3.2 8.3-3.2z" fill="#e8a93d"/>
+          <path d="M360 90l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z" fill="#3a5ad9" opacity="0.75"/>
+          <path d="M345 300l2.2 5.6 5.6 2.2-5.6 2.2-2.2 5.6-2.2-5.6-5.6-2.2 5.6-2.2z" fill="#ff6b57" opacity="0.8"/>
+          <circle cx="80" cy="290" r="5" fill="#3a5ad9" opacity="0.35"/>
+          <circle cx="330" cy="45" r="4" fill="#ff6b57" opacity="0.4"/>
+          <!-- ground shadow -->
+          <ellipse cx="212" cy="362" rx="148" ry="15" fill="#3a5ad9" opacity="0.09"/>
+          <!-- tail -->
+          <path d="M288 322 Q382 332 396 262 Q401 237 386 234 Q371 232 366 252 Q356 298 284 296 Z" fill="#e8944a"/>
+          <!-- ears (behind head) -->
+          <ellipse cx="165" cy="38" rx="17" ry="40" fill="#f2a35c" transform="rotate(-18 165 38)"/>
+          <ellipse cx="259" cy="38" rx="17" ry="40" fill="#f2a35c" transform="rotate(18 259 38)"/>
+          <ellipse cx="166" cy="44" rx="9" ry="26" fill="#ffd9ac" transform="rotate(-18 166 44)"/>
+          <ellipse cx="258" cy="44" rx="9" ry="26" fill="#ffd9ac" transform="rotate(18 258 44)"/>
+          <!-- body -->
+          <path d="M212 122 C 302 122 322 222 302 292 C 287 342 137 342 122 292 C 102 222 122 122 212 122 Z" fill="#f2a35c"/>
+          <!-- belly -->
+          <ellipse cx="212" cy="262" rx="62" ry="68" fill="#ffd9ac"/>
+          <!-- pouch smile line -->
+          <path d="M158 268 Q212 302 266 268" fill="none" stroke="#e8944a" stroke-width="5" stroke-linecap="round"/>
+          <!-- feet -->
+          <ellipse cx="150" cy="344" rx="56" ry="17" fill="#e8944a"/>
+          <ellipse cx="274" cy="344" rx="56" ry="17" fill="#f2a35c"/>
+          <!-- tablet -->
+          <rect x="158" y="192" width="108" height="76" rx="9" fill="#3a5ad9"/>
+          <rect x="166" y="200" width="92" height="60" rx="5" fill="#ffffff"/>
+          <text x="212" y="228" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="21" fill="#151a2e">1 + 2 = 3</text>
+          <text x="212" y="251" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="600" font-size="15" fill="#3a5ad9">A B C</text>
+          <!-- arms -->
+          <ellipse cx="156" cy="238" rx="14" ry="27" fill="#f2a35c" transform="rotate(22 156 238)"/>
+          <ellipse cx="268" cy="238" rx="14" ry="27" fill="#f2a35c" transform="rotate(-22 268 238)"/>
+          <!-- head -->
+          <circle cx="212" cy="96" r="58" fill="#f2a35c"/>
+          <!-- muzzle -->
+          <ellipse cx="212" cy="114" rx="30" ry="21" fill="#ffd9ac"/>
+          <!-- nose -->
+          <ellipse cx="212" cy="103" rx="9" ry="6" fill="#5a4632"/>
+          <!-- smile -->
+          <path d="M200 118 Q212 128 224 118" stroke="#5a4632" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <!-- eyes -->
+          <circle cx="190" cy="86" r="7.5" fill="#151a2e"/>
+          <circle cx="234" cy="86" r="7.5" fill="#151a2e"/>
+          <circle cx="192.5" cy="83.5" r="2.6" fill="#ffffff"/>
+          <circle cx="236.5" cy="83.5" r="2.6" fill="#ffffff"/>
+          <!-- cheeks -->
+          <circle cx="172" cy="104" r="9" fill="#ff9684" opacity="0.5"/>
+          <circle cx="252" cy="104" r="9" fill="#ff9684" opacity="0.5"/>
+          <!-- AI sparkle above head -->
+          <path d="M285 22l4 10.4 10.4 4-10.4 4-4 10.4-4-10.4-10.4-4 10.4-4z" fill="#3a5ad9"/>
+        </svg>
+      </div>
+      <div class="ribbons">
+        <div class="ribbon">
+          <span class="ribbon__num ribbon__num--sky">01</span>
+          <p>Builds early numeracy through play</p>
+        </div>
+        <div class="ribbon">
+          <span class="ribbon__num ribbon__num--coral">02</span>
+          <p>Grows language and first words</p>
+        </div>
+        <div class="ribbon">
+          <span class="ribbon__num ribbon__num--sun">03</span>
+          <p>Names feelings, builds empathy</p>
+        </div>
+        <div class="ribbon">
+          <span class="ribbon__num ribbon__num--leaf">04</span>
+          <p>Turns everyday routines into fun habits</p>
+        </div>
+        <div class="ribbon">
+          <span class="ribbon__num ribbon__num--sky">05</span>
+          <p>Safe, guided screen time</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="starburst-wrap">
+      <div class="starburst"><span>Hurry! Don't miss out on your spot</span></div>
+    </div>
+
+    <p class="lede">Welcome to AIJoeys, where AI meets play-based learning for your young ones. A fun learning program designed for young minds, coming soon to community centres near you.</p>
+
+    <div class="spacer"></div>
+
+    <div class="cta">
+      <div class="cta__qr">
+        <svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53" shape-rendering="crispEdges" role="img" aria-label="QR code — scan to register your interest"><path fill="#ffffff" d="M0 0h53v53H0z"/><path stroke="#151a2e" d="M4 4.5h7M13 4.5h3M18 4.5h1M21 4.5h3M25 4.5h2M29 4.5h1M33 4.5h5M40 4.5h1M42 4.5h7M4 5.5h1M10 5.5h1M13 5.5h2M17 5.5h1M19 5.5h1M22 5.5h3M27 5.5h2M30 5.5h2M35 5.5h1M39 5.5h1M42 5.5h1M48 5.5h1M4 6.5h1M6 6.5h3M10 6.5h1M12 6.5h3M17 6.5h6M27 6.5h1M29 6.5h2M32 6.5h1M36 6.5h2M39 6.5h1M42 6.5h1M44 6.5h3M48 6.5h1M4 7.5h1M6 7.5h3M10 7.5h1M12 7.5h1M14 7.5h1M16 7.5h2M22 7.5h4M27 7.5h1M30 7.5h1M33 7.5h1M35 7.5h1M39 7.5h2M42 7.5h1M44 7.5h3M48 7.5h1M4 8.5h1M6 8.5h3M10 8.5h1M12 8.5h2M17 8.5h1M19 8.5h1M23 8.5h13M38 8.5h3M42 8.5h1M44 8.5h3M48 8.5h1M4 9.5h1M10 9.5h1M12 9.5h2M15 9.5h1M18 9.5h2M22 9.5h1M24 9.5h1M28 9.5h1M31 9.5h1M33 9.5h1M35 9.5h1M42 9.5h1M48 9.5h1M4 10.5h7M12 10.5h1M14 10.5h1M16 10.5h1M18 10.5h1M20 10.5h1M22 10.5h1M24 10.5h1M26 10.5h1M28 10.5h1M30 10.5h1M32 10.5h1M34 10.5h1M36 10.5h1M38 10.5h1M40 10.5h1M42 10.5h7M12 11.5h5M18 11.5h7M28 11.5h5M35 11.5h2M39 11.5h2M4 12.5h1M6 12.5h5M13 12.5h4M19 12.5h2M22 12.5h1M24 12.5h5M30 12.5h2M33 12.5h2M37 12.5h1M39 12.5h1M42 12.5h5M4 13.5h2M11 13.5h1M14 13.5h1M17 13.5h1M20 13.5h5M28 13.5h2M33 13.5h2M39 13.5h2M44 13.5h2M47 13.5h2M5 14.5h3M10 14.5h3M16 14.5h2M19 14.5h1M22 14.5h1M26 14.5h2M30 14.5h1M33 14.5h1M35 14.5h1M37 14.5h3M41 14.5h3M45 14.5h1M47 14.5h1M4 15.5h1M9 15.5h1M13 15.5h2M16 15.5h1M18 15.5h1M21 15.5h1M23 15.5h2M30 15.5h2M34 15.5h1M36 15.5h2M39 15.5h3M44 15.5h3M4 16.5h3M10 16.5h2M16 16.5h3M20 16.5h1M22 16.5h1M24 16.5h1M27 16.5h1M29 16.5h1M31 16.5h1M33 16.5h3M39 16.5h2M42 16.5h1M48 16.5h1M5 17.5h1M8 17.5h2M17 17.5h2M20 17.5h1M23 17.5h3M27 17.5h1M29 17.5h1M31 17.5h1M33 17.5h4M39 17.5h3M44 17.5h1M46 17.5h1M48 17.5h1M10 18.5h1M12 18.5h2M15 18.5h1M20 18.5h1M22 18.5h1M28 18.5h1M30 18.5h2M37 18.5h1M40 18.5h1M44 18.5h2M47 18.5h1M6 19.5h4M18 19.5h3M22 19.5h2M25 19.5h1M27 19.5h3M33 19.5h1M36 19.5h3M40 19.5h4M45 19.5h3M4 20.5h1M6 20.5h1M9 20.5h4M14 20.5h1M17 20.5h1M19 20.5h1M21 20.5h2M24 20.5h1M33 20.5h1M35 20.5h1M37 20.5h1M41 20.5h2M48 20.5h1M4 21.5h2M9 21.5h1M11 21.5h1M17 21.5h1M19 21.5h2M24 21.5h1M28 21.5h2M33 21.5h2M36 21.5h1M39 21.5h3M44 21.5h3M5 22.5h1M8 22.5h1M10 22.5h1M12 22.5h2M16 22.5h3M20 22.5h2M25 22.5h4M30 22.5h1M35 22.5h5M41 22.5h3M45 22.5h3M4 23.5h3M9 23.5h1M11 23.5h1M15 23.5h4M20 23.5h2M23 23.5h1M27 23.5h1M31 23.5h1M34 23.5h1M36 23.5h2M39 23.5h1M43 23.5h1M45 23.5h3M5 24.5h8M14 24.5h1M19 24.5h11M33 24.5h1M35 24.5h1M38 24.5h8M48 24.5h1M4 25.5h1M6 25.5h3M12 25.5h2M15 25.5h1M17 25.5h1M21 25.5h1M23 25.5h2M28 25.5h1M31 25.5h4M39 25.5h2M44 25.5h3M48 25.5h1M7 26.5h2M10 26.5h1M12 26.5h1M14 26.5h2M17 26.5h2M20 26.5h2M24 26.5h1M26 26.5h1M28 26.5h2M31 26.5h1M33 26.5h2M36 26.5h1M38 26.5h3M42 26.5h1M44 26.5h1M46 26.5h1M5 27.5h1M8 27.5h1M12 27.5h1M17 27.5h1M24 27.5h1M28 27.5h1M31 27.5h5M38 27.5h1M40 27.5h1M44 27.5h3M6 28.5h1M8 28.5h6M16 28.5h1M18 28.5h1M20 28.5h2M24 28.5h7M33 28.5h1M35 28.5h1M38 28.5h8M47 28.5h1M7 29.5h1M14 29.5h1M17 29.5h1M22 29.5h5M29 29.5h1M31 29.5h1M33 29.5h3M39 29.5h1M42 29.5h1M45 29.5h2M48 29.5h1M4 30.5h1M7 30.5h1M9 30.5h2M14 30.5h1M17 30.5h1M20 30.5h1M25 30.5h2M30 30.5h1M32 30.5h1M34 30.5h2M37 30.5h3M41 30.5h1M45 30.5h3M5 31.5h2M8 31.5h2M11 31.5h1M13 31.5h1M16 31.5h1M18 31.5h1M20 31.5h4M25 31.5h1M28 31.5h2M31 31.5h1M33 31.5h4M38 31.5h2M42 31.5h2M46 31.5h1M48 31.5h1M4 32.5h1M7 32.5h2M10 32.5h4M17 32.5h1M19 32.5h2M22 32.5h1M24 32.5h2M27 32.5h2M31 32.5h1M34 32.5h1M37 32.5h1M40 32.5h1M42 32.5h1M44 32.5h1M47 32.5h2M4 33.5h3M8 33.5h2M15 33.5h2M20 33.5h3M26 33.5h2M31 33.5h4M36 33.5h1M40 33.5h1M42 33.5h1M48 33.5h1M4 34.5h1M6 34.5h1M10 34.5h1M12 34.5h3M17 34.5h2M21 34.5h2M24 34.5h8M35 34.5h1M39 34.5h1M43 34.5h1M46 34.5h2M4 35.5h1M6 35.5h1M8 35.5h2M11 35.5h2M14 35.5h1M16 35.5h1M18 35.5h2M22 35.5h1M28 35.5h3M32 35.5h2M36 35.5h4M42 35.5h2M45 35.5h2M48 35.5h1M5 36.5h3M9 36.5h2M12 36.5h3M16 36.5h2M19 36.5h3M24 36.5h1M27 36.5h5M33 36.5h1M37 36.5h2M43 36.5h2M47 36.5h1M5 37.5h2M13 37.5h1M16 37.5h3M20 37.5h1M22 37.5h1M24 37.5h1M26 37.5h1M28 37.5h2M31 37.5h6M40 37.5h2M45 37.5h2M8 38.5h1M10 38.5h1M12 38.5h1M15 38.5h1M17 38.5h2M20 38.5h3M24 38.5h1M26 38.5h2M31 38.5h1M38 38.5h4M43 38.5h3M47 38.5h1M5 39.5h4M11 39.5h1M13 39.5h7M22 39.5h1M25 39.5h2M28 39.5h3M33 39.5h2M36 39.5h2M39 39.5h2M45 39.5h4M4 40.5h1M7 40.5h2M10 40.5h1M14 40.5h2M20 40.5h1M23 40.5h6M30 40.5h1M33 40.5h1M35 40.5h1M37 40.5h1M40 40.5h5M47 40.5h2M12 41.5h2M16 41.5h1M18 41.5h1M20 41.5h2M23 41.5h2M28 41.5h4M33 41.5h3M37 41.5h1M39 41.5h2M44 41.5h3M48 41.5h1M4 42.5h7M14 42.5h2M17 42.5h4M24 42.5h1M26 42.5h1M28 42.5h1M33 42.5h1M35 42.5h2M38 42.5h3M42 42.5h1M44 42.5h1M46 42.5h2M4 43.5h1M10 43.5h1M12 43.5h5M18 43.5h2M22 43.5h3M28 43.5h10M39 43.5h2M44 43.5h5M4 44.5h1M6 44.5h3M10 44.5h1M12 44.5h2M16 44.5h2M24 44.5h7M34 44.5h2M38 44.5h8M47 44.5h2M4 45.5h1M6 45.5h3M10 45.5h1M12 45.5h1M15 45.5h2M20 45.5h3M24 45.5h1M26 45.5h2M29 45.5h1M32 45.5h1M34 45.5h3M39 45.5h1M44 45.5h2M48 45.5h1M4 46.5h1M6 46.5h3M10 46.5h1M12 46.5h1M14 46.5h3M19 46.5h2M23 46.5h1M25 46.5h1M30 46.5h1M33 46.5h1M35 46.5h1M38 46.5h1M40 46.5h2M45 46.5h1M47 46.5h1M4 47.5h1M10 47.5h1M13 47.5h3M18 47.5h2M21 47.5h4M26 47.5h1M28 47.5h1M32 47.5h3M36 47.5h2M39 47.5h3M46 47.5h1M4 48.5h7M12 48.5h2M15 48.5h1M20 48.5h1M23 48.5h1M26 48.5h5M33 48.5h3M38 48.5h2M41 48.5h1M43 48.5h1M45 48.5h1M47 48.5h1"/></svg>
+        <span class="qr-label">Scan to register</span>
+      </div>
+      <div class="cta__info">
+        <h2>Register your interest</h2>
+        <p>Fill out this quick form so we can set up the perfect session for your child.</p>
+        <span class="arrow-hint">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M10 18.5h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Point your phone camera at the code
+        </span>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="foot-top">
+        <span class="site">kloudbiz.com</span>
+        <span class="loc">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 1114 0c0 4.9-7 11-7 11z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+          Melbourne, Australia
+        </span>
+      </div>
+      <div class="foot-hint">
+        <span class="hint">
+          More on page 2
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="stage">
+  <div class="poster">
+
+    <div class="brand-row">
+      <svg class="logo" viewBox="0 0 380 190" fill="currentColor" role="img" aria-label="Kloudbiz" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" stroke="currentColor" stroke-width="3" stroke-linejoin="round" d="M38.9 41.3L68.4 41.3L68.3 42.4L65 42.4L60.8 44.6L57.9 50.8L57.9 125.8L60.8 131.9L65 134.1L68.3 134.1L68.3 135.4L38.9 135.3L39 134.1L45.5 132.6L49.1 127.3L49.1 49.3L45.5 43.9L38.9 41.5ZM89.6 41.3L118 41.1L118.1 42L111 43.1L104.5 46.9L71.6 85L125.5 141.6L141.8 151.9L151 154.9L160 155.6L160 157.1L151 158.4L139.5 157.1L130.8 154.1L120.8 148.4L104.4 133.5L62.4 88.8L94.6 48L94.4 43.5L89.6 41.5ZM310.1 69.8L346.4 77.8L321.4 75.5L329.8 83.6L301.5 78.6L309.8 87.4L264.4 79.8L298 80.6L291.8 73.9L318.9 78.3L310.3 69.9ZM308.4 97.5L312 97.6L314.6 100.5L314.6 103.8L311.5 106.9L307.8 106.6L305.1 103.5L305.6 99.8L308.3 97.6ZM255.1 98L255.9 143.3L247.5 143.4L247.3 140.9L239.5 143.9L230.3 141.9L225.1 137.5L222.1 131.5L221.6 125.5L223.6 119L228 113.9L234 110.9L241.5 110.6L247.3 112.9L247.4 99.8L255 98.1ZM131.4 99.8L140.4 99.8L140.3 143.4L131.4 143.3L131.4 100ZM263.1 99.8L287.3 99.9L293.3 102.1L296.4 105L298.4 109.3L298.4 113.8L296.6 117.8L293.4 121L298.9 126L299.9 133.3L295.3 140.4L287 143.4L263.1 143.3L263.1 100ZM272.5 107.1L272.5 117.6L284 117.6L289.1 114.5L289.1 110.3L286.3 107.6L272.8 107.1ZM162.9 110.3L168.8 110.9L174.3 113.6L178.6 118.5L180.9 124.8L180.4 132L176.9 138.3L170.3 142.9L164 144.1L157 142.9L152.3 140.1L147.4 133.5L146.1 127.8L147.4 120.8L150.1 116.3L157 111.4L162.8 110.4ZM71.6 110.8L73.8 111.1L75 113.1L77.8 112.9L79.5 115.6L81.5 115.9L82.9 118.3L82.4 120L77.3 123.4L67.8 123.4L65.8 120.9L62.5 120.9L61.6 117L64.8 115.6L66 113.1L69.3 112.9L71.5 110.9ZM185.9 111L194.4 111L194.6 131.8L197.3 135.6L199.8 136.6L204.5 136.1L207.9 133.5L207.9 111L216.6 111L216.5 143.4L208 143.4L207.8 140.9L203.5 143.4L196 143.9L188.9 139.8L185.9 132.5L185.9 111.3ZM305.6 111L314.1 111L314 143.4L305.6 143.3L305.6 111.3ZM319.4 111L346.6 111L346.6 117L330.4 136L346.8 136.1L346.8 143.4L319.1 143.3L319.1 137.5L335.4 118.3L319.5 118.1L319.4 111.3ZM162.8 117.6L156.6 121L154.9 124.5L154.6 128.8L158 134.6L164.5 136.6L170.1 133.8L172.6 126.3L169.8 120.1L163 117.6ZM238.5 117.6L234.3 119.1L231.6 121.8L230.1 128.5L231.9 132.8L235.3 135.6L242 136.4L247.4 133.3L247.4 120.8L243.8 118.4L238.8 117.6ZM272.3 124.6L272.3 135.9L285.5 135.9L288.8 134.6L290.6 132.3L290.6 128.3L288 125.4L272.5 124.6Z"/>
+      </svg>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Register today
+      </span>
+    </div>
+
+    <div class="banner">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l2.6 6.6L21 11l-6.4 2.4L12 20l-2.6-6.6L3 11l6.4-2.4L12 2z"/></svg>
+      Don't miss out · Limited spots per session
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l2.6 6.6L21 11l-6.4 2.4L12 20l-2.6-6.6L3 11l6.4-2.4L12 2z"/></svg>
+    </div>
+
+    <div class="page2-head">
+      <h2>Ready to register?</h2>
+      <p>AIJoeys brings AI-powered, play-based learning to your child. Scan the QR code below to register your interest in minutes.</p>
+    </div>
+
+    <div class="contact-wrap">
+      <div class="qr-card-wrap">
+        <div class="qr-card">
+          <svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53" shape-rendering="crispEdges" role="img" aria-label="QR code — scan to register your interest"><path fill="#ffffff" d="M0 0h53v53H0z"/><path stroke="#151a2e" d="M4 4.5h7M13 4.5h3M18 4.5h1M21 4.5h3M25 4.5h2M29 4.5h1M33 4.5h5M40 4.5h1M42 4.5h7M4 5.5h1M10 5.5h1M13 5.5h2M17 5.5h1M19 5.5h1M22 5.5h3M27 5.5h2M30 5.5h2M35 5.5h1M39 5.5h1M42 5.5h1M48 5.5h1M4 6.5h1M6 6.5h3M10 6.5h1M12 6.5h3M17 6.5h6M27 6.5h1M29 6.5h2M32 6.5h1M36 6.5h2M39 6.5h1M42 6.5h1M44 6.5h3M48 6.5h1M4 7.5h1M6 7.5h3M10 7.5h1M12 7.5h1M14 7.5h1M16 7.5h2M22 7.5h4M27 7.5h1M30 7.5h1M33 7.5h1M35 7.5h1M39 7.5h2M42 7.5h1M44 7.5h3M48 7.5h1M4 8.5h1M6 8.5h3M10 8.5h1M12 8.5h2M17 8.5h1M19 8.5h1M23 8.5h13M38 8.5h3M42 8.5h1M44 8.5h3M48 8.5h1M4 9.5h1M10 9.5h1M12 9.5h2M15 9.5h1M18 9.5h2M22 9.5h1M24 9.5h1M28 9.5h1M31 9.5h1M33 9.5h1M35 9.5h1M42 9.5h1M48 9.5h1M4 10.5h7M12 10.5h1M14 10.5h1M16 10.5h1M18 10.5h1M20 10.5h1M22 10.5h1M24 10.5h1M26 10.5h1M28 10.5h1M30 10.5h1M32 10.5h1M34 10.5h1M36 10.5h1M38 10.5h1M40 10.5h1M42 10.5h7M12 11.5h5M18 11.5h7M28 11.5h5M35 11.5h2M39 11.5h2M4 12.5h1M6 12.5h5M13 12.5h4M19 12.5h2M22 12.5h1M24 12.5h5M30 12.5h2M33 12.5h2M37 12.5h1M39 12.5h1M42 12.5h5M4 13.5h2M11 13.5h1M14 13.5h1M17 13.5h1M20 13.5h5M28 13.5h2M33 13.5h2M39 13.5h2M44 13.5h2M47 13.5h2M5 14.5h3M10 14.5h3M16 14.5h2M19 14.5h1M22 14.5h1M26 14.5h2M30 14.5h1M33 14.5h1M35 14.5h1M37 14.5h3M41 14.5h3M45 14.5h1M47 14.5h1M4 15.5h1M9 15.5h1M13 15.5h2M16 15.5h1M18 15.5h1M21 15.5h1M23 15.5h2M30 15.5h2M34 15.5h1M36 15.5h2M39 15.5h3M44 15.5h3M4 16.5h3M10 16.5h2M16 16.5h3M20 16.5h1M22 16.5h1M24 16.5h1M27 16.5h1M29 16.5h1M31 16.5h1M33 16.5h3M39 16.5h2M42 16.5h1M48 16.5h1M5 17.5h1M8 17.5h2M17 17.5h2M20 17.5h1M23 17.5h3M27 17.5h1M29 17.5h1M31 17.5h1M33 17.5h4M39 17.5h3M44 17.5h1M46 17.5h1M48 17.5h1M10 18.5h1M12 18.5h2M15 18.5h1M20 18.5h1M22 18.5h1M28 18.5h1M30 18.5h2M37 18.5h1M40 18.5h1M44 18.5h2M47 18.5h1M6 19.5h4M18 19.5h3M22 19.5h2M25 19.5h1M27 19.5h3M33 19.5h1M36 19.5h3M40 19.5h4M45 19.5h3M4 20.5h1M6 20.5h1M9 20.5h4M14 20.5h1M17 20.5h1M19 20.5h1M21 20.5h2M24 20.5h1M33 20.5h1M35 20.5h1M37 20.5h1M41 20.5h2M48 20.5h1M4 21.5h2M9 21.5h1M11 21.5h1M17 21.5h1M19 21.5h2M24 21.5h1M28 21.5h2M33 21.5h2M36 21.5h1M39 21.5h3M44 21.5h3M5 22.5h1M8 22.5h1M10 22.5h1M12 22.5h2M16 22.5h3M20 22.5h2M25 22.5h4M30 22.5h1M35 22.5h5M41 22.5h3M45 22.5h3M4 23.5h3M9 23.5h1M11 23.5h1M15 23.5h4M20 23.5h2M23 23.5h1M27 23.5h1M31 23.5h1M34 23.5h1M36 23.5h2M39 23.5h1M43 23.5h1M45 23.5h3M5 24.5h8M14 24.5h1M19 24.5h11M33 24.5h1M35 24.5h1M38 24.5h8M48 24.5h1M4 25.5h1M6 25.5h3M12 25.5h2M15 25.5h1M17 25.5h1M21 25.5h1M23 25.5h2M28 25.5h1M31 25.5h4M39 25.5h2M44 25.5h3M48 25.5h1M7 26.5h2M10 26.5h1M12 26.5h1M14 26.5h2M17 26.5h2M20 26.5h2M24 26.5h1M26 26.5h1M28 26.5h2M31 26.5h1M33 26.5h2M36 26.5h1M38 26.5h3M42 26.5h1M44 26.5h1M46 26.5h1M5 27.5h1M8 27.5h1M12 27.5h1M17 27.5h1M24 27.5h1M28 27.5h1M31 27.5h5M38 27.5h1M40 27.5h1M44 27.5h3M6 28.5h1M8 28.5h6M16 28.5h1M18 28.5h1M20 28.5h2M24 28.5h7M33 28.5h1M35 28.5h1M38 28.5h8M47 28.5h1M7 29.5h1M14 29.5h1M17 29.5h1M22 29.5h5M29 29.5h1M31 29.5h1M33 29.5h3M39 29.5h1M42 29.5h1M45 29.5h2M48 29.5h1M4 30.5h1M7 30.5h1M9 30.5h2M14 30.5h1M17 30.5h1M20 30.5h1M25 30.5h2M30 30.5h1M32 30.5h1M34 30.5h2M37 30.5h3M41 30.5h1M45 30.5h3M5 31.5h2M8 31.5h2M11 31.5h1M13 31.5h1M16 31.5h1M18 31.5h1M20 31.5h4M25 31.5h1M28 31.5h2M31 31.5h1M33 31.5h4M38 31.5h2M42 31.5h2M46 31.5h1M48 31.5h1M4 32.5h1M7 32.5h2M10 32.5h4M17 32.5h1M19 32.5h2M22 32.5h1M24 32.5h2M27 32.5h2M31 32.5h1M34 32.5h1M37 32.5h1M40 32.5h1M42 32.5h1M44 32.5h1M47 32.5h2M4 33.5h3M8 33.5h2M15 33.5h2M20 33.5h3M26 33.5h2M31 33.5h4M36 33.5h1M40 33.5h1M42 33.5h1M48 33.5h1M4 34.5h1M6 34.5h1M10 34.5h1M12 34.5h3M17 34.5h2M21 34.5h2M24 34.5h8M35 34.5h1M39 34.5h1M43 34.5h1M46 34.5h2M4 35.5h1M6 35.5h1M8 35.5h2M11 35.5h2M14 35.5h1M16 35.5h1M18 35.5h2M22 35.5h1M28 35.5h3M32 35.5h2M36 35.5h4M42 35.5h2M45 35.5h2M48 35.5h1M5 36.5h3M9 36.5h2M12 36.5h3M16 36.5h2M19 36.5h3M24 36.5h1M27 36.5h5M33 36.5h1M37 36.5h2M43 36.5h2M47 36.5h1M5 37.5h2M13 37.5h1M16 37.5h3M20 37.5h1M22 37.5h1M24 37.5h1M26 37.5h1M28 37.5h2M31 37.5h6M40 37.5h2M45 37.5h2M8 38.5h1M10 38.5h1M12 38.5h1M15 38.5h1M17 38.5h2M20 38.5h3M24 38.5h1M26 38.5h2M31 38.5h1M38 38.5h4M43 38.5h3M47 38.5h1M5 39.5h4M11 39.5h1M13 39.5h7M22 39.5h1M25 39.5h2M28 39.5h3M33 39.5h2M36 39.5h2M39 39.5h2M45 39.5h4M4 40.5h1M7 40.5h2M10 40.5h1M14 40.5h2M20 40.5h1M23 40.5h6M30 40.5h1M33 40.5h1M35 40.5h1M37 40.5h1M40 40.5h5M47 40.5h2M12 41.5h2M16 41.5h1M18 41.5h1M20 41.5h2M23 41.5h2M28 41.5h4M33 41.5h3M37 41.5h1M39 41.5h2M44 41.5h3M48 41.5h1M4 42.5h7M14 42.5h2M17 42.5h4M24 42.5h1M26 42.5h1M28 42.5h1M33 42.5h1M35 42.5h2M38 42.5h3M42 42.5h1M44 42.5h1M46 42.5h2M4 43.5h1M10 43.5h1M12 43.5h5M18 43.5h2M22 43.5h3M28 43.5h10M39 43.5h2M44 43.5h5M4 44.5h1M6 44.5h3M10 44.5h1M12 44.5h2M16 44.5h2M24 44.5h7M34 44.5h2M38 44.5h8M47 44.5h2M4 45.5h1M6 45.5h3M10 45.5h1M12 45.5h1M15 45.5h2M20 45.5h3M24 45.5h1M26 45.5h2M29 45.5h1M32 45.5h1M34 45.5h3M39 45.5h1M44 45.5h2M48 45.5h1M4 46.5h1M6 46.5h3M10 46.5h1M12 46.5h1M14 46.5h3M19 46.5h2M23 46.5h1M25 46.5h1M30 46.5h1M33 46.5h1M35 46.5h1M38 46.5h1M40 46.5h2M45 46.5h1M47 46.5h1M4 47.5h1M10 47.5h1M13 47.5h3M18 47.5h2M21 47.5h4M26 47.5h1M28 47.5h1M32 47.5h3M36 47.5h2M39 47.5h3M46 47.5h1M4 48.5h7M12 48.5h2M15 48.5h1M20 48.5h1M23 48.5h1M26 48.5h5M33 48.5h3M38 48.5h2M41 48.5h1M43 48.5h1M45 48.5h1M47 48.5h1"/></svg>
+          <span class="qr-label">Scan to register for AIJoeys</span>
+        </div>
+        <span class="sticker">Register today</span>
+      </div>
+      <div class="contact-card">
+        <div class="contact-row">
+          <span class="ico ico--wa">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.6 10.5c1.4 2.8 3.6 5 6.4 6.4l2.1-2.1c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.8c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <div class="label">Call or WhatsApp</div>
+            <div class="value">+61 414 491 510</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="ico ico--sky">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <div class="label">Email</div>
+            <div class="value">info@kloudbiz.com</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="ico ico--coral">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3z" stroke="currentColor" stroke-width="1.8"/></svg>
+          </span>
+          <div>
+            <div class="label">Web</div>
+            <div class="value">https://kloudbiz.com/#aijoeys</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.5 12.6L12.9 20.2a2 2 0 01-2.8 0l-6.3-6.3a2 2 0 010-2.8L11.4 3.5a2 2 0 011.4-.6H19a2 2 0 012 2v6.6a2 2 0 01-.5 1.1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="15.5" cy="8.5" r="1.4" fill="currentColor"/></svg>
+        </span>
+        <span class="label-text">Free to register</span>
+      </div>
+      <div class="info-item">
+        <span class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M2.8 20c0-3.3 2.8-5.2 6.2-5.2s6.2 1.9 6.2 5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15.5 5.2c1.5.3 2.6 1.5 2.6 3s-1.1 2.7-2.6 3M18.5 14.9c1.7.5 2.9 1.7 2.9 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </span>
+        <span class="label-text">Parent-supervised learning</span>
+      </div>
+      <div class="info-item">
+        <span class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.6-3 7.9-7 9.5-4-1.6-7-4.9-7-9.5V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="label-text">Safe &amp; secure programs</span>
+      </div>
+      <div class="info-item">
+        <span class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="9" r="5.5" stroke="currentColor" stroke-width="1.8"/><path d="M9 13.8L7.5 21l4.5-2.5 4.5 2.5-1.5-7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="label-text">Quick feedback &amp; certificates</span>
+      </div>
+      <div class="info-item info-item--wide">
+        <span class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="15.5" cy="14.5" r="1.3" fill="currentColor"/></svg>
+        </span>
+        <span class="label-text">Sessions available on weekends only</span>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="foot">
+      <div class="foot-top">
+        <span class="foot-brand">
+          <svg class="cameo-icon" viewBox="0 0 420 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AIJoeys kangaroo mascot">
+            <ellipse cx="212" cy="362" rx="148" ry="15" fill="#3a5ad9" opacity="0.09"/>
+            <path d="M288 322 Q382 332 396 262 Q401 237 386 234 Q371 232 366 252 Q356 298 284 296 Z" fill="#e8944a"/>
+            <ellipse cx="165" cy="38" rx="17" ry="40" fill="#f2a35c" transform="rotate(-18 165 38)"/>
+            <ellipse cx="259" cy="38" rx="17" ry="40" fill="#f2a35c" transform="rotate(18 259 38)"/>
+            <ellipse cx="166" cy="44" rx="9" ry="26" fill="#ffd9ac" transform="rotate(-18 166 44)"/>
+            <ellipse cx="258" cy="44" rx="9" ry="26" fill="#ffd9ac" transform="rotate(18 258 44)"/>
+            <path d="M212 122 C 302 122 322 222 302 292 C 287 342 137 342 122 292 C 102 222 122 122 212 122 Z" fill="#f2a35c"/>
+            <ellipse cx="212" cy="262" rx="62" ry="68" fill="#ffd9ac"/>
+            <path d="M158 268 Q212 302 266 268" fill="none" stroke="#e8944a" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="150" cy="344" rx="56" ry="17" fill="#e8944a"/>
+            <ellipse cx="274" cy="344" rx="56" ry="17" fill="#f2a35c"/>
+            <ellipse cx="156" cy="238" rx="14" ry="27" fill="#f2a35c" transform="rotate(22 156 238)"/>
+            <ellipse cx="268" cy="238" rx="14" ry="27" fill="#f2a35c" transform="rotate(-22 268 238)"/>
+            <circle cx="212" cy="96" r="58" fill="#f2a35c"/>
+            <ellipse cx="212" cy="114" rx="30" ry="21" fill="#ffd9ac"/>
+            <ellipse cx="212" cy="103" rx="9" ry="6" fill="#5a4632"/>
+            <path d="M200 118 Q212 128 224 118" stroke="#5a4632" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <circle cx="190" cy="86" r="7.5" fill="#151a2e"/>
+            <circle cx="234" cy="86" r="7.5" fill="#151a2e"/>
+            <circle cx="192.5" cy="83.5" r="2.6" fill="#ffffff"/>
+            <circle cx="236.5" cy="83.5" r="2.6" fill="#ffffff"/>
+            <circle cx="172" cy="104" r="9" fill="#ff9684" opacity="0.5"/>
+            <circle cx="252" cy="104" r="9" fill="#ff9684" opacity="0.5"/>
+          </svg>
+          <span class="site">kloudbiz.com</span>
+        </span>
+        <span class="loc">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 1114 0c0 4.9-7 11-7 11z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+          Melbourne, Australia
+        </span>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  </div>
+</body>
+</html>

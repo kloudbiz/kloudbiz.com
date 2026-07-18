@@ -9,14 +9,17 @@ Static website for Kloudbiz, a Melbourne-based digital studio offering websites,
 ```
 kloudbiz.com/
 ├── index.html          # Single-page site (all HTML, CSS, JS inline)
-├── poster.html         # Shareable 4:5 WhatsApp poster (self-contained, fluid)
+├── posters/            # Shareable posters (self-contained, fluid, size-agnostic print CSS)
+│   ├── poster.html          # 4:5 WhatsApp poster
+│   └── aijoeys-poster.html  # 2-page A4/A5/B6-compatible AIJoeys poster
 ├── public/             # Static assets
 │   └── kloudbiz-logo.svg   # Themeable vector wordmark (currentColor)
 ├── tasks/              # Task files — one per task, markdown format
 │   └── 1.md            # Completed tasks logged here
 └── .claude/
     └── commands/
-        └── commit.md   # /commit slash command — branch, commit, push
+        ├── commit.md      # /commit slash command — branch, commit, push
+        └── poster-pdf.md  # /poster-pdf slash command — export a poster to PDF
 ```
 
 ## Key facts
@@ -183,6 +186,7 @@ The site carries a visible version number in the footer (`<span class="site-vers
 
 ## Custom skills
 
-| Command   | Description                                         |
-|-----------|-----------------------------------------------------|
-| `/commit` | Bump patch version, commit, and push — reusing the active feature branch (new branch only when on `main`) |
+| Command       | Description                                         |
+|---------------|-----------------------------------------------------|
+| `/commit`     | Bump patch version, commit, and push — reusing the active feature branch (new branch only when on `main`) |
+| `/poster-pdf` | Export a file from `posters/` to a print-accurate PDF (A4/A5/B6) via headless Chromium |
