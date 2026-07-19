@@ -497,11 +497,36 @@
   @media (max-width:840px){
     .promo-card{flex-direction:column;text-align:center;gap:18px;padding:26px 22px;}
     .promo-art{flex-basis:auto;width:128px;}
+    .promo-art--lg{flex-basis:auto;width:160px;}
     .promo-ctas{justify-content:center;}
     .promo-desc{margin-left:auto;margin-right:auto;}
   }
-  @media (max-width:600px){.promo-qr{display:none;}}
-  @media (prefers-reduced-motion:reduce){.promo-art .joey-fig,.promo-art .spark{animation:none;}}
+  @media (max-width:600px){.aijoeys-promo .promo-qr{display:none;}}
+  @media (prefers-reduced-motion:reduce){.promo-art .joey-fig,.promo-art .lion-fig,.promo-art .ai-float,.promo-art .spark{animation:none;}}
+  @keyframes lion-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .promo-art .lion-fig{animation:lion-bob 3.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+  @keyframes ai-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  .promo-art .ai-float{animation:ai-float 3.6s ease-in-out infinite;animation-delay:0.9s;transform-box:fill-box;transform-origin:center;}
+  .promo-art--lg{flex:0 0 190px;}
+
+  /* promo product slider */
+  .promo-slider{position:relative;}
+  .promo-viewport{overflow:hidden;border-radius:22px;}
+  .promo-track{display:flex;transition:transform 0.5s ease;}
+  .promo-slide{flex:0 0 100%;min-width:0;display:flex;}
+  .promo-slide .promo-card{flex:1;}
+  .promo-dots{display:flex;justify-content:center;gap:9px;margin-top:14px;}
+  .promo-dot{width:9px;height:9px;padding:0;border:none;border-radius:999px;background:var(--border-strong);cursor:pointer;transition:width 0.25s ease,background 0.25s ease;}
+  .promo-dot.is-active{width:24px;background:var(--sky);}
+  .promo-dot:focus-visible{outline:3px solid var(--sun);outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){.promo-track{transition:none;}}
+
+  /* single-product section (AIJoeys / AIShers): card + register panel */
+  .product-layout{display:grid;grid-template-columns:1fr;gap:22px;align-items:stretch;max-width:940px;margin:28px auto 0;}
+  .product-register{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:28px 24px;}
+  .product-register__cta{display:flex;flex-direction:column;gap:10px;width:100%;max-width:290px;}
+  .product-register__cta .btn{justify-content:center;}
+  @media (min-width:760px){.product-layout{grid-template-columns:1.05fr 0.95fr;}}
 
   /* Section share links */
   .section-share{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;color:var(--ink-faint);background:var(--surface-solid);border:1px solid var(--border);border-radius:999px;padding:4px 12px;cursor:pointer;transition:color 0.18s,border-color 0.18s;text-decoration:none;vertical-align:middle;margin-top:12px;}
@@ -530,8 +555,9 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#services" data-i18n="nav_services">Services</a></li>
         <li><a href="#social-media" data-i18n="nav_social">Social &amp; Sales</a></li>
-        <li><a href="#ai-training" data-i18n="nav_ai_training">AI Training for Business</a></li>
+        <li><a href="#ai-training" data-i18n="nav_ai_training">AI Training</a></li>
         <li><a href="#aijoeys" data-i18n="nav_aijoeys">AIJoeys</a></li>
+        <li><a href="#aishers" data-i18n="nav_aishers">AIShers</a></li>
         <li><a href="#why" data-i18n="nav_why">Why us</a></li>
         <li><a href="#about" data-i18n="nav_about">About</a></li>
         <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
@@ -602,7 +628,11 @@
 
   <section class="aijoeys-promo" id="aijoeys-promo">
     <div class="container">
-      <div class="promo-card glass" data-reveal>
+      <div class="promo-slider" id="promo-slider" data-reveal>
+      <div class="promo-viewport">
+      <div class="promo-track">
+      <div class="promo-slide" role="group" aria-roledescription="slide" aria-label="AIJoeys">
+        <div class="promo-card glass">
         <div class="promo-art" aria-hidden="true">
           <svg viewBox="0 0 420 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A friendly joey kangaroo learning with AI">
           <path class="spark" d="M62 60l3.2 8.3 8.3 3.2-8.3 3.2-3.2 8.3-3.2-8.3-8.3-3.2 8.3-3.2z" fill="var(--sun)"/>
@@ -657,6 +687,43 @@
           <svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53" shape-rendering="crispEdges" role="img" aria-label="QR code — scan to register your interest"><path fill="#ffffff" d="M0 0h53v53H0z"/><path stroke="#151a2e" d="M4 4.5h7M13 4.5h3M18 4.5h1M21 4.5h3M25 4.5h2M29 4.5h1M33 4.5h5M40 4.5h1M42 4.5h7M4 5.5h1M10 5.5h1M13 5.5h2M17 5.5h1M19 5.5h1M22 5.5h3M27 5.5h2M30 5.5h2M35 5.5h1M39 5.5h1M42 5.5h1M48 5.5h1M4 6.5h1M6 6.5h3M10 6.5h1M12 6.5h3M17 6.5h6M27 6.5h1M29 6.5h2M32 6.5h1M36 6.5h2M39 6.5h1M42 6.5h1M44 6.5h3M48 6.5h1M4 7.5h1M6 7.5h3M10 7.5h1M12 7.5h1M14 7.5h1M16 7.5h2M22 7.5h4M27 7.5h1M30 7.5h1M33 7.5h1M35 7.5h1M39 7.5h2M42 7.5h1M44 7.5h3M48 7.5h1M4 8.5h1M6 8.5h3M10 8.5h1M12 8.5h2M17 8.5h1M19 8.5h1M23 8.5h13M38 8.5h3M42 8.5h1M44 8.5h3M48 8.5h1M4 9.5h1M10 9.5h1M12 9.5h2M15 9.5h1M18 9.5h2M22 9.5h1M24 9.5h1M28 9.5h1M31 9.5h1M33 9.5h1M35 9.5h1M42 9.5h1M48 9.5h1M4 10.5h7M12 10.5h1M14 10.5h1M16 10.5h1M18 10.5h1M20 10.5h1M22 10.5h1M24 10.5h1M26 10.5h1M28 10.5h1M30 10.5h1M32 10.5h1M34 10.5h1M36 10.5h1M38 10.5h1M40 10.5h1M42 10.5h7M12 11.5h5M18 11.5h7M28 11.5h5M35 11.5h2M39 11.5h2M4 12.5h1M6 12.5h5M13 12.5h4M19 12.5h2M22 12.5h1M24 12.5h5M30 12.5h2M33 12.5h2M37 12.5h1M39 12.5h1M42 12.5h5M4 13.5h2M11 13.5h1M14 13.5h1M17 13.5h1M20 13.5h5M28 13.5h2M33 13.5h2M39 13.5h2M44 13.5h2M47 13.5h2M5 14.5h3M10 14.5h3M16 14.5h2M19 14.5h1M22 14.5h1M26 14.5h2M30 14.5h1M33 14.5h1M35 14.5h1M37 14.5h3M41 14.5h3M45 14.5h1M47 14.5h1M4 15.5h1M9 15.5h1M13 15.5h2M16 15.5h1M18 15.5h1M21 15.5h1M23 15.5h2M30 15.5h2M34 15.5h1M36 15.5h2M39 15.5h3M44 15.5h3M4 16.5h3M10 16.5h2M16 16.5h3M20 16.5h1M22 16.5h1M24 16.5h1M27 16.5h1M29 16.5h1M31 16.5h1M33 16.5h3M39 16.5h2M42 16.5h1M48 16.5h1M5 17.5h1M8 17.5h2M17 17.5h2M20 17.5h1M23 17.5h3M27 17.5h1M29 17.5h1M31 17.5h1M33 17.5h4M39 17.5h3M44 17.5h1M46 17.5h1M48 17.5h1M10 18.5h1M12 18.5h2M15 18.5h1M20 18.5h1M22 18.5h1M28 18.5h1M30 18.5h2M37 18.5h1M40 18.5h1M44 18.5h2M47 18.5h1M6 19.5h4M18 19.5h3M22 19.5h2M25 19.5h1M27 19.5h3M33 19.5h1M36 19.5h3M40 19.5h4M45 19.5h3M4 20.5h1M6 20.5h1M9 20.5h4M14 20.5h1M17 20.5h1M19 20.5h1M21 20.5h2M24 20.5h1M33 20.5h1M35 20.5h1M37 20.5h1M41 20.5h2M48 20.5h1M4 21.5h2M9 21.5h1M11 21.5h1M17 21.5h1M19 21.5h2M24 21.5h1M28 21.5h2M33 21.5h2M36 21.5h1M39 21.5h3M44 21.5h3M5 22.5h1M8 22.5h1M10 22.5h1M12 22.5h2M16 22.5h3M20 22.5h2M25 22.5h4M30 22.5h1M35 22.5h5M41 22.5h3M45 22.5h3M4 23.5h3M9 23.5h1M11 23.5h1M15 23.5h4M20 23.5h2M23 23.5h1M27 23.5h1M31 23.5h1M34 23.5h1M36 23.5h2M39 23.5h1M43 23.5h1M45 23.5h3M5 24.5h8M14 24.5h1M19 24.5h11M33 24.5h1M35 24.5h1M38 24.5h8M48 24.5h1M4 25.5h1M6 25.5h3M12 25.5h2M15 25.5h1M17 25.5h1M21 25.5h1M23 25.5h2M28 25.5h1M31 25.5h4M39 25.5h2M44 25.5h3M48 25.5h1M7 26.5h2M10 26.5h1M12 26.5h1M14 26.5h2M17 26.5h2M20 26.5h2M24 26.5h1M26 26.5h1M28 26.5h2M31 26.5h1M33 26.5h2M36 26.5h1M38 26.5h3M42 26.5h1M44 26.5h1M46 26.5h1M5 27.5h1M8 27.5h1M12 27.5h1M17 27.5h1M24 27.5h1M28 27.5h1M31 27.5h5M38 27.5h1M40 27.5h1M44 27.5h3M6 28.5h1M8 28.5h6M16 28.5h1M18 28.5h1M20 28.5h2M24 28.5h7M33 28.5h1M35 28.5h1M38 28.5h8M47 28.5h1M7 29.5h1M14 29.5h1M17 29.5h1M22 29.5h5M29 29.5h1M31 29.5h1M33 29.5h3M39 29.5h1M42 29.5h1M45 29.5h2M48 29.5h1M4 30.5h1M7 30.5h1M9 30.5h2M14 30.5h1M17 30.5h1M20 30.5h1M25 30.5h2M30 30.5h1M32 30.5h1M34 30.5h2M37 30.5h3M41 30.5h1M45 30.5h3M5 31.5h2M8 31.5h2M11 31.5h1M13 31.5h1M16 31.5h1M18 31.5h1M20 31.5h4M25 31.5h1M28 31.5h2M31 31.5h1M33 31.5h4M38 31.5h2M42 31.5h2M46 31.5h1M48 31.5h1M4 32.5h1M7 32.5h2M10 32.5h4M17 32.5h1M19 32.5h2M22 32.5h1M24 32.5h2M27 32.5h2M31 32.5h1M34 32.5h1M37 32.5h1M40 32.5h1M42 32.5h1M44 32.5h1M47 32.5h2M4 33.5h3M8 33.5h2M15 33.5h2M20 33.5h3M26 33.5h2M31 33.5h4M36 33.5h1M40 33.5h1M42 33.5h1M48 33.5h1M4 34.5h1M6 34.5h1M10 34.5h1M12 34.5h3M17 34.5h2M21 34.5h2M24 34.5h8M35 34.5h1M39 34.5h1M43 34.5h1M46 34.5h2M4 35.5h1M6 35.5h1M8 35.5h2M11 35.5h2M14 35.5h1M16 35.5h1M18 35.5h2M22 35.5h1M28 35.5h3M32 35.5h2M36 35.5h4M42 35.5h2M45 35.5h2M48 35.5h1M5 36.5h3M9 36.5h2M12 36.5h3M16 36.5h2M19 36.5h3M24 36.5h1M27 36.5h5M33 36.5h1M37 36.5h2M43 36.5h2M47 36.5h1M5 37.5h2M13 37.5h1M16 37.5h3M20 37.5h1M22 37.5h1M24 37.5h1M26 37.5h1M28 37.5h2M31 37.5h6M40 37.5h2M45 37.5h2M8 38.5h1M10 38.5h1M12 38.5h1M15 38.5h1M17 38.5h2M20 38.5h3M24 38.5h1M26 38.5h2M31 38.5h1M38 38.5h4M43 38.5h3M47 38.5h1M5 39.5h4M11 39.5h1M13 39.5h7M22 39.5h1M25 39.5h2M28 39.5h3M33 39.5h2M36 39.5h2M39 39.5h2M45 39.5h4M4 40.5h1M7 40.5h2M10 40.5h1M14 40.5h2M20 40.5h1M23 40.5h6M30 40.5h1M33 40.5h1M35 40.5h1M37 40.5h1M40 40.5h5M47 40.5h2M12 41.5h2M16 41.5h1M18 41.5h1M20 41.5h2M23 41.5h2M28 41.5h4M33 41.5h3M37 41.5h1M39 41.5h2M44 41.5h3M48 41.5h1M4 42.5h7M14 42.5h2M17 42.5h4M24 42.5h1M26 42.5h1M28 42.5h1M33 42.5h1M35 42.5h2M38 42.5h3M42 42.5h1M44 42.5h1M46 42.5h2M4 43.5h1M10 43.5h1M12 43.5h5M18 43.5h2M22 43.5h3M28 43.5h10M39 43.5h2M44 43.5h5M4 44.5h1M6 44.5h3M10 44.5h1M12 44.5h2M16 44.5h2M24 44.5h7M34 44.5h2M38 44.5h8M47 44.5h2M4 45.5h1M6 45.5h3M10 45.5h1M12 45.5h1M15 45.5h2M20 45.5h3M24 45.5h1M26 45.5h2M29 45.5h1M32 45.5h1M34 45.5h3M39 45.5h1M44 45.5h2M48 45.5h1M4 46.5h1M6 46.5h3M10 46.5h1M12 46.5h1M14 46.5h3M19 46.5h2M23 46.5h1M25 46.5h1M30 46.5h1M33 46.5h1M35 46.5h1M38 46.5h1M40 46.5h2M45 46.5h1M47 46.5h1M4 47.5h1M10 47.5h1M13 47.5h3M18 47.5h2M21 47.5h4M26 47.5h1M28 47.5h1M32 47.5h3M36 47.5h2M39 47.5h3M46 47.5h1M4 48.5h7M12 48.5h2M15 48.5h1M20 48.5h1M23 48.5h1M26 48.5h5M33 48.5h3M38 48.5h2M41 48.5h1M43 48.5h1M45 48.5h1M47 48.5h1"/></svg>
           <span class="qr-label" data-i18n="promo_scan">Scan to register</span>
         </div>
+        </div>
+      </div>
+      <div class="promo-slide" role="group" aria-roledescription="slide" aria-label="AIShers" aria-hidden="true">
+        <div class="promo-card glass">
+        <div class="promo-art promo-art--lg" aria-hidden="true">
+          <svg viewBox="0 0 240 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A lion with an AI symbol">
+          <path class="spark" d="M26 26l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="var(--sun)"/>
+          <path class="spark spark--2" d="M226 96l2.6 6.8 6.8 2.6-6.8 2.6-2.6 6.8-2.6-6.8-6.8-2.6 6.8-2.6z" fill="var(--coral)"/>
+          <ellipse cx="112" cy="196" rx="92" ry="9" fill="var(--sky)" opacity="0.12"/>
+          <g class="lion-fig"><image href="public/flaticon-lion.png" x="14" y="26" width="180" height="180" transform="translate(208,0) scale(-1,1)"/></g>
+          <image class="ai-float" href="public/flaticon-ai.png" x="174" y="6" width="56" height="56"/>
+          </svg>
+        </div>
+        <div class="promo-text">
+          <span class="promo-badge">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:13px;height:13px" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" stroke="currentColor" stroke-width="1.8"/></svg>
+            <span data-i18n="promo_eyebrow">Our newest product</span>
+          </span>
+          <h2>AIShers</h2>
+          <p class="promo-tagline" data-i18n="aishers_promo_tagline">Where kids build real things with AI</p>
+          <p class="promo-desc" data-i18n="aishers_promo_desc">Coding, web and app building with AI for ages 8 and up.</p>
+          <div class="promo-ctas">
+            <a class="btn btn--primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfcOlzXv77rJ-0B0rWmLFvYZgpm4zQUh2xBDJJPikmVmJExeg/viewform?usp=dialog" target="_blank" rel="noopener"><span data-i18n="register_here">Register here</span></a>
+            <a class="btn btn--ghost" href="#aishers" data-i18n="svc_learnmore">Learn more</a>
+          </div>
+        </div>
+        <div class="promo-qr">
+          <svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53" shape-rendering="crispEdges" role="img" aria-label="QR code — scan to register for AIShers"><path fill="#ffffff" d="M0 0h53v53H0z"/><path stroke="#151a2e" d="M4 4.5h7M13 4.5h2M23 4.5h2M26 4.5h1M29 4.5h7M40 4.5h1M42 4.5h7M4 5.5h1M10 5.5h1M15 5.5h1M17 5.5h1M20 5.5h1M23 5.5h4M30 5.5h2M33 5.5h3M39 5.5h1M42 5.5h1M48 5.5h1M4 6.5h1M6 6.5h3M10 6.5h1M14 6.5h1M16 6.5h3M20 6.5h1M23 6.5h1M25 6.5h2M29 6.5h3M36 6.5h1M39 6.5h1M42 6.5h1M44 6.5h3M48 6.5h1M4 7.5h1M6 7.5h3M10 7.5h1M15 7.5h1M19 7.5h1M21 7.5h1M24 7.5h2M28 7.5h4M34 7.5h1M39 7.5h2M42 7.5h1M44 7.5h3M48 7.5h1M4 8.5h1M6 8.5h3M10 8.5h1M14 8.5h1M18 8.5h3M24 8.5h5M31 8.5h4M36 8.5h5M42 8.5h1M44 8.5h3M48 8.5h1M4 9.5h1M10 9.5h1M12 9.5h1M15 9.5h3M19 9.5h2M23 9.5h2M28 9.5h3M34 9.5h2M42 9.5h1M48 9.5h1M4 10.5h7M12 10.5h1M14 10.5h1M16 10.5h1M18 10.5h1M20 10.5h1M22 10.5h1M24 10.5h1M26 10.5h1M28 10.5h1M30 10.5h1M32 10.5h1M34 10.5h1M36 10.5h1M38 10.5h1M40 10.5h1M42 10.5h7M14 11.5h1M18 11.5h3M23 11.5h2M28 11.5h4M33 11.5h1M38 11.5h1M4 12.5h1M7 12.5h1M9 12.5h2M12 12.5h3M20 12.5h3M24 12.5h5M30 12.5h1M32 12.5h2M35 12.5h1M38 12.5h1M40 12.5h2M43 12.5h1M6 13.5h1M9 13.5h1M11 13.5h2M15 13.5h1M17 13.5h2M24 13.5h4M35 13.5h1M41 13.5h1M44 13.5h1M46 13.5h1M48 13.5h1M5 14.5h1M7 14.5h2M10 14.5h2M13 14.5h1M16 14.5h3M22 14.5h3M26 14.5h2M29 14.5h1M31 14.5h1M34 14.5h2M38 14.5h1M45 14.5h1M48 14.5h1M4 15.5h3M9 15.5h1M11 15.5h1M13 15.5h3M17 15.5h1M19 15.5h4M28 15.5h1M30 15.5h2M35 15.5h3M40 15.5h1M42 15.5h1M44 15.5h2M47 15.5h2M7 16.5h1M9 16.5h2M13 16.5h2M18 16.5h2M22 16.5h1M26 16.5h2M29 16.5h1M32 16.5h9M43 16.5h2M5 17.5h1M8 17.5h2M11 17.5h2M14 17.5h5M21 17.5h7M29 17.5h1M31 17.5h2M35 17.5h2M38 17.5h1M41 17.5h1M48 17.5h1M4 18.5h2M7 18.5h4M14 18.5h6M24 18.5h3M28 18.5h3M32 18.5h2M38 18.5h3M43 18.5h1M45 18.5h1M47 18.5h1M4 19.5h1M6 19.5h3M11 19.5h1M14 19.5h1M16 19.5h1M18 19.5h3M25 19.5h1M29 19.5h4M34 19.5h4M39 19.5h1M41 19.5h1M44 19.5h1M7 20.5h1M9 20.5h2M13 20.5h3M17 20.5h1M21 20.5h2M24 20.5h2M27 20.5h1M31 20.5h1M33 20.5h1M36 20.5h2M41 20.5h3M45 20.5h3M5 21.5h2M9 21.5h1M12 21.5h1M16 21.5h1M19 21.5h2M24 21.5h1M27 21.5h2M30 21.5h2M33 21.5h1M35 21.5h1M39 21.5h1M42 21.5h1M44 21.5h2M5 22.5h1M10 22.5h1M14 22.5h1M16 22.5h2M21 22.5h1M23 22.5h2M28 22.5h1M32 22.5h1M35 22.5h1M37 22.5h3M43 22.5h6M5 23.5h2M11 23.5h1M13 23.5h1M15 23.5h1M17 23.5h2M20 23.5h1M22 23.5h2M26 23.5h1M34 23.5h1M36 23.5h3M40 23.5h1M43 23.5h2M48 23.5h1M5 24.5h1M7 24.5h7M15 24.5h1M20 24.5h1M22 24.5h1M24 24.5h6M32 24.5h4M37 24.5h1M40 24.5h5M47 24.5h1M5 25.5h1M8 25.5h1M12 25.5h3M16 25.5h1M20 25.5h1M22 25.5h1M24 25.5h1M28 25.5h2M31 25.5h2M35 25.5h1M40 25.5h1M44 25.5h1M47 25.5h2M4 26.5h2M8 26.5h1M10 26.5h1M12 26.5h4M17 26.5h1M19 26.5h1M21 26.5h1M23 26.5h2M26 26.5h1M28 26.5h1M30 26.5h2M33 26.5h1M36 26.5h5M42 26.5h1M44 26.5h1M46 26.5h3M4 27.5h2M8 27.5h1M12 27.5h1M16 27.5h1M20 27.5h1M22 27.5h3M28 27.5h6M38 27.5h1M40 27.5h1M44 27.5h2M47 27.5h2M6 28.5h1M8 28.5h6M15 28.5h2M19 28.5h3M24 28.5h6M31 28.5h2M34 28.5h4M39 28.5h7M47 28.5h2M4 29.5h1M6 29.5h3M11 29.5h1M13 29.5h1M16 29.5h1M18 29.5h4M23 29.5h3M28 29.5h2M31 29.5h2M36 29.5h1M38 29.5h1M40 29.5h1M42 29.5h1M44 29.5h1M48 29.5h1M5 30.5h2M8 30.5h1M10 30.5h4M16 30.5h2M19 30.5h3M26 30.5h2M30 30.5h2M33 30.5h2M41 30.5h1M43 30.5h2M46 30.5h2M5 31.5h3M9 31.5h1M11 31.5h1M13 31.5h1M17 31.5h1M20 31.5h1M25 31.5h3M29 31.5h1M31 31.5h1M34 31.5h3M38 31.5h1M40 31.5h4M45 31.5h1M47 31.5h2M5 32.5h2M9 32.5h2M15 32.5h3M20 32.5h1M22 32.5h2M27 32.5h3M34 32.5h1M36 32.5h1M40 32.5h2M43 32.5h2M11 33.5h1M15 33.5h4M20 33.5h2M23 33.5h2M26 33.5h3M30 33.5h1M32 33.5h2M35 33.5h1M40 33.5h2M46 33.5h2M5 34.5h1M7 34.5h1M10 34.5h1M16 34.5h2M19 34.5h4M25 34.5h4M30 34.5h3M35 34.5h4M42 34.5h1M44 34.5h5M4 35.5h3M8 35.5h1M11 35.5h5M17 35.5h4M22 35.5h1M26 35.5h2M29 35.5h2M32 35.5h1M34 35.5h1M36 35.5h1M38 35.5h1M40 35.5h1M42 35.5h3M48 35.5h1M4 36.5h1M6 36.5h1M8 36.5h6M16 36.5h2M19 36.5h1M21 36.5h1M25 36.5h2M28 36.5h2M31 36.5h2M37 36.5h3M46 36.5h2M4 37.5h1M6 37.5h4M13 37.5h2M16 37.5h1M19 37.5h1M21 37.5h2M24 37.5h1M26 37.5h2M31 37.5h2M36 37.5h1M39 37.5h1M47 37.5h1M8 38.5h1M10 38.5h1M14 38.5h1M19 38.5h3M23 38.5h4M30 38.5h1M32 38.5h1M35 38.5h2M38 38.5h3M42 38.5h1M44 38.5h2M48 38.5h1M5 39.5h4M12 39.5h3M19 39.5h1M23 39.5h5M32 39.5h1M34 39.5h2M37 39.5h1M39 39.5h1M41 39.5h2M45 39.5h1M47 39.5h2M4 40.5h1M7 40.5h2M10 40.5h1M12 40.5h1M15 40.5h1M18 40.5h3M22 40.5h7M31 40.5h2M35 40.5h2M38 40.5h1M40 40.5h5M47 40.5h1M12 41.5h1M14 41.5h2M18 41.5h1M22 41.5h3M28 41.5h5M35 41.5h1M37 41.5h2M40 41.5h1M44 41.5h1M48 41.5h1M4 42.5h7M14 42.5h1M18 42.5h7M26 42.5h1M28 42.5h1M34 42.5h4M40 42.5h1M42 42.5h1M44 42.5h4M4 43.5h1M10 43.5h1M12 43.5h2M17 43.5h1M22 43.5h1M24 43.5h1M28 43.5h1M30 43.5h5M36 43.5h2M40 43.5h1M44 43.5h1M48 43.5h1M4 44.5h1M6 44.5h3M10 44.5h1M14 44.5h3M19 44.5h1M23 44.5h6M31 44.5h1M35 44.5h11M4 45.5h1M6 45.5h3M10 45.5h1M12 45.5h1M14 45.5h4M19 45.5h2M23 45.5h2M26 45.5h1M28 45.5h1M30 45.5h1M32 45.5h2M35 45.5h2M39 45.5h2M43 45.5h5M4 46.5h1M6 46.5h3M10 46.5h1M13 46.5h1M16 46.5h5M24 46.5h1M26 46.5h3M31 46.5h2M34 46.5h1M37 46.5h1M40 46.5h6M47 46.5h2M4 47.5h1M10 47.5h1M13 47.5h1M15 47.5h3M19 47.5h2M23 47.5h2M27 47.5h2M30 47.5h2M34 47.5h1M36 47.5h3M43 47.5h1M45 47.5h1M4 48.5h7M12 48.5h1M14 48.5h1M16 48.5h2M19 48.5h1M21 48.5h1M23 48.5h1M25 48.5h1M27 48.5h2M30 48.5h3M35 48.5h1M37 48.5h1M41 48.5h2M47 48.5h1"/></svg>
+          <span class="qr-label" data-i18n="promo_scan">Scan to register</span>
+        </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div class="promo-dots" role="tablist" aria-label="Choose product">
+        <button class="promo-dot is-active" type="button" data-slide="0" aria-label="AIJoeys" aria-selected="true"></button>
+        <button class="promo-dot" type="button" data-slide="1" aria-label="AIShers" aria-selected="false"></button>
       </div>
     </div>
   </section>
@@ -773,13 +840,13 @@
             </span>
             <h3 data-i18n="card_aishers_title">AIJoeys</h3>
           </div>
-          <p class="svc-card__intro" data-i18n="card_aishers_intro">AI-powered learning for children from 3 years up, designed for kinder, daycare, and school environments.</p>
+          <p class="svc-card__intro" data-i18n="card_aishers_intro">AI-powered learning that grows with your child, from little joeys to sharp teens.</p>
           <ul class="svc-list">
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b1">Kinder (3–5): playful habit tracker with friendly animal companions</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b2">School (5–12): interactive games that build reading, numeracy, and life skills</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b3">Teens (12+): AI literacy, creativity tools, and real-world problem solving</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b4">Built for kinder, daycare, and schools — runs on any tablet</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b5">Privacy-first — no sign-up needed, all data stays on the device</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b1">AIJoeys (ages 4–8): numeracy, literacy, habits, and emotions</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b2">AIShers (ages 8+): coding with AI and app building</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b3">Play-first for little ones, project-based for older kids</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b4">Runs on any tablet or laptop</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="card_aishers_b5">Privacy-first, no sign-up needed</span></li>
           </ul>
           <div class="svc-card__footer"><a href="#aijoeys" class="svc-card__link" data-i18n="svc_learnmore">Learn more <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </article>
@@ -925,60 +992,74 @@
     <div class="container">
       <div class="section-head center" data-reveal>
         <p class="eyebrow" data-i18n="aijoeys_eyebrow">AIJoeys</p>
-        <h2 data-i18n="aijoeys_title">Joyful learning for every young joey</h2>
+        <h2 data-i18n="aijoeys_title">Playful AI learning for little ones</h2>
         <a href="#aijoeys" class="section-share" data-share-id="aijoeys" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="aijoeys">kloudbiz.com/#aijoeys</span></a>
-        <p data-i18n="aijoeys_intro">AI-powered activities built for kinder, daycare, montessori, and schools — from first steps to teen years.</p>
+        <p data-i18n="aijoeys_intro">Kinder-based, play-first learning for ages 4 to 8.</p>
       </div>
-      <div class="aijoeys-grid" data-reveal>
+      <div class="product-layout" data-reveal>
         <div class="svc-card glass">
           <div class="svc-card__head">
             <div class="svc-card__icon svc-card__icon--sun">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" stroke="currentColor" stroke-width="1.6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 8.2C8 6.6 7.7 4.6 8.3 2.9 9.4 4 10 5.6 10 7.3"/><path d="M15 8.2c1-1.6 1.3-3.6.7-5.3C14.6 4 14 5.6 14 7.3"/><path d="M8.3 8.8C7.5 9.7 7 11 7 12.4 7 15.2 9.2 17 12 17s5-1.8 5-4.6c0-1.4-.5-2.7-1.3-3.6"/><circle cx="10" cy="11.4" r=".7" fill="currentColor" stroke="none"/><circle cx="14" cy="11.4" r=".7" fill="currentColor" stroke="none"/><path d="M12 13v1.3"/><path d="M10.8 14.4c.7.6 1.7.6 2.4 0"/></svg>
             </div>
-            <h3 data-i18n="aijoeys_k_title">Kinder &amp; Daycare (3–5)</h3>
+            <h3 data-i18n="aijoeys_j_title">AIJoeys</h3>
           </div>
-          <p class="svc-card__intro" data-i18n="aijoeys_k_intro">Gentle, play-based learning designed for childcare and montessori settings.</p>
+          <p class="svc-card__intro" data-i18n="aijoeys_j_intro">Ages 4–8. Kinder-based learning through play-first activities.</p>
           <ul class="svc-list">
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_k_b1">Playful habit tracker with animal companions</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_k_b2">Visual stories, colours, and shapes</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_k_b3">Designed with educators — no screen anxiety</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_k_b4">Works offline, no sign-up needed</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_j_b1">Early numeracy through play</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_j_b2">Literacy and first words</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_j_b3">Good daily habits</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_j_b4">Understanding emotions</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_j_b5">Social and sharing skills</span></li>
           </ul>
         </div>
-        <div class="svc-card glass">
-          <div class="svc-card__head">
-            <div class="svc-card__icon svc-card__icon--sky">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="currentColor" stroke-width="1.8"/></svg>
-            </div>
-            <h3 data-i18n="aijoeys_s_title">School (5–12)</h3>
+        <div class="product-register glass">
+          <div class="promo-qr">
+            <svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53" shape-rendering="crispEdges" role="img" aria-label="QR code — scan to register for AIJoeys"><path fill="#ffffff" d="M0 0h53v53H0z"/><path stroke="#151a2e" d="M4 4.5h7M13 4.5h3M18 4.5h1M21 4.5h3M25 4.5h2M29 4.5h1M33 4.5h5M40 4.5h1M42 4.5h7M4 5.5h1M10 5.5h1M13 5.5h2M17 5.5h1M19 5.5h1M22 5.5h3M27 5.5h2M30 5.5h2M35 5.5h1M39 5.5h1M42 5.5h1M48 5.5h1M4 6.5h1M6 6.5h3M10 6.5h1M12 6.5h3M17 6.5h6M27 6.5h1M29 6.5h2M32 6.5h1M36 6.5h2M39 6.5h1M42 6.5h1M44 6.5h3M48 6.5h1M4 7.5h1M6 7.5h3M10 7.5h1M12 7.5h1M14 7.5h1M16 7.5h2M22 7.5h4M27 7.5h1M30 7.5h1M33 7.5h1M35 7.5h1M39 7.5h2M42 7.5h1M44 7.5h3M48 7.5h1M4 8.5h1M6 8.5h3M10 8.5h1M12 8.5h2M17 8.5h1M19 8.5h1M23 8.5h13M38 8.5h3M42 8.5h1M44 8.5h3M48 8.5h1M4 9.5h1M10 9.5h1M12 9.5h2M15 9.5h1M18 9.5h2M22 9.5h1M24 9.5h1M28 9.5h1M31 9.5h1M33 9.5h1M35 9.5h1M42 9.5h1M48 9.5h1M4 10.5h7M12 10.5h1M14 10.5h1M16 10.5h1M18 10.5h1M20 10.5h1M22 10.5h1M24 10.5h1M26 10.5h1M28 10.5h1M30 10.5h1M32 10.5h1M34 10.5h1M36 10.5h1M38 10.5h1M40 10.5h1M42 10.5h7M12 11.5h5M18 11.5h7M28 11.5h5M35 11.5h2M39 11.5h2M4 12.5h1M6 12.5h5M13 12.5h4M19 12.5h2M22 12.5h1M24 12.5h5M30 12.5h2M33 12.5h2M37 12.5h1M39 12.5h1M42 12.5h5M4 13.5h2M11 13.5h1M14 13.5h1M17 13.5h1M20 13.5h5M28 13.5h2M33 13.5h2M39 13.5h2M44 13.5h2M47 13.5h2M5 14.5h3M10 14.5h3M16 14.5h2M19 14.5h1M22 14.5h1M26 14.5h2M30 14.5h1M33 14.5h1M35 14.5h1M37 14.5h3M41 14.5h3M45 14.5h1M47 14.5h1M4 15.5h1M9 15.5h1M13 15.5h2M16 15.5h1M18 15.5h1M21 15.5h1M23 15.5h2M30 15.5h2M34 15.5h1M36 15.5h2M39 15.5h3M44 15.5h3M4 16.5h3M10 16.5h2M16 16.5h3M20 16.5h1M22 16.5h1M24 16.5h1M27 16.5h1M29 16.5h1M31 16.5h1M33 16.5h3M39 16.5h2M42 16.5h1M48 16.5h1M5 17.5h1M8 17.5h2M17 17.5h2M20 17.5h1M23 17.5h3M27 17.5h1M29 17.5h1M31 17.5h1M33 17.5h4M39 17.5h3M44 17.5h1M46 17.5h1M48 17.5h1M10 18.5h1M12 18.5h2M15 18.5h1M20 18.5h1M22 18.5h1M28 18.5h1M30 18.5h2M37 18.5h1M40 18.5h1M44 18.5h2M47 18.5h1M6 19.5h4M18 19.5h3M22 19.5h2M25 19.5h1M27 19.5h3M33 19.5h1M36 19.5h3M40 19.5h4M45 19.5h3M4 20.5h1M6 20.5h1M9 20.5h4M14 20.5h1M17 20.5h1M19 20.5h1M21 20.5h2M24 20.5h1M33 20.5h1M35 20.5h1M37 20.5h1M41 20.5h2M48 20.5h1M4 21.5h2M9 21.5h1M11 21.5h1M17 21.5h1M19 21.5h2M24 21.5h1M28 21.5h2M33 21.5h2M36 21.5h1M39 21.5h3M44 21.5h3M5 22.5h1M8 22.5h1M10 22.5h1M12 22.5h2M16 22.5h3M20 22.5h2M25 22.5h4M30 22.5h1M35 22.5h5M41 22.5h3M45 22.5h3M4 23.5h3M9 23.5h1M11 23.5h1M15 23.5h4M20 23.5h2M23 23.5h1M27 23.5h1M31 23.5h1M34 23.5h1M36 23.5h2M39 23.5h1M43 23.5h1M45 23.5h3M5 24.5h8M14 24.5h1M19 24.5h11M33 24.5h1M35 24.5h1M38 24.5h8M48 24.5h1M4 25.5h1M6 25.5h3M12 25.5h2M15 25.5h1M17 25.5h1M21 25.5h1M23 25.5h2M28 25.5h1M31 25.5h4M39 25.5h2M44 25.5h3M48 25.5h1M7 26.5h2M10 26.5h1M12 26.5h1M14 26.5h2M17 26.5h2M20 26.5h2M24 26.5h1M26 26.5h1M28 26.5h2M31 26.5h1M33 26.5h2M36 26.5h1M38 26.5h3M42 26.5h1M44 26.5h1M46 26.5h1M5 27.5h1M8 27.5h1M12 27.5h1M17 27.5h1M24 27.5h1M28 27.5h1M31 27.5h5M38 27.5h1M40 27.5h1M44 27.5h3M6 28.5h1M8 28.5h6M16 28.5h1M18 28.5h1M20 28.5h2M24 28.5h7M33 28.5h1M35 28.5h1M38 28.5h8M47 28.5h1M7 29.5h1M14 29.5h1M17 29.5h1M22 29.5h5M29 29.5h1M31 29.5h1M33 29.5h3M39 29.5h1M42 29.5h1M45 29.5h2M48 29.5h1M4 30.5h1M7 30.5h1M9 30.5h2M14 30.5h1M17 30.5h1M20 30.5h1M25 30.5h2M30 30.5h1M32 30.5h1M34 30.5h2M37 30.5h3M41 30.5h1M45 30.5h3M5 31.5h2M8 31.5h2M11 31.5h1M13 31.5h1M16 31.5h1M18 31.5h1M20 31.5h4M25 31.5h1M28 31.5h2M31 31.5h1M33 31.5h4M38 31.5h2M42 31.5h2M46 31.5h1M48 31.5h1M4 32.5h1M7 32.5h2M10 32.5h4M17 32.5h1M19 32.5h2M22 32.5h1M24 32.5h2M27 32.5h2M31 32.5h1M34 32.5h1M37 32.5h1M40 32.5h1M42 32.5h1M44 32.5h1M47 32.5h2M4 33.5h3M8 33.5h2M15 33.5h2M20 33.5h3M26 33.5h2M31 33.5h4M36 33.5h1M40 33.5h1M42 33.5h1M48 33.5h1M4 34.5h1M6 34.5h1M10 34.5h1M12 34.5h3M17 34.5h2M21 34.5h2M24 34.5h8M35 34.5h1M39 34.5h1M43 34.5h1M46 34.5h2M4 35.5h1M6 35.5h1M8 35.5h2M11 35.5h2M14 35.5h1M16 35.5h1M18 35.5h2M22 35.5h1M28 35.5h3M32 35.5h2M36 35.5h4M42 35.5h2M45 35.5h2M48 35.5h1M5 36.5h3M9 36.5h2M12 36.5h3M16 36.5h2M19 36.5h3M24 36.5h1M27 36.5h5M33 36.5h1M37 36.5h2M43 36.5h2M47 36.5h1M5 37.5h2M13 37.5h1M16 37.5h3M20 37.5h1M22 37.5h1M24 37.5h1M26 37.5h1M28 37.5h2M31 37.5h6M40 37.5h2M45 37.5h2M8 38.5h1M10 38.5h1M12 38.5h1M15 38.5h1M17 38.5h2M20 38.5h3M24 38.5h1M26 38.5h2M31 38.5h1M38 38.5h4M43 38.5h3M47 38.5h1M5 39.5h4M11 39.5h1M13 39.5h7M22 39.5h1M25 39.5h2M28 39.5h3M33 39.5h2M36 39.5h2M39 39.5h2M45 39.5h4M4 40.5h1M7 40.5h2M10 40.5h1M14 40.5h2M20 40.5h1M23 40.5h6M30 40.5h1M33 40.5h1M35 40.5h1M37 40.5h1M40 40.5h5M47 40.5h2M12 41.5h2M16 41.5h1M18 41.5h1M20 41.5h2M23 41.5h2M28 41.5h4M33 41.5h3M37 41.5h1M39 41.5h2M44 41.5h3M48 41.5h1M4 42.5h7M14 42.5h2M17 42.5h4M24 42.5h1M26 42.5h1M28 42.5h1M33 42.5h1M35 42.5h2M38 42.5h3M42 42.5h1M44 42.5h1M46 42.5h2M4 43.5h1M10 43.5h1M12 43.5h5M18 43.5h2M22 43.5h3M28 43.5h10M39 43.5h2M44 43.5h5M4 44.5h1M6 44.5h3M10 44.5h1M12 44.5h2M16 44.5h2M24 44.5h7M34 44.5h2M38 44.5h8M47 44.5h2M4 45.5h1M6 45.5h3M10 45.5h1M12 45.5h1M15 45.5h2M20 45.5h3M24 45.5h1M26 45.5h2M29 45.5h1M32 45.5h1M34 45.5h3M39 45.5h1M44 45.5h2M48 45.5h1M4 46.5h1M6 46.5h3M10 46.5h1M12 46.5h1M14 46.5h3M19 46.5h2M23 46.5h1M25 46.5h1M30 46.5h1M33 46.5h1M35 46.5h1M38 46.5h1M40 46.5h2M45 46.5h1M47 46.5h1M4 47.5h1M10 47.5h1M13 47.5h3M18 47.5h2M21 47.5h4M26 47.5h1M28 47.5h1M32 47.5h3M36 47.5h2M39 47.5h3M46 47.5h1M4 48.5h7M12 48.5h2M15 48.5h1M20 48.5h1M23 48.5h1M26 48.5h5M33 48.5h3M38 48.5h2M41 48.5h1M43 48.5h1M45 48.5h1M47 48.5h1"/></svg>
+            <span class="qr-label" data-i18n="promo_scan">Scan to register</span>
           </div>
-          <p class="svc-card__intro" data-i18n="aijoeys_s_intro">Interactive games that reinforce classroom learning.</p>
-          <ul class="svc-list">
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_s_b1">Reading, literacy, and comprehension games</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_s_b2">Numeracy and problem-solving challenges</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_s_b3">Life skills and social-emotional learning</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_s_b4">Curriculum-aligned for Australian schools</span></li>
-          </ul>
-        </div>
-        <div class="svc-card glass">
-          <div class="svc-card__head">
-            <div class="svc-card__icon svc-card__icon--coral">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-            </div>
-            <h3 data-i18n="aijoeys_t_title">Teens (12+)</h3>
+          <div class="product-register__cta">
+            <a class="btn btn--primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf3ksWtRByd3KIH6SCPoIChasOqXwxjwuT9wD25QdoK97YyZA/viewform?usp=header" target="_blank" rel="noopener"><span data-i18n="register_here">Register here</span></a>
+            <a class="btn btn--ghost" href="#quote" data-i18n="aijoeys_cta">Enquire for your school or centre</a>
           </div>
-          <p class="svc-card__intro" data-i18n="aijoeys_t_intro">Real AI literacy — building skills for tomorrow's world.</p>
-          <ul class="svc-list">
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_t_b1">AI tools explained and applied</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_t_b2">Creative projects using AI</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_t_b3">Critical thinking and digital citizenship</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_t_b4">Project-based and self-paced</span></li>
-          </ul>
         </div>
       </div>
-      <div class="services-foot" data-reveal>
-        <a class="btn btn--primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf3ksWtRByd3KIH6SCPoIChasOqXwxjwuT9wD25QdoK97YyZA/viewform?usp=header" target="_blank" rel="noopener"><span data-i18n="register_here">Register here</span></a>
-        <a href="#quote" class="btn btn--ghost" data-i18n="aijoeys_cta">Enquire for your school or centre</a>
+    </div>
+  </section>
+
+  <section class="ai-training" id="aishers">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <p class="eyebrow" data-i18n="aishers_eyebrow">AIShers</p>
+        <h2 data-i18n="aishers_title">Real AI skills as they grow</h2>
+        <a href="#aishers" class="section-share" data-share-id="aishers" aria-label="Share link to this section"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-share-label="aishers">kloudbiz.com/#aishers</span></a>
+        <p data-i18n="aishers_intro">School and college level building with AI, for ages 8 and up.</p>
+      </div>
+      <div class="product-layout" data-reveal>
+        <div class="svc-card glass">
+          <div class="svc-card__head">
+            <div class="svc-card__icon svc-card__icon--sun">
+              <img src="public/flaticon-lion.png" alt="Lion" width="32" height="32" style="display:block">
+            </div>
+            <h3 data-i18n="aijoeys_a_title">AIShers</h3>
+          </div>
+          <p class="svc-card__intro" data-i18n="aijoeys_a_intro">Ages 8+. School and college level building with AI.</p>
+          <ul class="svc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_a_b1">Coding with AI</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_a_b2">Building web apps</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="aijoeys_a_b3">Building Android and iOS apps</span></li>
+          </ul>
+        </div>
+        <div class="product-register glass">
+          <div class="promo-qr">
+            <svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53" shape-rendering="crispEdges" role="img" aria-label="QR code — scan to register for AIShers"><path fill="#ffffff" d="M0 0h53v53H0z"/><path stroke="#151a2e" d="M4 4.5h7M13 4.5h2M23 4.5h2M26 4.5h1M29 4.5h7M40 4.5h1M42 4.5h7M4 5.5h1M10 5.5h1M15 5.5h1M17 5.5h1M20 5.5h1M23 5.5h4M30 5.5h2M33 5.5h3M39 5.5h1M42 5.5h1M48 5.5h1M4 6.5h1M6 6.5h3M10 6.5h1M14 6.5h1M16 6.5h3M20 6.5h1M23 6.5h1M25 6.5h2M29 6.5h3M36 6.5h1M39 6.5h1M42 6.5h1M44 6.5h3M48 6.5h1M4 7.5h1M6 7.5h3M10 7.5h1M15 7.5h1M19 7.5h1M21 7.5h1M24 7.5h2M28 7.5h4M34 7.5h1M39 7.5h2M42 7.5h1M44 7.5h3M48 7.5h1M4 8.5h1M6 8.5h3M10 8.5h1M14 8.5h1M18 8.5h3M24 8.5h5M31 8.5h4M36 8.5h5M42 8.5h1M44 8.5h3M48 8.5h1M4 9.5h1M10 9.5h1M12 9.5h1M15 9.5h3M19 9.5h2M23 9.5h2M28 9.5h3M34 9.5h2M42 9.5h1M48 9.5h1M4 10.5h7M12 10.5h1M14 10.5h1M16 10.5h1M18 10.5h1M20 10.5h1M22 10.5h1M24 10.5h1M26 10.5h1M28 10.5h1M30 10.5h1M32 10.5h1M34 10.5h1M36 10.5h1M38 10.5h1M40 10.5h1M42 10.5h7M14 11.5h1M18 11.5h3M23 11.5h2M28 11.5h4M33 11.5h1M38 11.5h1M4 12.5h1M7 12.5h1M9 12.5h2M12 12.5h3M20 12.5h3M24 12.5h5M30 12.5h1M32 12.5h2M35 12.5h1M38 12.5h1M40 12.5h2M43 12.5h1M6 13.5h1M9 13.5h1M11 13.5h2M15 13.5h1M17 13.5h2M24 13.5h4M35 13.5h1M41 13.5h1M44 13.5h1M46 13.5h1M48 13.5h1M5 14.5h1M7 14.5h2M10 14.5h2M13 14.5h1M16 14.5h3M22 14.5h3M26 14.5h2M29 14.5h1M31 14.5h1M34 14.5h2M38 14.5h1M45 14.5h1M48 14.5h1M4 15.5h3M9 15.5h1M11 15.5h1M13 15.5h3M17 15.5h1M19 15.5h4M28 15.5h1M30 15.5h2M35 15.5h3M40 15.5h1M42 15.5h1M44 15.5h2M47 15.5h2M7 16.5h1M9 16.5h2M13 16.5h2M18 16.5h2M22 16.5h1M26 16.5h2M29 16.5h1M32 16.5h9M43 16.5h2M5 17.5h1M8 17.5h2M11 17.5h2M14 17.5h5M21 17.5h7M29 17.5h1M31 17.5h2M35 17.5h2M38 17.5h1M41 17.5h1M48 17.5h1M4 18.5h2M7 18.5h4M14 18.5h6M24 18.5h3M28 18.5h3M32 18.5h2M38 18.5h3M43 18.5h1M45 18.5h1M47 18.5h1M4 19.5h1M6 19.5h3M11 19.5h1M14 19.5h1M16 19.5h1M18 19.5h3M25 19.5h1M29 19.5h4M34 19.5h4M39 19.5h1M41 19.5h1M44 19.5h1M7 20.5h1M9 20.5h2M13 20.5h3M17 20.5h1M21 20.5h2M24 20.5h2M27 20.5h1M31 20.5h1M33 20.5h1M36 20.5h2M41 20.5h3M45 20.5h3M5 21.5h2M9 21.5h1M12 21.5h1M16 21.5h1M19 21.5h2M24 21.5h1M27 21.5h2M30 21.5h2M33 21.5h1M35 21.5h1M39 21.5h1M42 21.5h1M44 21.5h2M5 22.5h1M10 22.5h1M14 22.5h1M16 22.5h2M21 22.5h1M23 22.5h2M28 22.5h1M32 22.5h1M35 22.5h1M37 22.5h3M43 22.5h6M5 23.5h2M11 23.5h1M13 23.5h1M15 23.5h1M17 23.5h2M20 23.5h1M22 23.5h2M26 23.5h1M34 23.5h1M36 23.5h3M40 23.5h1M43 23.5h2M48 23.5h1M5 24.5h1M7 24.5h7M15 24.5h1M20 24.5h1M22 24.5h1M24 24.5h6M32 24.5h4M37 24.5h1M40 24.5h5M47 24.5h1M5 25.5h1M8 25.5h1M12 25.5h3M16 25.5h1M20 25.5h1M22 25.5h1M24 25.5h1M28 25.5h2M31 25.5h2M35 25.5h1M40 25.5h1M44 25.5h1M47 25.5h2M4 26.5h2M8 26.5h1M10 26.5h1M12 26.5h4M17 26.5h1M19 26.5h1M21 26.5h1M23 26.5h2M26 26.5h1M28 26.5h1M30 26.5h2M33 26.5h1M36 26.5h5M42 26.5h1M44 26.5h1M46 26.5h3M4 27.5h2M8 27.5h1M12 27.5h1M16 27.5h1M20 27.5h1M22 27.5h3M28 27.5h6M38 27.5h1M40 27.5h1M44 27.5h2M47 27.5h2M6 28.5h1M8 28.5h6M15 28.5h2M19 28.5h3M24 28.5h6M31 28.5h2M34 28.5h4M39 28.5h7M47 28.5h2M4 29.5h1M6 29.5h3M11 29.5h1M13 29.5h1M16 29.5h1M18 29.5h4M23 29.5h3M28 29.5h2M31 29.5h2M36 29.5h1M38 29.5h1M40 29.5h1M42 29.5h1M44 29.5h1M48 29.5h1M5 30.5h2M8 30.5h1M10 30.5h4M16 30.5h2M19 30.5h3M26 30.5h2M30 30.5h2M33 30.5h2M41 30.5h1M43 30.5h2M46 30.5h2M5 31.5h3M9 31.5h1M11 31.5h1M13 31.5h1M17 31.5h1M20 31.5h1M25 31.5h3M29 31.5h1M31 31.5h1M34 31.5h3M38 31.5h1M40 31.5h4M45 31.5h1M47 31.5h2M5 32.5h2M9 32.5h2M15 32.5h3M20 32.5h1M22 32.5h2M27 32.5h3M34 32.5h1M36 32.5h1M40 32.5h2M43 32.5h2M11 33.5h1M15 33.5h4M20 33.5h2M23 33.5h2M26 33.5h3M30 33.5h1M32 33.5h2M35 33.5h1M40 33.5h2M46 33.5h2M5 34.5h1M7 34.5h1M10 34.5h1M16 34.5h2M19 34.5h4M25 34.5h4M30 34.5h3M35 34.5h4M42 34.5h1M44 34.5h5M4 35.5h3M8 35.5h1M11 35.5h5M17 35.5h4M22 35.5h1M26 35.5h2M29 35.5h2M32 35.5h1M34 35.5h1M36 35.5h1M38 35.5h1M40 35.5h1M42 35.5h3M48 35.5h1M4 36.5h1M6 36.5h1M8 36.5h6M16 36.5h2M19 36.5h1M21 36.5h1M25 36.5h2M28 36.5h2M31 36.5h2M37 36.5h3M46 36.5h2M4 37.5h1M6 37.5h4M13 37.5h2M16 37.5h1M19 37.5h1M21 37.5h2M24 37.5h1M26 37.5h2M31 37.5h2M36 37.5h1M39 37.5h1M47 37.5h1M8 38.5h1M10 38.5h1M14 38.5h1M19 38.5h3M23 38.5h4M30 38.5h1M32 38.5h1M35 38.5h2M38 38.5h3M42 38.5h1M44 38.5h2M48 38.5h1M5 39.5h4M12 39.5h3M19 39.5h1M23 39.5h5M32 39.5h1M34 39.5h2M37 39.5h1M39 39.5h1M41 39.5h2M45 39.5h1M47 39.5h2M4 40.5h1M7 40.5h2M10 40.5h1M12 40.5h1M15 40.5h1M18 40.5h3M22 40.5h7M31 40.5h2M35 40.5h2M38 40.5h1M40 40.5h5M47 40.5h1M12 41.5h1M14 41.5h2M18 41.5h1M22 41.5h3M28 41.5h5M35 41.5h1M37 41.5h2M40 41.5h1M44 41.5h1M48 41.5h1M4 42.5h7M14 42.5h1M18 42.5h7M26 42.5h1M28 42.5h1M34 42.5h4M40 42.5h1M42 42.5h1M44 42.5h4M4 43.5h1M10 43.5h1M12 43.5h2M17 43.5h1M22 43.5h1M24 43.5h1M28 43.5h1M30 43.5h5M36 43.5h2M40 43.5h1M44 43.5h1M48 43.5h1M4 44.5h1M6 44.5h3M10 44.5h1M14 44.5h3M19 44.5h1M23 44.5h6M31 44.5h1M35 44.5h11M4 45.5h1M6 45.5h3M10 45.5h1M12 45.5h1M14 45.5h4M19 45.5h2M23 45.5h2M26 45.5h1M28 45.5h1M30 45.5h1M32 45.5h2M35 45.5h2M39 45.5h2M43 45.5h5M4 46.5h1M6 46.5h3M10 46.5h1M13 46.5h1M16 46.5h5M24 46.5h1M26 46.5h3M31 46.5h2M34 46.5h1M37 46.5h1M40 46.5h6M47 46.5h2M4 47.5h1M10 47.5h1M13 47.5h1M15 47.5h3M19 47.5h2M23 47.5h2M27 47.5h2M30 47.5h2M34 47.5h1M36 47.5h3M43 47.5h1M45 47.5h1M4 48.5h7M12 48.5h1M14 48.5h1M16 48.5h2M19 48.5h1M21 48.5h1M23 48.5h1M25 48.5h1M27 48.5h2M30 48.5h3M35 48.5h1M37 48.5h1M41 48.5h2M47 48.5h1"/></svg>
+            <span class="qr-label" data-i18n="promo_scan">Scan to register</span>
+          </div>
+          <div class="product-register__cta">
+            <a class="btn btn--primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfcOlzXv77rJ-0B0rWmLFvYZgpm4zQUh2xBDJJPikmVmJExeg/viewform?usp=dialog" target="_blank" rel="noopener"><span data-i18n="register_here">Register here</span></a>
+            <a class="btn btn--ghost" href="#quote" data-i18n="aijoeys_cta">Enquire for your school or centre</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1083,6 +1164,16 @@
               <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" stroke="currentColor" stroke-width="1.6"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             </span>
             <span class="service-tile__label" data-i18n="svc_aishers">AIJoeys</span>
+          </label>
+
+          <input type="checkbox" id="svc-shers-q" class="service-checkbox" value="AIShers">
+          <label for="svc-shers-q" class="service-tile">
+            <span class="service-tile__check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l5 5L20 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="service-tile__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="service-tile__icon-wrap service-tile__icon-wrap--coral">
+              <svg class="service-tile__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 6 3 12l5 6M16 6l5 6-5 6M13.5 4l-3 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="service-tile__label" data-i18n="svc_shers">AIShers</span>
           </label>
 
           <input type="checkbox" id="svc-social-q" class="service-checkbox" value="Social Media &amp; Sales">
@@ -1200,7 +1291,7 @@
 
 <footer class="site-footer">
   <div class="container">
-    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.12</span></p>
+    <p>© <span id="year"></span> Kloudbiz. <span class="site-version">v1.0.13</span> · <a href="https://www.flaticon.com/free-icon/animal_15622696" title="lion icon" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Lion icon by Freepik</a> · <a href="https://www.flaticon.com/free-icon/artificial-intelligence_4616790" title="AI icon" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">AI icon by Smashicons</a> · Flaticon</p>
     <a href="https://wa.me/61414491510" class="footer-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L4 20l1-4.4A8.5 8.5 0 1121 11.5z" stroke="currentColor" stroke-width="1.8"/></svg>
       <span>WhatsApp</span>
@@ -1353,7 +1444,7 @@
   function selectedServices(){
     return Array.from(checkboxes).filter(function(c){ return c.checked; }).map(function(c){ return c.value; });
   }
-  var SERVICE_KEY = {'Website':'name_web','Google Listing':'name_gbl','Android App':'name_android','iOS App':'name_ios','AI Training for Business':'name_ai','AIJoeys':'name_aishers','Social Media & Sales':'name_social','Digital Content':'name_content','Other':'name_other'};
+  var SERVICE_KEY = {'Website':'name_web','Google Listing':'name_gbl','Android App':'name_android','iOS App':'name_ios','AI Training for Business':'name_ai','AIJoeys':'name_aishers','AIShers':'name_shers','Social Media & Sales':'name_social','Digital Content':'name_content','Other':'name_other'};
   function updateSummary(){
     var picked = selectedServices();
     if (picked.length){
@@ -1463,6 +1554,32 @@
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(function(){});
   }
+
+  // Promo product slider — auto-advances every 15s, pauses on hover/focus
+  (function(){
+    var slider = document.getElementById('promo-slider');
+    if (!slider) return;
+    var track = slider.querySelector('.promo-track');
+    var slides = slider.querySelectorAll('.promo-slide');
+    var dots = slider.querySelectorAll('.promo-dot');
+    if (slides.length < 2) return;
+    var i = 0, timer = null;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function go(n){
+      i = (n + slides.length) % slides.length;
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+      dots.forEach(function(d, k){ d.classList.toggle('is-active', k === i); d.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+      slides.forEach(function(s, k){ s.setAttribute('aria-hidden', k === i ? 'false' : 'true'); });
+    }
+    function start(){ if (reduce) return; stop(); timer = setInterval(function(){ go(i + 1); }, 15000); }
+    function stop(){ if (timer){ clearInterval(timer); timer = null; } }
+    dots.forEach(function(d){ d.addEventListener('click', function(){ go(parseInt(d.getAttribute('data-slide'), 10)); start(); }); });
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', start);
+    slider.addEventListener('focusin', stop);
+    slider.addEventListener('focusout', start);
+    go(0); start();
+  })();
 
   // Section scroll-spy (updates URL hash) + share-link clipboard copy
   (function(){

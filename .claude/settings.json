@@ -20,7 +20,9 @@
       "Bash(sed *)",
       "Bash(wc *)",
       "Bash(curl -s*)",
-      "Bash(python3 -m http.server*)"
+      "Bash(python3 -m http.server*)",
+      "WebSearch",
+      "WebFetch(domain:www.flaticon.com)"
     ]
   }
 }
