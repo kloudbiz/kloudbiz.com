@@ -11,7 +11,8 @@ kloudbiz.com/
 ├── index.html          # Single-page site (all HTML, CSS, JS inline)
 ├── posters/            # Shareable posters (self-contained, fluid, size-agnostic print CSS)
 │   ├── poster.html          # 4:5 WhatsApp poster
-│   └── aijoeys-poster.html  # 2-page A4/A5/B6-compatible AIJoeys poster
+│   ├── aijoeys-poster.html  # 2-page A4/A5/B6-compatible AIJoeys poster
+│   └── aishers-poster.html  # 2-page A4/A5/B6-compatible AIShers poster
 ├── public/             # Static assets
 │   └── kloudbiz-logo.svg   # Themeable vector wordmark (currentColor)
 ├── tasks/              # Task files — one per task, markdown format
